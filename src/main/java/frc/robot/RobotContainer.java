@@ -9,9 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -26,6 +26,14 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
 
+  //THING FROM DRIVETRAIN SUBSYSTEM I WAS TALKING ABOUT
+
+  /*
+  public static final int FRONT_LEFT_DRIVE_MOTOR = 1;
+  public static final int BACK_LEFT_DRIVE_MOTOR = 2;
+  public static final int FRONT_RIGHT_DRIVE_MOTOR = 3;
+  public static final int BACK_RIGHT_DRIVE_MOTOR = 4;
+  */
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
