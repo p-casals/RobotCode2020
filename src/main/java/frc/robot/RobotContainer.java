@@ -10,8 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.DrivetrainCommand;
+import frc.robot.subsystems.Drivetrain;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -21,19 +22,14 @@ import frc.robot.subsystems.ExampleSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private Drivetrain DRIVETRAIN = new Drivetrain();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private DrivetrainCommand driveCommand = new DrivetrainCommand(DRIVETRAIN);
 
-
-  //THING FROM DRIVETRAIN SUBSYSTEM I WAS TALKING ABOUT
-
-  /*
-  public static final int FRONT_LEFT_DRIVE_MOTOR = 1;
-  public static final int BACK_LEFT_DRIVE_MOTOR = 2;
-  public static final int FRONT_RIGHT_DRIVE_MOTOR = 3;
-  public static final int BACK_RIGHT_DRIVE_MOTOR = 4;
-  */
+  public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
+  public static final int BACK_LEFT_DRIVE_MOTOR = 1;
+  public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
+  public static final int BACK_RIGHT_DRIVE_MOTOR = 3;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -41,6 +37,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    CommandScheduler.getInstance().schedule(driveCommand);
   }
 
   /**
@@ -60,6 +58,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null; //TODO- create auto command
   }
 }

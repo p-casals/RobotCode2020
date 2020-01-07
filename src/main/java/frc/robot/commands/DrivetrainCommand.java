@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  */
 public class DrivetrainCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Drivetrain m_drivetrain;
+  private final Drivetrain drivetrain;
 
   /**
    * Creates a new ExampleCommand.
@@ -23,7 +23,7 @@ public class DrivetrainCommand extends CommandBase {
    * @param drivetrain The subsystem used by this command.
    */
   public DrivetrainCommand(Drivetrain drivetrain) {
-    m_drivetrain = drivetrain;
+    this.drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
   }
