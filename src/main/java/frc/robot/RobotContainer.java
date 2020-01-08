@@ -8,31 +8,57 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DrivetrainCommand;
+import frc.robot.subsystems.Drivetrain;
 
-/**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // Subsystems
+  private Drivetrain DRIVETRAIN;
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // Commands
+  private DrivetrainCommand driveCommand;
 
+  // Controllers
+  public static Joystick driverController, opController;
+  public static JoystickButton buttonA, buttonB, buttonX, buttonY;
 
+  // Robot Ports
+  public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
+  public static final int BACK_LEFT_DRIVE_MOTOR = 1;
+  public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
+  public static final int BACK_RIGHT_DRIVE_MOTOR = 3;
+
+  // Controller Constants
+  public static final int FORWARD_AXIS_LEFT = 0;
+  public static final int HORIZ_AXIS_LEFT = 1;
+  public static final int FORWARD_AXIS_RIGHT = 2;
+  public static final int HORIZ_AXIS_RIGHT = 3;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the button bindings
     configureButtonBindings();
+    initializeSubsystems();
+    initializeCommands();
+
+    scheduleCommands();
+  }
+
+  private void initializeSubsystems() {
+    DRIVETRAIN = new Drivetrain();
+  }
+
+  private void initializeCommands() {
+    driveCommand = new DrivetrainCommand(DRIVETRAIN);
+  }
+
+  private void scheduleCommands() {
+    driveCommand.schedule();
   }
 
   /**
@@ -42,6 +68,13 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    driverController = new Joystick(0);
+    opController = new Joystick(1);
+
+    buttonA = new JoystickButton(opController, 0);
+    buttonB = new JoystickButton(opController, 1);
+    buttonX = new JoystickButton(opController, 2);
+    buttonY = new JoystickButton(opController, 3);
   }
 
 
@@ -52,6 +85,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null; //TODO- create auto command
   }
 }
