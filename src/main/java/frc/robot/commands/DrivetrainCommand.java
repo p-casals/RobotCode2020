@@ -10,6 +10,8 @@ package frc.robot.commands;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+import static frc.robot.RobotContainer.*;
+
 /**
  * An example command that uses an example subsystem.
  */
@@ -36,11 +38,13 @@ public class DrivetrainCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    drivetrain.arcadeDrive(driverController.getRawAxis(FORWARD_AXIS_LEFT), driverController.getRawAxis(HORIZ_AXIS_RIGHT));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    drivetrain.tankDrive(0, 0);
   }
 
   // Returns true when the command should end.
