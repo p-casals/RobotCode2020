@@ -6,59 +6,36 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DrivetrainCommand;
 import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
   // Subsystems
-  private Drivetrain DRIVETRAIN;
+  private final Drivetrain DRIVETRAIN = new Drivetrain();
 
   // Commands
-  private DrivetrainCommand driveCommand;
 
   // Controllers
-  public static Joystick driverController, opController;
-  public static JoystickButton buttonA, buttonB, buttonX, buttonY;
-
-  // Robot Ports
-  public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
-  public static final int BACK_LEFT_DRIVE_MOTOR = 1;
-  public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
-  public static final int BACK_RIGHT_DRIVE_MOTOR = 3;
-
-  // Controller Constants
-  public static final int FORWARD_AXIS_LEFT = 0;
-  public static final int HORIZ_AXIS_LEFT = 1;
-  public static final int FORWARD_AXIS_RIGHT = 2;
-  public static final int HORIZ_AXIS_RIGHT = 3;
+  private Joystick driverController, opController;
+  private JoystickButton buttonA, buttonB, buttonX, buttonY;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     configureButtonBindings();
-    initializeSubsystems();
-    initializeCommands();
-
-    scheduleCommands();
   }
 
-  private void initializeSubsystems() {
-    DRIVETRAIN = new Drivetrain();
+  public double getVerticalAxisLeft() {
+    return driverController.getRawAxis(Constants.FORWARD_AXIS_LEFT);
   }
 
-  private void initializeCommands() {
-    driveCommand = new DrivetrainCommand(DRIVETRAIN);
-  }
-
-  private void scheduleCommands() {
-    driveCommand.schedule();
+  public double getHorizontalAxisRight() {
+    return driverController.getRawAxis(Constants.HORIZ_AXIS_RIGHT);
   }
 
   /**
@@ -75,6 +52,10 @@ public class RobotContainer {
     buttonB = new JoystickButton(opController, 1);
     buttonX = new JoystickButton(opController, 2);
     buttonY = new JoystickButton(opController, 3);
+  }
+
+  public Drivetrain getDrivetrain() {
+    return this.DRIVETRAIN;
   }
 
 
