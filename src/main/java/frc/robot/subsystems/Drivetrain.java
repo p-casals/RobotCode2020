@@ -10,18 +10,18 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotContainer;
 
+import static frc.robot.Constants.*;
 
 public class Drivetrain extends SubsystemBase {
   
   private WPI_TalonFX frontLeft, frontRight, backLeft, backRight;
 
   public Drivetrain() {
-    frontLeft = new WPI_TalonFX(RobotContainer.FRONT_LEFT_DRIVE_MOTOR);
-    backLeft = new WPI_TalonFX(RobotContainer.BACK_LEFT_DRIVE_MOTOR);
-    frontRight = new WPI_TalonFX(RobotContainer.FRONT_RIGHT_DRIVE_MOTOR);
-    backRight = new WPI_TalonFX(RobotContainer.BACK_RIGHT_DRIVE_MOTOR);
+    frontLeft = new WPI_TalonFX(FRONT_LEFT_DRIVE_MOTOR);
+    backLeft = new WPI_TalonFX(BACK_LEFT_DRIVE_MOTOR);
+    frontRight = new WPI_TalonFX(FRONT_RIGHT_DRIVE_MOTOR);
+    backRight = new WPI_TalonFX(BACK_RIGHT_DRIVE_MOTOR);
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed){
