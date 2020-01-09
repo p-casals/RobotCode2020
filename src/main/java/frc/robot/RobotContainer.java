@@ -52,6 +52,7 @@ public class RobotContainer {
     buttonB = new JoystickButton(opController, 1);
     buttonX = new JoystickButton(opController, 2);
     buttonY = new JoystickButton(opController, 3);
+    buttonA.whenPressed()
   }
 
   public Drivetrain getDrivetrain() {
