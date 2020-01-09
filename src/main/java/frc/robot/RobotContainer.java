@@ -12,11 +12,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.PistonExtendCommand;
+import frc.robot.subsystems.Pneumatics;
 
 public class RobotContainer {
   // Subsystems
   private final Drivetrain DRIVETRAIN = new Drivetrain();
 
+  private final Pneumatics PNEUMATICS = new Pneumatics();
   // Commands
 
   // Controllers
@@ -52,7 +55,8 @@ public class RobotContainer {
     buttonB = new JoystickButton(opController, 1);
     buttonX = new JoystickButton(opController, 2);
     buttonY = new JoystickButton(opController, 3);
-    buttonA.whenPressed()
+    buttonA.whenPressed(new PistonExtendCommand(PNEUMATICS).withTimeout(1));
+  
   }
 
   public Drivetrain getDrivetrain() {
