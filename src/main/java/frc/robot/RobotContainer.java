@@ -12,14 +12,18 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.PistonContractCommand;
 import frc.robot.subsystems.PistonExtendCommand;
 import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
   // Subsystems
   private final Drivetrain DRIVETRAIN = new Drivetrain();
+  private final ShooterSubsystem SHOOTER_SYSTEM = new ShooterSubsystem();
 
   private final Pneumatics PNEUMATICS = new Pneumatics();
   // Commands
@@ -59,6 +63,9 @@ public class RobotContainer {
     buttonY = new JoystickButton(opController, 3);
     buttonA.whenPressed(new PistonExtendCommand(PNEUMATICS).withTimeout(1));
     buttonB.whenPressed(new PistonContractCommand(PNEUMATICS).withTimetout(1));
+
+    buttonY.whenPressed(new RunShooterCommand(SHOOTER_SYSTEM, 1.0));
+    buttonA.whenPressed(new RunShooterCommand(SHOOTER_SYSTEM, -1.0));
   }
 
   public Drivetrain getDrivetrain() {
@@ -73,6 +80,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null; //TODO- create auto command
+    return new TestAutoCommandGroup(DRIVETRAIN); //TODO- create auto command
   }
 }
