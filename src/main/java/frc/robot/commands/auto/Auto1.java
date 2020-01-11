@@ -23,8 +23,9 @@ public class Auto1 extends SequentialCommandGroup {
   public Auto1(Drivetrain train, PatrickSensor paddy, ShooterSubsystem shooter) {
     super(
       //Align and drive to target. Shoot
-      new Align(train, paddy), 
-      new RunShooterCommand(shooter, 1), 
+      //new Align(train, paddy), 
+      //new RunShooterCommand(shooter, 1, 5)
+      //TODO- shooter commands (feed, shoot, etc)
 
       //Turn and move to bottom wall
       new MoveCommand(train, -17, 0.5), 
@@ -41,9 +42,9 @@ public class Auto1 extends SequentialCommandGroup {
 
       //Turn and move to target
       new TurnCommand(train, 180, 0.5), 
-      new Align(train, paddy), 
+      //new Align(train, paddy), 
 
       //Shoot
-      new RunShooterCommand(shooter, 1));
+      //new RunShooterCommand(shooter, 1));
   }
 }
