@@ -56,7 +56,7 @@ public class RobotContainer {
     buttonX = new JoystickButton(opController, 2);
     buttonY = new JoystickButton(opController, 3);
     buttonA.whenPressed(new PistonExtendCommand(PNEUMATICS).withTimeout(1));
-  
+    buttonB.whenPressed(new PistonContractCommand(PNEUMATICS).withTimetout(1));
   }
 
   public Drivetrain getDrivetrain() {
