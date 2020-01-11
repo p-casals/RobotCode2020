@@ -7,24 +7,25 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PistonContractCommand extends CommandBase {
-  Pneumatics pneumatics;
+public class ShootBall extends CommandBase {
+  ShooterMotors shooterMotors;
+
   /**
-   * Creates a new PistonContractCommand.
+   * Creates a new ShootBall.
    */
-  public PistonContractCommand(Pneumatics P) {
-    addRequirements(P);
-    pneumatics = P;
+  public ShootBall(ShooterMotors sM) {
+    addRequirements(sM);
+    shooterMotors = sM;
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pneumatics.contractPiston();
+    shooterMotors.motors(motorSpeed);;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +36,6 @@ public class PistonContractCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    pneumatics.offPiston();
   }
 
   // Returns true when the command should end.
@@ -43,8 +43,4 @@ public class PistonContractCommand extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-
-public Command withTimetout(int i) {
-	return null;
-}
 }
