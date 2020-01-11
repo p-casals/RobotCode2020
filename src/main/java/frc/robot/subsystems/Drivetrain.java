@@ -9,19 +9,39 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
 
 public class Drivetrain extends SubsystemBase {
+
+  public static final double MM_TO_IN = 0.0393701;
+  public static final double WHEEL_TO_WHEEL_DIAMETER_INCHES = 320 * MM_TO_IN;
+  public static final double WHEEL_DIAMETER_INCHES = 4;
+
+  public static final double PULSES_PER_ROTATION = 256;
   
   private WPI_TalonFX frontLeft, frontRight, backLeft, backRight;
+  private Encoder leftEncoder, rightEncoder;
+
+  private SpeedControllerGroup left, right;
 
   public Drivetrain() {
     frontLeft = new WPI_TalonFX(FRONT_LEFT_DRIVE_MOTOR);
     backLeft = new WPI_TalonFX(BACK_LEFT_DRIVE_MOTOR);
     frontRight = new WPI_TalonFX(FRONT_RIGHT_DRIVE_MOTOR);
     backRight = new WPI_TalonFX(BACK_RIGHT_DRIVE_MOTOR);
+
+    left = new SpeedControllerGroup(frontLeft, backLeft);
+    right = new SpeedControllerGroup(frontRight, backRight);
+
+    // Since encoders return pulses, set the proper distance using wheel diameter.
+    leftEncoder = new Encoder(LEFT_ENCODER_PORT, LEFT_ENCODER_PORT + 1);
+    leftEncoder.setDistancePerPulse((2 * Math.PI * WHEEL_DIAMETER_INCHES) / PULSES_PER_ROTATION);
+    rightEncoder = new Encoder(RIGHT_ENCODER_PORT, RIGHT_ENCODER_PORT + 1);
+    rightEncoder.setDistancePerPulse((2 * Math.PI * WHEEL_DIAMETER_INCHES) / PULSES_PER_ROTATION);
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed){
@@ -35,14 +55,25 @@ public class Drivetrain extends SubsystemBase {
     tankDrive(x-z, x+z);
   }
 
+  public double getLeftDistance() {
+    return leftEncoder.getDistance();
+  }
+
+  public double getRightDistance() {
+    return rightEncoder.getDistance();
+  }
+
+  public void resetEncoders() {
+    leftEncoder.reset();
+    rightEncoder.reset();
+  }
+
   private void setLeftSpeed(double speed) {
-    frontLeft.set(speed);
-    backLeft.set(speed);
+    left.set(speed);
   }
 
   private void setRightSpeed(double speed) {
-    frontRight.set(speed);
-    backRight.set(speed);
+    right.set(speed);
   }
 
   @Override
