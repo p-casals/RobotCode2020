@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -72,6 +73,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null; //TODO- create auto command
+    return new TestAutoCommandGroup(DRIVETRAIN); //TODO- create auto command
   }
 }
