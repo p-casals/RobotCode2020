@@ -34,12 +34,12 @@ public class Align extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (angle>=0){
-      angle = 90 - angle;
-    }
-    else if (angle<0){
-      angle += 90;
+    if (angle>=90){
+      angle -= 90;
       angle *= -1;
+    }
+    else if (angle<90){
+      angle = 90 - angle;
     }
     new TurnCommand(drive, angle, 0.5);
     new MoveCommand(drive, distance, 0.5);
