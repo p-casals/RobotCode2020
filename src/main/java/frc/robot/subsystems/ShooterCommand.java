@@ -13,22 +13,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ShooterCommand extends CommandBase {
   ShooterSubsystem shooterSubsystem;
-  private double shootSpeed;
+  private double speed;
 
   /**
    * Creates a new ShooterCommand.
    */
-  public ShooterCommand(ShooterSubsystem p, double shootSpeed) {
+  public ShooterCommand(ShooterSubsystem p, double speed) {
     addRequirements(p);
     shooterSubsystem = p;
-    this.shootSpeed = shootSpeed;
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooterSubsystem.setSpeed(shootSpeed);
+    shooterSubsystem.setSpeed(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

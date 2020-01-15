@@ -24,13 +24,16 @@ public final class Constants {
   public static final int BACK_LEFT_DRIVE_MOTOR = 1;
   public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
   public static final int BACK_RIGHT_DRIVE_MOTOR = 3;
-  public static final int SHOOTER_MOTOR_1 = 7;
-  public static final int SHOOTER_MOTOR_2 = 7;
-  public static final int SHOOTER_MOTOR_3 = 7;
+  
 
   // ENCODERS
   public static final int LEFT_ENCODER_PORT = 0; // port 1 is reserved
   public static final int RIGHT_ENCODER_PORT = 2; // port 3 is reserved
+
+  //SHOOTERS
+  public static final int SHOOTER_MOTOR_1 = 7;
+  public static final int SHOOTER_MOTOR_2 = 8;
+  public static final int SHOOTER_MOTOR_3 = 9;
 
   // === CONTROLLERS === //
   public static final int HORIZ_AXIS_LEFT = 0;

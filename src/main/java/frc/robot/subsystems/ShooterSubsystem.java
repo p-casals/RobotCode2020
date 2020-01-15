@@ -9,23 +9,24 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private VictorSP shooterMotorOne, shooterMotorTwo, shooterMotorThree;
-  
+  private VictorSP motor1, motor2, motor3;
+
   /**
    * Creates a new ShooterSubsytem.
    */
   public ShooterSubsystem() {
-    shooterMotorOne = new VictorSP(7);
-    shooterMotorTwo = new VictorSP(7);
-    shooterMotorThree = new VictorSP(7);
+    motor1 = new VictorSP(Constants.SHOOTER_MOTOR_1);
+    motor2 = new VictorSP(Constants.SHOOTER_MOTOR_2);
+    motor3 = new VictorSP(Constants.SHOOTER_MOTOR_3);
 
   }
   public void setSpeed(double shooterSpeed) {
-    shooterMotorOne.set(shooterSpeed);
-    shooterMotorTwo.set(shooterSpeed);
-    shooterMotorThree.set(shooterSpeed);
+    motor1.set(shooterSpeed);
+    motor2.set(shooterSpeed);
+    motor3.set(shooterSpeed);
 
   }
   @Override
