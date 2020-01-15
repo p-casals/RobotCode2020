@@ -18,12 +18,12 @@ import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.*;
 
 public class RobotContainer {
+  
   // Subsystems
   private final Drivetrain DRIVETRAIN = new Drivetrain();
   private final Climber CLIMBER = new Climber();
 
   // Commands
-
   private final StartEndCommand climb = new StartEndCommand(
     () -> CLIMBER.climb(),
     () -> CLIMBER.stopHookPiston(),
@@ -49,8 +49,8 @@ public class RobotContainer {
   );
 
   // Controllers
-  private final Joystick driverController = new Joystick(0), 
-                         opController = new Joystick(1);
+  private final Joystick driverController = new Joystick(0), opController = new Joystick(1);
+  
   private final JoystickButton climbButton = new JoystickButton(opController, 1), 
                                raiseHooksButton = new JoystickButton(opController, 2), 
                                raiseClimbPistonsButton = new JoystickButton(opController, 3), 
@@ -71,25 +71,22 @@ public class RobotContainer {
     return driverController.getRawAxis(Constants.HORIZ_AXIS_RIGHT);
   }
 
-  /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
+  public double getLeftTrigger() {
+    return opController.getRawAxis(Constants.LEFT_TRIGGER_AXIS);
+  }
+  
   private void configureButtonBindings() {
     climbButton.whenPressed(climb.withTimeout(8));
     raiseHooksButton.whenPressed(raiseHooks.withTimeout(6));
     raiseClimbPistonsButton.whenPressed(raiseClimbPistons.withTimeout(2));
     lowerClimbPistonsButton.whenPressed(lowerClimbPistons.withTimeout(2));
-
-
+    
+    // TODO- add buttons for intake and change climb buttons
   }
 
   public Drivetrain getDrivetrain() {
     return this.DRIVETRAIN;
   }
-
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -98,7 +95,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new TestAutoCommandGroup(DRIVETRAIN); //TODO- create auto command
+    return new TestAutoCommandGroup(DRIVETRAIN);
   }
+  
 }
-
