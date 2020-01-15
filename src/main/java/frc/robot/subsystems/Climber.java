@@ -24,26 +24,32 @@ public class Climber extends SubsystemBase {
   }
 
   public void raiseClimber() {
+    //extends the secondary piston
     pistonLiftPiston.set(DoubleSolenoid.Value.kForward);
   }
 
   public void stopRaisePiston() {
+    //stops the secondary piston
     pistonLiftPiston.set(DoubleSolenoid.Value.kOff);
   }
 
   public void reverseRaisePiston() {
+    //retracts the secondary piston
     pistonLiftPiston.set(DoubleSolenoid.Value.kReverse);
   }
   
   public void raiseHooks() {
+    //extends the primary piston
     robotLiftPiston.set(DoubleSolenoid.Value.kForward);
   }
 
   public void stopHookPiston() {
+    //stops the primary piston
     robotLiftPiston.set(DoubleSolenoid.Value.kOff);
   }
 
   public void reverseHookPiston() {
+    //retracts the primary piston
     robotLiftPiston.set(DoubleSolenoid.Value.kReverse);
   }
 
