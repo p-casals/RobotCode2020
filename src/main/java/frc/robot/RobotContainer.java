@@ -47,7 +47,7 @@ public class RobotContainer {
     );
 
     // Controllers
-    private final Joystick driverController = new Joystick(0), opController = new Joystick(1);
+    public final Joystick driverController = new Joystick(0), opController = new Joystick(1);
 
     private final JoystickButton climbButton = new JoystickButton(opController, 1),
             raiseHooksButton = new JoystickButton(opController, 2),
@@ -61,17 +61,6 @@ public class RobotContainer {
         configureButtonBindings();
     }
 
-    public double getVerticalAxisLeft() {
-        return driverController.getRawAxis(Constants.FORWARD_AXIS_LEFT);
-    }
-
-    public double getHorizontalAxisRight() {
-        return driverController.getRawAxis(Constants.HORIZ_AXIS_RIGHT);
-    }
-
-    public double getLeftTrigger() {
-        return opController.getRawAxis(Constants.LEFT_TRIGGER_AXIS);
-    }
 
     private void configureButtonBindings() {
         climbButton.whenPressed(climb.withTimeout(8));
