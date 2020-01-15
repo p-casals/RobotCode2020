@@ -6,59 +6,40 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DrivetrainCommand;
+import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
   // Subsystems
-  private Drivetrain DRIVETRAIN;
+  private final Drivetrain DRIVETRAIN = new Drivetrain();
+  private final ShooterSubsystem SHOOTER_SYSTEM = new ShooterSubsystem();
 
   // Commands
-  private DrivetrainCommand driveCommand;
 
   // Controllers
-  public static Joystick driverController, opController;
-  public static JoystickButton buttonA, buttonB, buttonX, buttonY;
-
-  // Robot Ports
-  public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
-  public static final int BACK_LEFT_DRIVE_MOTOR = 1;
-  public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
-  public static final int BACK_RIGHT_DRIVE_MOTOR = 3;
-
-  // Controller Constants
-  public static final int FORWARD_AXIS_LEFT = 0;
-  public static final int HORIZ_AXIS_LEFT = 1;
-  public static final int FORWARD_AXIS_RIGHT = 2;
-  public static final int HORIZ_AXIS_RIGHT = 3;
+  private Joystick driverController, opController;
+  private JoystickButton buttonA, buttonB, buttonX, buttonY;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     configureButtonBindings();
-    initializeSubsystems();
-    initializeCommands();
-
-    scheduleCommands();
   }
 
-  private void initializeSubsystems() {
-    DRIVETRAIN = new Drivetrain();
+  public double getVerticalAxisLeft() {
+    return driverController.getRawAxis(Constants.FORWARD_AXIS_LEFT);
   }
 
-  private void initializeCommands() {
-    driveCommand = new DrivetrainCommand(DRIVETRAIN);
-  }
-
-  private void scheduleCommands() {
-    driveCommand.schedule();
+  public double getHorizontalAxisRight() {
+    return driverController.getRawAxis(Constants.HORIZ_AXIS_RIGHT);
   }
 
   /**
@@ -75,6 +56,13 @@ public class RobotContainer {
     buttonB = new JoystickButton(opController, 1);
     buttonX = new JoystickButton(opController, 2);
     buttonY = new JoystickButton(opController, 3);
+
+    buttonY.whenPressed(new RunShooterCommand(SHOOTER_SYSTEM, 1.0));
+    buttonA.whenPressed(new RunShooterCommand(SHOOTER_SYSTEM, -1.0));
+  }
+
+  public Drivetrain getDrivetrain() {
+    return this.DRIVETRAIN;
   }
 
 
@@ -85,6 +73,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null; //TODO- create auto command
+    return new TestAutoCommandGroup(DRIVETRAIN); //TODO- create auto command
   }
 }
