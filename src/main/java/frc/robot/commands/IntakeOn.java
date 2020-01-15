@@ -5,18 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.auto;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
-public class IntakeOff extends CommandBase {
+public class IntakeOn extends CommandBase {
   /**
-   * Creates a new IntakeOff.
+   * Creates a new IntakeOn.
    */
   private final Intake intake;
-  
-  public IntakeOff(Intake intake) {
+
+  public IntakeOn(Intake intake) {
+    // Use addRequirements() here to declare subsystem dependencies.
     this.intake = intake;
     addRequirements(intake);
   }
@@ -24,7 +26,7 @@ public class IntakeOff extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.wheelSpeed(0);
+    intake.wheelSpeed(Constants.WHEEL_INTAKE_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
