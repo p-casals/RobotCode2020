@@ -39,6 +39,10 @@ public class RobotContainer {
     return driverController.getRawAxis(Constants.HORIZ_AXIS_RIGHT);
   }
 
+  public double getLeftTrigger() {
+    return opController.getRawAxis(Constants.LEFT_TRIGGER_AXIS);
+  }
+
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
