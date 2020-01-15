@@ -27,8 +27,14 @@ public class ShooterSubsystem extends SubsystemBase {
     motor1.set(shooterSpeed);
     motor2.set(shooterSpeed);
     motor3.set(shooterSpeed);
-
   }
+
+  public void makeZero() {
+    motor1.set(0);
+    motor2.set(0);
+    motor3.set(0);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import static frc.robot.Constants.*;
 
 public class Intake extends SubsystemBase {
   
@@ -17,8 +17,8 @@ public class Intake extends SubsystemBase {
   private VictorSP deployMotor;
 
   public Intake() {
-    wheelMotor = new VictorSP(Constants.WHEEL_INTAKE_MOTOR);
-    deployMotor = new VictorSP(Constants.DEPLOY_INTAKE_MOTOR);
+    wheelMotor = new VictorSP(WHEEL_INTAKE_MOTOR);
+    deployMotor = new VictorSP(DEPLOY_INTAKE_MOTOR);
   }
 
   public void deploySpeed(double speed){

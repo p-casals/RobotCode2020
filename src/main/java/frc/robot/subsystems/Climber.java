@@ -16,8 +16,7 @@ public class Climber extends SubsystemBase {
    * Creates a new climber.
    */
    
-   private DoubleSolenoid pistonLiftPiston;
-   private DoubleSolenoid robotLiftPiston;
+   private DoubleSolenoid pistonLiftPiston, robotLiftPiston;
    
   public Climber() {
     pistonLiftPiston = new DoubleSolenoid(CLIMBER_PISTON_LIFT_PISTON_1, CLIMBER_PISTON_LIFT_PISTON_2);
