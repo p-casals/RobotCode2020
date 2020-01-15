@@ -34,13 +34,23 @@ public final class Constants {
   // ENCODERS
   public static final int LEFT_ENCODER_PORT = 0; // port 1 is reserved
   public static final int RIGHT_ENCODER_PORT = 2; // port 3 is reserved
+  
+  //SHOOTERS
+  public static final int SHOOTER_MOTOR_1 = 7;
+  public static final int SHOOTER_MOTOR_2 = 8;
+  public static final int SHOOTER_MOTOR_3 = 9;
 
+  
   // === CONTROLLERS === //
-  public static final int HORIZ_AXIS_LEFT = 0;
-  public static final int FORWARD_AXIS_LEFT = 1;
-  public static final int FORWARD_AXIS_RIGHT = 2;
-  public static final int HORIZ_AXIS_RIGHT = 3;
-
-  
+  
+  // STICKS
+  public static final int HORIZ_AXIS_LEFT = 0;
+  public static final int FORWARD_AXIS_LEFT = 1;
+  public static final int FORWARD_AXIS_RIGHT = 2;
+  public static final int HORIZ_AXIS_RIGHT = 3;
+  
+  // TRIGGERS
+  public static final int LEFT_TRIGGER_AXIS = 7;
+  
 }
 
