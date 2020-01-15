@@ -5,11 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
-
+package frc.robot.commands;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterCommand extends CommandBase {
   ShooterSubsystem shooterSubsystem;
