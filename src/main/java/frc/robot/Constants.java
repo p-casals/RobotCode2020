@@ -19,20 +19,47 @@ public final class Constants {
 
   // === ROBOT PORTS === //
 
-  // MOTORS
+  // DRIVE MOTORS
   public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
   public static final int BACK_LEFT_DRIVE_MOTOR = 1;
   public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
   public static final int BACK_RIGHT_DRIVE_MOTOR = 3;
+  
+  // INTAKE
+  public static final int WHEEL_INTAKE_MOTOR = 4;
+  public static final int DEPLOY_INTAKE_MOTOR = 5;
+  
+  // PISTONS
+  public static final int CLIMBER_PISTON_LIFT_PISTON_1 = 0;
+  public static final int CLIMBER_PISTON_LIFT_PISTON_2 = 1;
+  public static final int CLIMBER_ROBOT_LIFT_PISTON_1 = 2;
+  public static final int CLIMBER_ROBOT_LIFT_PISTON_2 = 3;
 
   // ENCODERS
-  public static final int LEFT_ENCODER_PORT = 0; // port above this one is reserved
-  public static final int RIGHT_ENCODER_PORT = 2;
+  public static final int LEFT_ENCODER_PORT = 0; // port 1 is reserved
+  public static final int RIGHT_ENCODER_PORT = 2; // port 3 is reserved
+  
+  // SHOOTERS
+  public static final int SHOOTER_MOTOR_1 = 7;
+  public static final int SHOOTER_MOTOR_2 = 8;
+  public static final int SHOOTER_MOTOR_3 = 9;
 
   // === CONTROLLERS === //
+  
+  // STICKS
   public static final int HORIZ_AXIS_LEFT = 0;
   public static final int FORWARD_AXIS_LEFT = 1;
   public static final int FORWARD_AXIS_RIGHT = 2;
   public static final int HORIZ_AXIS_RIGHT = 3;
 
+  // TRIGGERS
+  public static final int LEFT_TRIGGER_AXIS = 7;
+  
+  // === SPEED CONSTANTS === //
+  
+  // INTAKE
+  public static final double DEPLOY_INTAKE_SPEED = 0.5;
+  public static final double WHEEL_INTAKE_SPEED = 0.5;
+  
 }
+
