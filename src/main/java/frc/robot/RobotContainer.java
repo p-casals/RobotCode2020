@@ -24,7 +24,6 @@ public class RobotContainer {
   private final Climber CLIMBER = new Climber();
 
   // Commands
-
   private final StartEndCommand climb = new StartEndCommand(
     () -> CLIMBER.climb(),
     () -> CLIMBER.stopHookPiston(),
@@ -81,6 +80,8 @@ public class RobotContainer {
     raiseHooksButton.whenPressed(raiseHooks.withTimeout(6));
     raiseClimbPistonsButton.whenPressed(raiseClimbPistons.withTimeout(2));
     lowerClimbPistonsButton.whenPressed(lowerClimbPistons.withTimeout(2));
+    
+    // TODO- add buttons for intake and change climb buttons
   }
 
   public Drivetrain getDrivetrain() {
@@ -94,7 +95,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new TestAutoCommandGroup(DRIVETRAIN); //TODO- create auto command
+    return new TestAutoCommandGroup(DRIVETRAIN);
   }
   
 }
