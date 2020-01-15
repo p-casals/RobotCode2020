@@ -11,10 +11,6 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPXPIDSetConfigUtil;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 public class Intake extends SubsystemBase {
   
   private VictorSP wheelMotor;

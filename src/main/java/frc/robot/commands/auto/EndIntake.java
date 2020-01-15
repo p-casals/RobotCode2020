@@ -20,6 +20,6 @@ public class EndIntake extends SequentialCommandGroup {
   public EndIntake(Intake intake) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new RetractIntake(intake).withTimeout(1), new IntakeOff(intake));
+    super(new IntakeOff(intake), new RetractIntake(intake).withTimeout(1));
   }
 }

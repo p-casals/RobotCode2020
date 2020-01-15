@@ -25,6 +25,7 @@ public final class Constants {
   public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
   public static final int BACK_RIGHT_DRIVE_MOTOR = 3;
   
+  // INTAKE
   public static final int WHEEL_INTAKE_MOTOR = 4;
   public static final int DEPLOY_INTAKE_MOTOR = 5;
 
