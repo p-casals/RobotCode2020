@@ -6,17 +6,22 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.auto.EndIntake;
+import frc.robot.commands.auto.RunIntake;
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 
 public class RobotContainer {
   // Subsystems
   private final Drivetrain DRIVETRAIN = new Drivetrain();
+  private final Intake INTAKE = new Intake();
 
   // Commands
 
@@ -53,6 +58,9 @@ public class RobotContainer {
     buttonB = new JoystickButton(opController, 1);
     buttonX = new JoystickButton(opController, 2);
     buttonY = new JoystickButton(opController, 3);
+
+    buttonA.whenPressed(new RunIntake(INTAKE));
+    buttonB.whenPressed(new EndIntake(INTAKE));
   }
 
   public Drivetrain getDrivetrain() {

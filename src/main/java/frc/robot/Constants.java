@@ -24,6 +24,9 @@ public final class Constants {
   public static final int BACK_LEFT_DRIVE_MOTOR = 1;
   public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
   public static final int BACK_RIGHT_DRIVE_MOTOR = 3;
+  
+  public static final int WHEEL_INTAKE_MOTOR = 4;
+  public static final int DEPLOY_INTAKE_MOTOR = 5;
 
   // ENCODERS
   public static final int LEFT_ENCODER_PORT = 0; // port 1 is reserved
@@ -35,4 +38,7 @@ public final class Constants {
   public static final int FORWARD_AXIS_RIGHT = 2;
   public static final int HORIZ_AXIS_RIGHT = 3;
 
+  // === SPEED CONSTANTS === //
+  public static final double DEPLOY_INTAKE_SPEED = 0.5;
+  public static final double WHEEL_INTAKE_SPEED = 0.5;
 }
