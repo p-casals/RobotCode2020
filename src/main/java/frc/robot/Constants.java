@@ -64,6 +64,12 @@ public final class Constants {
   public static final int RAISE_HOOKS_BUTTON = 2;
   public static final int RAISE_CLIMB_PISTONS_BUTTON  = 3;
   public static final int LOWER_CLIMB_PISTONS_BUTTON = 4;
+
+  // SHOOTING
+  
+  // TODO: I don't know what number this should be
+  public static final int SHOOT_BUTTON = 7;
+
   
   // === SPEED CONSTANTS === //
   

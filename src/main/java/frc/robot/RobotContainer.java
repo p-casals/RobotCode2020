@@ -22,6 +22,7 @@ public class RobotContainer {
     private final Drivetrain DRIVETRAIN = new Drivetrain();
     private final Climber CLIMBER = new Climber();
     private final Shooter SHOOTER = new Shooter();
+    private final Intake INTAKE = new Intake();
 
     // CLIMBER COMMANDS
 
@@ -60,36 +61,80 @@ public class RobotContainer {
     // SHOOTER COMMANDS
     
     private final StartEndCommand shootAtSpeed = new StartEndCommand(
-        // TODO: change setspeed parameter to variable if vision processing works.
+        
+    // TODO: change set speed parameter to variable if vision processing works.
         
         //Runnable on initialise
         () -> SHOOTER.setSpeed(1),
         //Runnable on end
         () -> SHOOTER.makeZero(),
         SHOOTER
+
+
     );
+
+    // INTAKE COMMANDS
+
+    private final StartEndCommand deployIntake = new StartEndCommand(
+        () -> INTAKE.deploySpeed(DEPLOY_INTAKE_SPEED),
+        () -> INTAKE.deploySpeed(0),
+        INTAKE
+    );
+
+    private final InstantCommand intakeOn = new InstantCommand(
+        () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED),
+        INTAKE
+    );
+
+    private final InstantCommand intakeOff = new InstantCommand(
+        () -> INTAKE.wheelSpeed(0),
+        INTAKE
+    );
+
+    // HAILEY'S TODO: FINISH STREAMLINING INTAKE STUFF: RUNINTAKE, ENDINTAKE.
+
+
+
   
+    // MAKE A NEW JOYSTICK
+
     public final Joystick driverController = new Joystick(DRIVER_CONTROLLER), opController = new Joystick(OPERATOR_CONTROLLER);
   
+    // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
+
+    // CLIMB BUTTONS
+
     private final JoystickButton climbButton = new JoystickButton(opController, CLIMB_BUTTON),
-            raiseHooksButton = new JoystickButton(opController, RAISE_HOOKS_BUTTON),
-            raiseClimbPistonsButton = new JoystickButton(opController, RAISE_CLIMB_PISTONS_BUTTON),
-            lowerClimbPistonsButton = new JoystickButton(opController, LOWER_CLIMB_PISTONS_BUTTON);
+                                 raiseHooksButton = new JoystickButton(opController, RAISE_HOOKS_BUTTON),
+                                 raiseClimbPistonsButton = new JoystickButton(opController, RAISE_CLIMB_PISTONS_BUTTON),
+                                 lowerClimbPistonsButton = new JoystickButton(opController, LOWER_CLIMB_PISTONS_BUTTON);
+
+    // SHOOT BUTTON (TOGGLEABLE)
+
+    private final JoystickButton shootButton = new JoystickButton(opController, SHOOT_BUTTON);
+    
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
      */
 
     public RobotContainer() {
-        configureButtonBindings();
+        configureButtonActions();
     }
 
-
-    private void configureButtonBindings() {
+    /**
+     * Config button actions: it changes what does each button do. Don't touch this to change bindings
+     */
+    private void configureButtonActions() {
+        // CLIMB BUTTONS
         climbButton.whenPressed(climb.withTimeout(8));
         raiseHooksButton.whenPressed(raiseHooks.withTimeout(6));
         raiseClimbPistonsButton.whenPressed(raiseClimbPistons.withTimeout(2));
         lowerClimbPistonsButton.whenPressed(lowerClimbPistons.withTimeout(2));
+
+        // SHOOT BUTTONS
+        // TODO - this might not work. Check (I think it does... see Button.class)
+        shootButton.toggleWhenPressed(shootAtSpeed);
 
         // TODO- add buttons for intake and change climb buttons
     }

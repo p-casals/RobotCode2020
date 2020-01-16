@@ -35,6 +35,9 @@ public class Shooter extends SubsystemBase {
     motor3.set(0);
   }
 
+  public void doNothing(){
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
