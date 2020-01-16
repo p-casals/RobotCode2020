@@ -6,20 +6,21 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.Shooter;
+
+ //TODO: this is unneccesary: we have the suff in robotcontainer.java
 
 public class ShooterCommand extends CommandBase {
-  ShooterSubsystem shooterSubsystem;
+  Shooter shooter;
   private double speed;
 
   /**
    * Creates a new ShooterCommand.
    */
-  public ShooterCommand(ShooterSubsystem p, double speed) {
+  public ShooterCommand(Shooter p, double speed) {
     addRequirements(p);
-    shooterSubsystem = p;
+    shooter = p;
     this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -27,7 +28,7 @@ public class ShooterCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooterSubsystem.setSpeed(speed);
+    shooter.setSpeed(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,7 +39,7 @@ public class ShooterCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooterSubsystem.setSpeed(0);
+    shooter.setSpeed(0);
   }
 
   // Returns true when the command should end.

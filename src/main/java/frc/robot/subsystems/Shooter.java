@@ -9,26 +9,32 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import static frc.robot.Constants.*;
 
-public class ShooterSubsystem extends SubsystemBase {
+public class Shooter extends SubsystemBase {
   private VictorSP motor1, motor2, motor3;
 
   /**
    * Creates a new ShooterSubsytem.
    */
-  public ShooterSubsystem() {
-    motor1 = new VictorSP(Constants.SHOOTER_MOTOR_1);
-    motor2 = new VictorSP(Constants.SHOOTER_MOTOR_2);
-    motor3 = new VictorSP(Constants.SHOOTER_MOTOR_3);
+  public Shooter() {
+    motor1 = new VictorSP(SHOOTER_MOTOR_1);
+    motor2 = new VictorSP(SHOOTER_MOTOR_2);
+    motor3 = new VictorSP(SHOOTER_MOTOR_3);
 
   }
   public void setSpeed(double shooterSpeed) {
     motor1.set(shooterSpeed);
     motor2.set(shooterSpeed);
     motor3.set(shooterSpeed);
-
   }
+
+  public void makeZero() {
+    motor1.set(0);
+    motor2.set(0);
+    motor3.set(0);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
