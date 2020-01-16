@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.*;
 
+import static frc.robot.Constants.*;
+
 public class RobotContainer {
 
     // SUBSYSTEMS
@@ -67,12 +69,12 @@ public class RobotContainer {
         SHOOTER
     );
   
-    public final Joystick driverController = new Joystick(0), opController = new Joystick(1);
+    public final Joystick driverController = new Joystick(DRIVER_CONTROLLER), opController = new Joystick(OPERATOR_CONTROLLER);
   
-    private final JoystickButton climbButton = new JoystickButton(opController, 1),
-            raiseHooksButton = new JoystickButton(opController, 2),
-            raiseClimbPistonsButton = new JoystickButton(opController, 3),
-            lowerClimbPistonsButton = new JoystickButton(opController, 4);
+    private final JoystickButton climbButton = new JoystickButton(opController, CLIMB_BUTTON),
+            raiseHooksButton = new JoystickButton(opController, RAISE_HOOKS_BUTTON),
+            raiseClimbPistonsButton = new JoystickButton(opController, RAISE_CLIMB_PISTONS_BUTTON),
+            lowerClimbPistonsButton = new JoystickButton(opController, LOWER_CLIMB_PISTONS_BUTTON);
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
