@@ -12,7 +12,7 @@ import frc.robot.subsystems.Shooter;
  //TODO: this is unneccesary: we have the suff in robotcontainer.java
 
 public class ShooterCommand extends CommandBase {
-  Shooter Shooter;
+  Shooter shooter;
   private double speed;
 
   /**
@@ -20,7 +20,7 @@ public class ShooterCommand extends CommandBase {
    */
   public ShooterCommand(Shooter p, double speed) {
     addRequirements(p);
-    Shooter = p;
+    shooter = p;
     this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -28,7 +28,7 @@ public class ShooterCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Shooter.setSpeed(speed);
+    shooter.setSpeed(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,7 +39,7 @@ public class ShooterCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Shooter.setSpeed(0);
+    shooter.setSpeed(0);
   }
 
   // Returns true when the command should end.
