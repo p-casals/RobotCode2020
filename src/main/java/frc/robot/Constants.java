@@ -54,6 +54,16 @@ public final class Constants {
 
   // TRIGGERS
   public static final int LEFT_TRIGGER_AXIS = 7;
+
+  // CONTROLLERS
+  public static final int DRIVER_CONTROLLER = 0;
+  public static final int OPERATOR_CONTROLLER = 1;
+
+  // CLIMBING
+  public static final int CLIMB_BUTTON = 1;
+  public static final int RAISE_HOOKS_BUTTON = 2;
+  public static final int RAISE_CLIMB_PISTONS_BUTTON  = 3;
+  public static final int LOWER_CLIMB_PISTONS_BUTTON = 4;
   
   // === SPEED CONSTANTS === //
   
