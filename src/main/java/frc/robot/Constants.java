@@ -75,7 +75,7 @@ public final class Constants {
 
   // INTAKE
 
-  // TODO: what needs to be a button????
+  // TODO: END_INTAKE and RUN_INTAKE seem unneccessary. fix.
   public static final int DEPLOY_INTAKE = 5;
   public static final int RETRACT_INTAKE = 6;
   public static final int END_INTAKE = 5;

@@ -141,7 +141,8 @@ public class RobotContainer {
     
 
     // PISTON-Y INTAKE BUTTONS
-    // TODO: figure out if its piston or motor-based deployment
+    // TODO: figure out if its piston or motor-based deployment: but the above and the below won't work in tandem since they're connected to the same button.
+// TODO: FIX HERE!!!
 
     private final JoystickButton pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
                                  pistonRetractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
@@ -175,6 +176,11 @@ public class RobotContainer {
         endIntakeButton.whenPressed(intakeOff.andThen(retractIntake.withTimeout(1)));
         runIntakeButton.whenPressed(deployIntake.withTimeout(1).andThen(intakeOn));
 
+        // TODO: either above or below is redundant. fix.
+
+        // PISTON-Y INTAKE BUTTONS
+        pistonDeployIntakeButton.whenPressed(pistonDeploy.withTimeout(1).andThen(intakeOn));
+        pistonRetractIntakeButton.whenPressed(intakeOff.andThen(pistonRetract.withTimeout(1)));
 
 
     }
