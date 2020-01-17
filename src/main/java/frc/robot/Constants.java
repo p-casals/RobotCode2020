@@ -75,11 +75,11 @@ public final class Constants {
 
   // INTAKE
 
-  // TODO: END_INTAKE and RUN_INTAKE seem unneccessary. fix.
+  // TODO: MAKE TOGGLEABLE???
   public static final int DEPLOY_INTAKE = 5;
   public static final int RETRACT_INTAKE = 6;
-  public static final int END_INTAKE = 5;
-  public static final int RUN_INTAKE = 5;
+  public static final int END_INTAKE = 8;
+  public static final int RUN_INTAKE = 9;
 
 
   

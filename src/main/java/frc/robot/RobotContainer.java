@@ -132,7 +132,6 @@ public class RobotContainer {
     private final JoystickButton shootButton = new JoystickButton(opController, SHOOT_BUTTON);
 
     // INTAKE BUTTONS
-    // TODO: what intake-y things do we actually need?
 
     private final JoystickButton deployIntakeButton = new JoystickButton(opController,DEPLOY_INTAKE),
                                  retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
