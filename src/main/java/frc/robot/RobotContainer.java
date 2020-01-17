@@ -140,8 +140,7 @@ public class RobotContainer {
     
 
     // PISTON-Y INTAKE BUTTONS
-    // TODO: figure out if its piston or motor-based deployment: but the above and the below won't work in tandem since they're connected to the same button.
-// TODO: FIX HERE!!!
+    // TODO: piston/motor change
 
     private final JoystickButton pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
                                  pistonRetractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);

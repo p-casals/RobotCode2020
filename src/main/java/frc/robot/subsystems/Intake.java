@@ -27,10 +27,17 @@ public class Intake extends SubsystemBase {
 
   }
 
+  // DEPLOY & WHEEL MOTORS
+  
   public void deploySpeed(double speed){
     deployMotor.set(speed);
     
   }
+
+  public void wheelSpeed(double speed){
+    wheelMotor.set(speed);
+  }
+
 
   // TODO: IMPLEMENT PISTON?
 
@@ -46,10 +53,7 @@ public class Intake extends SubsystemBase {
     intakePiston.set(DoubleSolenoid.Value.kOff);
   }
 
-   public void wheelSpeed(double speed){
-     wheelMotor.set(speed);
-   }
-
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

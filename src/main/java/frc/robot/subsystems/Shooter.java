@@ -35,8 +35,6 @@ public class Shooter extends SubsystemBase {
     motor3.set(0);
   }
 
-  public void doNothing(){
-  }
 
   @Override
   public void periodic() {
