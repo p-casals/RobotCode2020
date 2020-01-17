@@ -91,6 +91,13 @@ public class RobotContainer {
         INTAKE
     );
 
+    private final StartEndCommand retractIntake = new StartEndCommand(
+    () -> INTAKE.deploySpeed(-DEPLOY_INTAKE_SPEED),
+    () -> INTAKE.deploySpeed(0),
+    INTAKE
+    );
+
+
     // HAILEY'S TODO: FINISH STREAMLINING INTAKE STUFF: RUNINTAKE, ENDINTAKE.
 
 
@@ -116,8 +123,10 @@ public class RobotContainer {
     // INTAKE BUTTONS
     // TODO: what intake-y things do we actually need?
 
-    private final JoystickButton deployIntakeButton = new JoystickButton(opController,DEPLOY_INTAKE);
-    private final JoystickButton retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
+    private final JoystickButton deployIntakeButton = new JoystickButton(opController,DEPLOY_INTAKE),
+                                 retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
+                                 endIntakeButton = new JoystickButton(opController, END_INTAKE),
+                                 runIntakeButton = new JoystickButton(opController, RUN_INTAKE);
     
 
     /**
@@ -143,6 +152,13 @@ public class RobotContainer {
         shootButton.toggleWhenPressed(shootAtSpeed);
 
         // TODO- add buttons for intake and change climb buttons
+
+        // INTAKE BUTTONS
+        deployIntakeButton.whenPressed(deployIntake);
+        retractIntakeButton.whenPressed(retractIntake);
+        endIntakeButton.whenPressed(intakeOff.andThen(retractIntake.withTimeout(1)));
+        runIntakeButton.whenPressed(deployIntake.withTimeout(1).andThen(intakeOn));
+
 
 
     }
