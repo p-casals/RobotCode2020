@@ -112,6 +112,12 @@ public class RobotContainer {
     // SHOOT BUTTON (TOGGLEABLE)
 
     private final JoystickButton shootButton = new JoystickButton(opController, SHOOT_BUTTON);
+
+    // INTAKE BUTTONS
+    // TODO: what intake-y things do we actually need?
+
+    private final JoystickButton deployIntakeButton = new JoystickButton(opController,DEPLOY_INTAKE);
+    private final JoystickButton retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
     
 
     /**
@@ -137,6 +143,8 @@ public class RobotContainer {
         shootButton.toggleWhenPressed(shootAtSpeed);
 
         // TODO- add buttons for intake and change climb buttons
+
+
     }
 
     public Drivetrain getDrivetrain() {

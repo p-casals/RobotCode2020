@@ -70,6 +70,10 @@ public final class Constants {
   // TODO: I don't know what number this should be
   public static final int SHOOT_BUTTON = 7;
 
+  // INTAKE
+  public static final int DEPLOY_INTAKE = 5;
+  public static final int RETRACT_INTAKE = 6;
+
   
   // === SPEED CONSTANTS === //
   
