@@ -29,7 +29,7 @@ public class Shooter extends SubsystemBase {
     motor3.set(shooterSpeed);
   }
 
-  public void makeZero() {
+  public void stopShooter() {
     motor1.set(0);
     motor2.set(0);
     motor3.set(0);

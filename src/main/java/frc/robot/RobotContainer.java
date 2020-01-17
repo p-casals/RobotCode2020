@@ -67,7 +67,7 @@ public class RobotContainer {
         //Runnable on initialise
         () -> SHOOTER.setSpeed(1),
         //Runnable on end
-        () -> SHOOTER.makeZero(),
+        () -> SHOOTER.stopShooter(),
         SHOOTER
 
 
@@ -97,9 +97,20 @@ public class RobotContainer {
     INTAKE
     );
 
+    // TODO: PISTON INTAKE
 
-    // HAILEY'S TODO: FINISH STREAMLINING INTAKE STUFF: RUNINTAKE, ENDINTAKE.
+    private final StartEndCommand pistonDeploy = new StartEndCommand(
+        () -> INTAKE.deployPiston(),
+        () -> INTAKE.pistonOff(),
+        INTAKE
 
+    );
+
+    private final StartEndCommand pistonRetract = new StartEndCommand(
+        () -> INTAKE.retractPiston(),
+        () -> INTAKE.pistonOff(),
+        INTAKE
+    );
 
 
   
@@ -129,6 +140,11 @@ public class RobotContainer {
                                  runIntakeButton = new JoystickButton(opController, RUN_INTAKE);
     
 
+    // PISTON-Y INTAKE BUTTONS
+    // TODO: figure out if its piston or motor-based deployment
+
+    private final JoystickButton pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
+                                 pistonRetractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
      */
