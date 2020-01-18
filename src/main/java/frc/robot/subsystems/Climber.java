@@ -14,63 +14,56 @@ import static frc.robot.Constants.*;
 import java.util.function.BooleanSupplier;
 
 public class Climber extends SubsystemBase {
-  /**
-   * Creates a new climber.
-   */
-   
-   private DoubleSolenoid secondaryPiston, primaryPiston;
+
+  
+  // FIELDS ETC.
+  private DoubleSolenoid secondaryPiston, primaryPiston;
   private boolean hasClimbed = false;
   private boolean pistonUp = false;
    
+
+  // CONSTRUCTOR
   public Climber() {
     secondaryPiston = new DoubleSolenoid(SECONDARY_PISTON_1, SECONDARY_PISTON_2);
     primaryPiston = new DoubleSolenoid(PRIMARY_PISTON_1, PRIMARY_PISTON_2);
   }
 
-  // SECONDARY PISTON BASE COMMANDS
 
-  public void raisePiston() {
-    //extends the secondary piston
+  // SECONDARY PISTON BASE COMMANDS
+  public void raiseSecondary() {
     secondaryPiston.set(DoubleSolenoid.Value.kForward);
     pistonUp = true;
   }
 
-  public void stopPiston() {
-    //stops the secondary piston
+  public void stopSecondary() {
     secondaryPiston.set(DoubleSolenoid.Value.kOff);
   }
 
-  public void reversePiston() {
-    //retracts the secondary piston
+  public void reverseSecondary() {
     secondaryPiston.set(DoubleSolenoid.Value.kReverse);
     pistonUp = false;
   }
   
-  // PRIMARY PISTON BASE COMMANDS
 
-  public void raiseHooks() {
-    //extends the primary piston
+  // PRIMARY PISTON BASE COMMANDS
+  public void raisePrimary() {
     primaryPiston.set(DoubleSolenoid.Value.kForward);
     hasClimbed = true;
   }
 
-  public void stopHooks() {
-    //stops the primary piston
+  public void stopPrimary() {
     primaryPiston.set(DoubleSolenoid.Value.kOff);
   }
 
-  public void reverseHooks() {
-    //retracts the primary piston
+  public void reversePrimary() {
     primaryPiston.set(DoubleSolenoid.Value.kReverse);
     hasClimbed = false;
   }
 
+
   // BOOLEANSUPPLIERS: For robotContainer climber secondary commands
-   
   public BooleanSupplier hasClimbedBooleanSupplier = () -> hasClimbed;
   public BooleanSupplier pistonUpSupplier = () -> pistonUp;
-
-  
 
   @Override
   public void periodic() {

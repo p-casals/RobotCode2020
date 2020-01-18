@@ -24,10 +24,10 @@ private DoubleSolenoid intakePiston;
 public boolean isOn = false;
 private boolean isDeployed = false;
 
+  //CONSTRUCTOR
   public Intake() {
     wheelMotor = new VictorSP(WHEEL_INTAKE_MOTOR);
    intakePiston = new DoubleSolenoid(INTAKE_PISTON_1, INTAKE_PISTON_2);
-
   }
 
   // MOTORS
@@ -35,18 +35,18 @@ private boolean isDeployed = false;
     wheelMotor.set(speed);
   }
 
-  public void deployPiston() {
+  public void deploy() {
     intakePiston.set(DoubleSolenoid.Value.kForward);
     isDeployed = true;
   }
 
   // PISTONS
-  public void retractPiston() {
+  public void retract() {
     intakePiston.set(DoubleSolenoid.Value.kReverse);
     isDeployed = false;
   }
 
-  public void pistonOff() {
+  public void stop() {
     intakePiston.set(DoubleSolenoid.Value.kOff);
   }
 

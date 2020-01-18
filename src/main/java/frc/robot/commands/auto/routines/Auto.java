@@ -9,12 +9,10 @@ package frc.robot.commands.auto.routines;
 
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.*;
 
 import frc.robot.commands.auto.MoveCommand;
 import frc.robot.commands.auto.TurnCommand;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.RobotContainer.*;
 import frc.robot.subsystems.Shooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -33,10 +31,7 @@ public class Auto extends SequentialCommandGroup {
     // turn 37.69 degrees
     // move forwards 108 in
 
-
     super(
-
-
       new TurnCommand(DRIVETRAIN, -37.69, 0.5),
       new MoveCommand(DRIVETRAIN, 109.461, 0.5),
       new TurnCommand(DRIVETRAIN, 37.69, 0.5),
