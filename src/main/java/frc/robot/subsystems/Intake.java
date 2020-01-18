@@ -15,8 +15,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Intake extends SubsystemBase {
   
-  // TODO: check intake deploy method (we need a piston??)
-  private VictorSP wheelMotor;
+private VictorSP wheelMotor;
  private DoubleSolenoid intakePiston;
 
   public Intake() {

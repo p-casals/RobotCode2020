@@ -131,7 +131,7 @@ public class RobotContainer {
 
         raiseBothPistonsButton.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
         climbButton.whenPressed(climb.withTimeout(6));
-        // TODO - rework comeDown - maybe something toggleable? too many buttons.
+        // TODO - rework lowerRobotButton - maybe something toggleable? too many buttons.
         lowerRobotButton.whenPressed(raiseHooks.withTimeout(6).andThen(lowerClimbPistons.withTimeout(4)));
 
 
