@@ -20,38 +20,39 @@ public class RobotContainer {
     // SUBSYSTEMS
     private final Climber CLIMBER = new Climber();
 
-    // CLIMBER COMMANDS
-
-    private final StartEndCommand climb = new StartEndCommand(
-            //runnable on init
-            () -> CLIMBER.reverseHookPiston(),
-            //runnable on end
-            () -> CLIMBER.stopHookPiston(),
-            CLIMBER
+    // BASE CLIMBER COMMANDS
+    private final StartEndCommand climbCommand = new StartEndCommand(
+        () -> CLIMBER.reversePrimary(), 
+        () -> CLIMBER.stopPrimary(), 
+        CLIMBER
+    );
+    private final StartEndCommand raisePrimaryCommand = new StartEndCommand(
+        () -> CLIMBER.raisePrimary(), 
+        () -> CLIMBER.stopPrimary(), 
+        CLIMBER
+    );
+    private final StartEndCommand raiseSecondaryCommand = new StartEndCommand(
+        () -> CLIMBER.raiseSecondary(), 
+        () -> CLIMBER.stopSecondary(), 
+        CLIMBER
+    );
+    private final StartEndCommand reverseSecondaryCommand = new StartEndCommand(
+        () -> CLIMBER.reverseSecondary(), 
+        () -> CLIMBER.stopSecondary(), 
+        CLIMBER
     );
 
-    private final StartEndCommand raiseHooks = new StartEndCommand(
-            //runnable on init
-            () -> CLIMBER.raiseHooks(),
-            //runnable on end
-            () -> CLIMBER.stopHookPiston(),
-            CLIMBER
-    );
 
-    private final StartEndCommand raiseClimbPistons = new StartEndCommand(
-            //runnable on init
-            () -> CLIMBER.raiseClimber(),
-            //runnable on end
-            () -> CLIMBER.stopRaisePiston(),
-            CLIMBER
+    // SECOND LEVEL CLIMBER COMMANDS
+    // TODO - check timeout times - I kind of made them up
+    private final ConditionalCommand climbOrLower = new ConditionalCommand(
+        raisePrimaryCommand.withTimeout(6), climbCommand.withTimeout(6).andThen(reverseSecondaryCommand.withTimeout(3)), 
+        CLIMBER.hasClimbedBooleanSupplier
     );
-
-    private final StartEndCommand lowerClimbPistons = new StartEndCommand(
-            //runnable on init
-            () -> CLIMBER.reverseRaisePiston(),
-            //runnable on end
-            () -> CLIMBER.stopRaisePiston(),
-            CLIMBER
+    private final ConditionalCommand pistonUpOrDown = new ConditionalCommand(
+        reverseSecondaryCommand.withTimeout(2), 
+        raiseSecondaryCommand.withTimeout(2), 
+        CLIMBER.pistonUpSupplier
     );
 
     // MAKE A NEW JOYSTICK
