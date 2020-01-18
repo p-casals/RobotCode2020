@@ -35,6 +35,9 @@ public final class Constants {
   public static final int CLIMBER_ROBOT_LIFT_PISTON_1 = 2;
   public static final int CLIMBER_ROBOT_LIFT_PISTON_2 = 3;
 
+  public static final int INTAKE_PISTON_1 = 4;
+  public static final int INTAKE_PISTON_2 = 5;
+
   // ENCODERS
   public static final int LEFT_ENCODER_PORT = 0; // port 1 is reserved
   public static final int RIGHT_ENCODER_PORT = 2; // port 3 is reserved
@@ -64,6 +67,21 @@ public final class Constants {
   public static final int RAISE_HOOKS_BUTTON = 2;
   public static final int RAISE_CLIMB_PISTONS_BUTTON  = 3;
   public static final int LOWER_CLIMB_PISTONS_BUTTON = 4;
+
+  // SHOOTING
+  
+  // TODO: Change this number
+  public static final int SHOOT_BUTTON = 7;
+
+  // INTAKE
+
+  // TODO: MAKE TOGGLEABLE???
+  public static final int DEPLOY_INTAKE = 5;
+  public static final int RETRACT_INTAKE = 6;
+  public static final int END_INTAKE = 8;
+  public static final int RUN_INTAKE = 9;
+
+
   
   // === SPEED CONSTANTS === //
   
