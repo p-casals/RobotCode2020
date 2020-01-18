@@ -69,17 +69,9 @@ public class RobotContainer {
         //Runnable on end
         () -> SHOOTER.stopShooter(),
         SHOOTER
-
-
     );
 
     // INTAKE COMMANDS
-
-    private final StartEndCommand deployIntake = new StartEndCommand(
-        () -> INTAKE.deploySpeed(DEPLOY_INTAKE_SPEED),
-        () -> INTAKE.deploySpeed(0),
-        INTAKE
-    );
 
     private final InstantCommand intakeOn = new InstantCommand(
         () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED),
@@ -91,19 +83,10 @@ public class RobotContainer {
         INTAKE
     );
 
-    private final StartEndCommand retractIntake = new StartEndCommand(
-    () -> INTAKE.deploySpeed(-DEPLOY_INTAKE_SPEED),
-    () -> INTAKE.deploySpeed(0),
-    INTAKE
-    );
-
-    // TODO: PISTON INTAKE
-
     private final StartEndCommand pistonDeploy = new StartEndCommand(
         () -> INTAKE.deployPiston(),
         () -> INTAKE.pistonOff(),
         INTAKE
-
     );
 
     private final StartEndCommand pistonRetract = new StartEndCommand(
@@ -111,8 +94,6 @@ public class RobotContainer {
         () -> INTAKE.pistonOff(),
         INTAKE
     );
-
-
   
     // MAKE A NEW JOYSTICK
 
@@ -122,25 +103,15 @@ public class RobotContainer {
 
     // CLIMB BUTTONS
 
-    private final JoystickButton climbButton = new JoystickButton(opController, CLIMB_BUTTON),
-                                 raiseHooksButton = new JoystickButton(opController, RAISE_HOOKS_BUTTON),
-                                 raiseClimbPistonsButton = new JoystickButton(opController, RAISE_CLIMB_PISTONS_BUTTON),
-                                 lowerClimbPistonsButton = new JoystickButton(opController, LOWER_CLIMB_PISTONS_BUTTON);
-
+    private final JoystickButton raiseBothPistonsButton = new JoystickButton(opController, RAISE_BOTH_PISTONS),
+                                 climbButton = new JoystickButton(opController, CLIMB),
+                                 lowerRobotButton = new JoystickButton(opController, LOWER_ROBOT);
+                                 
     // SHOOT BUTTON (TOGGLEABLE)
 
     private final JoystickButton shootButton = new JoystickButton(opController, SHOOT_BUTTON);
 
-    // INTAKE BUTTONS
-
-    private final JoystickButton deployIntakeButton = new JoystickButton(opController,DEPLOY_INTAKE),
-                                 retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
-                                 endIntakeButton = new JoystickButton(opController, END_INTAKE),
-                                 runIntakeButton = new JoystickButton(opController, RUN_INTAKE);
-    
-
     // PISTON-Y INTAKE BUTTONS
-    // TODO: piston/motor change
 
     private final JoystickButton pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
                                  pistonRetractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
@@ -157,29 +128,20 @@ public class RobotContainer {
      */
     private void configureButtonActions() {
         // CLIMB BUTTONS
-        climbButton.whenPressed(climb.withTimeout(8));
-        raiseHooksButton.whenPressed(raiseHooks.withTimeout(6));
-        raiseClimbPistonsButton.whenPressed(raiseClimbPistons.withTimeout(2));
-        lowerClimbPistonsButton.whenPressed(lowerClimbPistons.withTimeout(2));
+
+        raiseBothPistonsButton.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
+        climbButton.whenPressed(climb.withTimeout(6));
+        // TODO - rework comeDown - maybe something toggleable? too many buttons.
+        lowerRobotButton.whenPressed(raiseHooks.withTimeout(6).andThen(lowerClimbPistons.withTimeout(4)));
+
+
 
         // SHOOT BUTTONS
-        // TODO - this might not work. Check (I think it does... see Button.class)
         shootButton.toggleWhenPressed(shootAtSpeed);
-
-        // TODO- add buttons for intake and change climb buttons
-
-        // INTAKE BUTTONS
-        deployIntakeButton.whenPressed(deployIntake);
-        retractIntakeButton.whenPressed(retractIntake);
-        endIntakeButton.whenPressed(intakeOff.andThen(retractIntake.withTimeout(1)));
-        runIntakeButton.whenPressed(deployIntake.withTimeout(1).andThen(intakeOn));
-
-        // TODO: either above or below is redundant. fix.
 
         // PISTON-Y INTAKE BUTTONS
         pistonDeployIntakeButton.whenPressed(pistonDeploy.withTimeout(1).andThen(intakeOn));
         pistonRetractIntakeButton.whenPressed(intakeOff.andThen(pistonRetract.withTimeout(1)));
-
 
     }
 
