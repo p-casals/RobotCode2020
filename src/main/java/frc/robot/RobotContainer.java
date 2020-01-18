@@ -126,7 +126,7 @@ public class RobotContainer {
     // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
 
     // CLIMB BUTTONS
-    private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_BOTH_PISTONS),
+    private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_CLIMB_PISTONS),
                                  climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
                                  
     // SHOOT BUTTON (TOGGLEABLE)

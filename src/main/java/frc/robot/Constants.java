@@ -28,7 +28,8 @@ public final class Constants {
   // INTAKE
   public static final int WHEEL_INTAKE_MOTOR = 4;
   public static final int DEPLOY_INTAKE_MOTOR = 5;
-  
+
+
   // PISTONS
   public static final int CLIMBER_PISTON_LIFT_PISTON_1 = 0;
   public static final int CLIMBER_PISTON_LIFT_PISTON_2 = 1;
@@ -63,7 +64,7 @@ public final class Constants {
   public static final int OPERATOR_CONTROLLER = 1;
 
   // CLIMBING
-  public static final int RAISE_OR_LOWER_BOTH_PISTONS = 5;
+  public static final int RAISE_OR_LOWER_CLIMB_PISTONS = 5;
   public static final int CLIMB_OR_LOWER = 6;
 
   // SHOOTING
