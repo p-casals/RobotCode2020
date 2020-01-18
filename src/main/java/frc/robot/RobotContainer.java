@@ -8,11 +8,14 @@
 
 package frc.robot;
 
+import java.util.function.BooleanSupplier; 
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.*;
+
 
 import static frc.robot.Constants.*;
 
@@ -73,6 +76,7 @@ public class RobotContainer {
 
     // INTAKE COMMANDS
 
+
     private final InstantCommand intakeOn = new InstantCommand(
         () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED),
         INTAKE
@@ -84,7 +88,7 @@ public class RobotContainer {
     );
 
     private final StartEndCommand pistonDeploy = new StartEndCommand(
-        () -> INTAKE.deployPiston(),
+        () -> INTAKE.deployPiston(), 
         () -> INTAKE.pistonOff(),
         INTAKE
     );
@@ -94,6 +98,13 @@ public class RobotContainer {
         () -> INTAKE.pistonOff(),
         INTAKE
     );
+
+    // SECOND LEVEL INTAKE COMMANDS
+
+    private final ConditionalCommand finalDeployPiston = new ConditionalCommand(
+        intakeOn, pistonDeploy.andThen(intakeOn), INTAKE.isDeployedSupplier
+    );
+
   
     // MAKE A NEW JOYSTICK
 
@@ -131,7 +142,7 @@ public class RobotContainer {
 
         raiseBothPistonsButton.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
         climbButton.whenPressed(climb.withTimeout(6));
-        // TODO - rework comeDown - maybe something toggleable? too many buttons.
+        // TODO - rework lowerRobotButton - maybe something toggleable? too many buttons.
         lowerRobotButton.whenPressed(raiseHooks.withTimeout(6).andThen(lowerClimbPistons.withTimeout(4)));
 
 
@@ -140,7 +151,7 @@ public class RobotContainer {
         shootButton.toggleWhenPressed(shootAtSpeed);
 
         // PISTON-Y INTAKE BUTTONS
-        pistonDeployIntakeButton.whenPressed(pistonDeploy.withTimeout(1).andThen(intakeOn));
+        pistonDeployIntakeButton.whileHeld(finalDeployPiston);
         pistonRetractIntakeButton.whenPressed(intakeOff.andThen(pistonRetract.withTimeout(1)));
 
     }

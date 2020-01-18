@@ -63,9 +63,9 @@ public final class Constants {
   public static final int OPERATOR_CONTROLLER = 1;
 
   // CLIMBING
-  public static final int RAISE_BOTH_PISTONS = 1;
-  public static final int CLIMB = 2;
-  public static final int LOWER_ROBOT = 3;
+  public static final int RAISE_BOTH_PISTONS = 2;
+  public static final int CLIMB = 4;
+  public static final int LOWER_ROBOT = 5;
 
   // SHOOTING
   
@@ -73,17 +73,9 @@ public final class Constants {
 
   // INTAKE
 
-  // TODO: MAKE TOGGLEABLE???
-  public static final int DEPLOY_INTAKE = 5;
-  public static final int RETRACT_INTAKE = 6;
-  public static final int END_INTAKE = 8;
-  public static final int RUN_INTAKE = 9;
+  public static final int DEPLOY_INTAKE = 3;
+  public static final int RETRACT_INTAKE = 1;
 
-  // TODO - 3 is deploy & turn on (if not deployed already)
-
-  // TODO - 1 is turn off and retract
-
-  
   // === SPEED CONSTANTS === //
   
   // INTAKE
