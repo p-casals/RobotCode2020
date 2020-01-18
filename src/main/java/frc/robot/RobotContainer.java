@@ -20,6 +20,7 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
 
     // SUBSYSTEMS
+    
     private final Drivetrain DRIVETRAIN = new Drivetrain();
     private final Climber CLIMBER = new Climber();
     private final Shooter SHOOTER = new Shooter();
@@ -60,9 +61,15 @@ public class RobotContainer {
     );
 
     // SECOND LEVEL CLIMBER COMMANDS
+
     // TODO - check timeout times - I kind of made them up
+
     private final ConditionalCommand climbOrLower = new ConditionalCommand(
         raiseHooks.withTimeout(6), climb.withTimeout(6).andThen(lowerClimbPistons.withTimeout(3)), CLIMBER.hasClimbedBooleanSupplier
+    );
+
+    private final ConditionalCommand pistonUpOrDown = new ConditionalCommand(
+        lowerClimbPistons.withTimeout(2), raiseClimbPistons.withTimeout(2), CLIMBER.pistonUpSupplier
     );
 
     // SHOOTER COMMANDS
@@ -110,6 +117,7 @@ public class RobotContainer {
         intakeOn, pistonDeploy.andThen(intakeOn), INTAKE.isDeployedSupplier
     );
 
+
   
     // MAKE A NEW JOYSTICK
 
@@ -118,17 +126,14 @@ public class RobotContainer {
     // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
 
     // CLIMB BUTTONS
-
-    private final JoystickButton raiseBothPistonsButton = new JoystickButton(opController, RAISE_BOTH_PISTONS),
-                                 climbButton = new JoystickButton(opController, CLIMB);
+    private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_BOTH_PISTONS),
+                                 climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
                                  
     // SHOOT BUTTON (TOGGLEABLE)
-
-    private final JoystickButton shootButton = new JoystickButton(opController, SHOOT_BUTTON);
+                                 shootButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
 
     // PISTON-Y INTAKE BUTTONS
-
-    private final JoystickButton pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
+                                 pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
                                  pistonRetractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -143,9 +148,8 @@ public class RobotContainer {
      */
     private void configureButtonActions() {
         // CLIMB BUTTONS
-
-        raiseBothPistonsButton.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
         climbButton.whenPressed(climbOrLower);
+        pistonUpOrDownButton.whenPressed(pistonUpOrDown);
 
         // SHOOT BUTTONS
         shootButton.toggleWhenPressed(shootAtSpeed);

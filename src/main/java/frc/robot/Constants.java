@@ -63,12 +63,13 @@ public final class Constants {
   public static final int OPERATOR_CONTROLLER = 1;
 
   // CLIMBING
-  public static final int RAISE_BOTH_PISTONS = 2;
-  public static final int CLIMB = 4;
+  public static final int RAISE_OR_LOWER_BOTH_PISTONS = 5;
+  public static final int CLIMB_OR_LOWER = 6;
 
   // SHOOTING
   
-  public static final int SHOOT_BUTTON = 7;
+  public static final int SHOOTER_WHEEL_TOGGLE = 7;
+  public static final int SHOOT_BUTTON = 8;
 
   // INTAKE
 
