@@ -13,3 +13,5 @@ public class TestAutoCommandGroup extends SequentialCommandGroup {
                 new MoveCommand(drivetrain, 24, 0.5));
     }
 }
+
+// TODO: this doesn't need to be its own thing: it can be inlined unless it's going to be much more complicated
