@@ -63,10 +63,8 @@ public class RobotContainer {
 
     // CLIMB BUTTONS
 
-    private final JoystickButton climbButton = new JoystickButton(opController, CLIMB_BUTTON),
-                                 raiseHooksButton = new JoystickButton(opController, RAISE_HOOKS_BUTTON),
-                                 raiseClimbPistonsButton = new JoystickButton(opController, RAISE_CLIMB_PISTONS_BUTTON),
-                                 lowerClimbPistonsButton = new JoystickButton(opController, LOWER_CLIMB_PISTONS_BUTTON);
+    private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_CLIMB_PISTONS),
+                                 climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
 
     public RobotContainer() {
         configureButtonActions();
