@@ -65,7 +65,6 @@ public final class Constants {
   // CLIMBING
   public static final int RAISE_BOTH_PISTONS = 2;
   public static final int CLIMB = 4;
-  public static final int LOWER_ROBOT = 5;
 
   // SHOOTING
   

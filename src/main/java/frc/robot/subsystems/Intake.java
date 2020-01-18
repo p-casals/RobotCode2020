@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
 private VictorSP wheelMotor;
 private DoubleSolenoid intakePiston;
 public boolean isOn;
-private boolean isDeployed;
+private boolean isDeployed = false;
 
   public Intake() {
     wheelMotor = new VictorSP(WHEEL_INTAKE_MOTOR);
