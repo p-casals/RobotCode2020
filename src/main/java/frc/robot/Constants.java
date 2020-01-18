@@ -63,9 +63,9 @@ public final class Constants {
   public static final int OPERATOR_CONTROLLER = 1;
 
   // CLIMBING
-  public static final int GET_READY = 1;
-  public static final int CLIMB_NOW = 2;
-  public static final int COME_DOWN = 3;
+  public static final int RAISE_BOTH_PISTONS = 1;
+  public static final int CLIMB = 2;
+  public static final int LOWER_ROBOT = 3;
 
   // SHOOTING
   
@@ -79,6 +79,9 @@ public final class Constants {
   public static final int END_INTAKE = 8;
   public static final int RUN_INTAKE = 9;
 
+  // TODO - 3 is deploy & turn on (if not deployed already)
+
+  // TODO - 1 is turn off and retract
 
   
   // === SPEED CONSTANTS === //

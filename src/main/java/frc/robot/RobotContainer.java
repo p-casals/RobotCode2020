@@ -103,9 +103,9 @@ public class RobotContainer {
 
     // CLIMB BUTTONS
 
-    private final JoystickButton getReady = new JoystickButton(opController, GET_READY),
-                                 climbNow = new JoystickButton(opController, CLIMB_NOW),
-                                 comeDown = new JoystickButton(opController, COME_DOWN);
+    private final JoystickButton raiseBothPistonsButton = new JoystickButton(opController, RAISE_BOTH_PISTONS),
+                                 climbButton = new JoystickButton(opController, CLIMB),
+                                 lowerRobotButton = new JoystickButton(opController, LOWER_ROBOT);
                                  
     // SHOOT BUTTON (TOGGLEABLE)
 
@@ -129,10 +129,10 @@ public class RobotContainer {
     private void configureButtonActions() {
         // CLIMB BUTTONS
 
-        getReady.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
-        climbNow.whenPressed(climb.withTimeout(6));
+        raiseBothPistonsButton.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
+        climbButton.whenPressed(climb.withTimeout(6));
         // TODO - rework comeDown - maybe something toggleable? too many buttons.
-        comeDown.whenPressed(raiseHooks.withTimeout(6).andThen(lowerClimbPistons.withTimeout(4)));
+        lowerRobotButton.whenPressed(raiseHooks.withTimeout(6).andThen(lowerClimbPistons.withTimeout(4)));
 
 
 
