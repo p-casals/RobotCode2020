@@ -14,11 +14,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.*;
 
+
 import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
     // SUBSYSTEMS
+    
     private final Drivetrain DRIVETRAIN = new Drivetrain();
     private final Climber CLIMBER = new Climber();
     private final Shooter SHOOTER = new Shooter();
@@ -58,6 +60,18 @@ public class RobotContainer {
             CLIMBER
     );
 
+    // SECOND LEVEL CLIMBER COMMANDS
+
+    // TODO - check timeout times - I kind of made them up
+
+    private final ConditionalCommand climbOrLower = new ConditionalCommand(
+        raiseHooks.withTimeout(6), climb.withTimeout(6).andThen(lowerClimbPistons.withTimeout(3)), CLIMBER.hasClimbedBooleanSupplier
+    );
+
+    private final ConditionalCommand pistonUpOrDown = new ConditionalCommand(
+        lowerClimbPistons.withTimeout(2), raiseClimbPistons.withTimeout(2), CLIMBER.pistonUpSupplier
+    );
+
     // SHOOTER COMMANDS
     
     private final StartEndCommand shootAtSpeed = new StartEndCommand(
@@ -73,6 +87,7 @@ public class RobotContainer {
 
     // INTAKE COMMANDS
 
+
     private final InstantCommand intakeOn = new InstantCommand(
         () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED),
         INTAKE
@@ -84,7 +99,7 @@ public class RobotContainer {
     );
 
     private final StartEndCommand pistonDeploy = new StartEndCommand(
-        () -> INTAKE.deployPiston(),
+        () -> INTAKE.deployPiston(), 
         () -> INTAKE.pistonOff(),
         INTAKE
     );
@@ -94,6 +109,15 @@ public class RobotContainer {
         () -> INTAKE.pistonOff(),
         INTAKE
     );
+
+
+    // SECOND LEVEL INTAKE COMMANDS
+
+    private final ConditionalCommand finalDeployPiston = new ConditionalCommand(
+        intakeOn, pistonDeploy.andThen(intakeOn), INTAKE.isDeployedSupplier
+    );
+
+
   
     // MAKE A NEW JOYSTICK
 
@@ -102,18 +126,14 @@ public class RobotContainer {
     // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
 
     // CLIMB BUTTONS
-
-    private final JoystickButton raiseBothPistonsButton = new JoystickButton(opController, RAISE_BOTH_PISTONS),
-                                 climbButton = new JoystickButton(opController, CLIMB),
-                                 lowerRobotButton = new JoystickButton(opController, LOWER_ROBOT);
+    private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_BOTH_PISTONS),
+                                 climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
                                  
     // SHOOT BUTTON (TOGGLEABLE)
-
-    private final JoystickButton shootButton = new JoystickButton(opController, SHOOT_BUTTON);
+                                 shootButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
 
     // PISTON-Y INTAKE BUTTONS
-
-    private final JoystickButton pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
+                                 pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
                                  pistonRetractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -128,19 +148,14 @@ public class RobotContainer {
      */
     private void configureButtonActions() {
         // CLIMB BUTTONS
-
-        raiseBothPistonsButton.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
-        climbButton.whenPressed(climb.withTimeout(6));
-        // TODO - rework comeDown - maybe something toggleable? too many buttons.
-        lowerRobotButton.whenPressed(raiseHooks.withTimeout(6).andThen(lowerClimbPistons.withTimeout(4)));
-
-
+        climbButton.whenPressed(climbOrLower);
+        pistonUpOrDownButton.whenPressed(pistonUpOrDown);
 
         // SHOOT BUTTONS
         shootButton.toggleWhenPressed(shootAtSpeed);
 
         // PISTON-Y INTAKE BUTTONS
-        pistonDeployIntakeButton.whenPressed(pistonDeploy.withTimeout(1).andThen(intakeOn));
+        pistonDeployIntakeButton.whileHeld(finalDeployPiston);
         pistonRetractIntakeButton.whenPressed(intakeOff.andThen(pistonRetract.withTimeout(1)));
 
     }
@@ -151,7 +166,6 @@ public class RobotContainer {
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
      * @return the command to run in autonomous
      */
 
