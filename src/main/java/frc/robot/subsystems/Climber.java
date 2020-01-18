@@ -11,12 +11,15 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
+import java.util.function.BooleanSupplier;
+
 public class Climber extends SubsystemBase {
   /**
    * Creates a new climber.
    */
    
    private DoubleSolenoid pistonLiftPiston, robotLiftPiston;
+  private boolean hasClimbed = false;
    
   public Climber() {
     pistonLiftPiston = new DoubleSolenoid(CLIMBER_PISTON_LIFT_PISTON_1, CLIMBER_PISTON_LIFT_PISTON_2);
@@ -41,6 +44,7 @@ public class Climber extends SubsystemBase {
   public void raiseHooks() {
     //extends the primary piston
     robotLiftPiston.set(DoubleSolenoid.Value.kForward);
+    hasClimbed = true;
   }
 
   public void stopHookPiston() {
@@ -51,7 +55,10 @@ public class Climber extends SubsystemBase {
   public void reverseHookPiston() {
     //retracts the primary piston
     robotLiftPiston.set(DoubleSolenoid.Value.kReverse);
+    hasClimbed = false;
   }
+
+  public BooleanSupplier hasClimbedSupplier = () -> hasClimbed;
 
   
 

@@ -8,8 +8,6 @@
 
 package frc.robot;
 
-import java.util.function.BooleanSupplier; 
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -61,6 +59,12 @@ public class RobotContainer {
             CLIMBER
     );
 
+    // SECOND LEVEL CLIMBER COMMANDS
+    // TODO - check timeout times - I kind of made them up
+    private final ConditionalCommand climbOrLower = new ConditionalCommand(
+        raiseHooks.withTimeout(6), climb.withTimeout(6).andThen(lowerClimbPistons.withTimeout(3)), CLIMBER.hasClimbedSupplier
+    );
+
     // SHOOTER COMMANDS
     
     private final StartEndCommand shootAtSpeed = new StartEndCommand(
@@ -99,6 +103,7 @@ public class RobotContainer {
         INTAKE
     );
 
+
     // SECOND LEVEL INTAKE COMMANDS
 
     private final ConditionalCommand finalDeployPiston = new ConditionalCommand(
@@ -115,8 +120,7 @@ public class RobotContainer {
     // CLIMB BUTTONS
 
     private final JoystickButton raiseBothPistonsButton = new JoystickButton(opController, RAISE_BOTH_PISTONS),
-                                 climbButton = new JoystickButton(opController, CLIMB),
-                                 lowerRobotButton = new JoystickButton(opController, LOWER_ROBOT);
+                                 climbButton = new JoystickButton(opController, CLIMB);
                                  
     // SHOOT BUTTON (TOGGLEABLE)
 
@@ -141,11 +145,7 @@ public class RobotContainer {
         // CLIMB BUTTONS
 
         raiseBothPistonsButton.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
-        climbButton.whenPressed(climb.withTimeout(6));
-        // TODO - rework lowerRobotButton - maybe something toggleable? too many buttons.
-        lowerRobotButton.whenPressed(raiseHooks.withTimeout(6).andThen(lowerClimbPistons.withTimeout(4)));
-
-
+        climbButton.whenPressed(climbOrLower);
 
         // SHOOT BUTTONS
         shootButton.toggleWhenPressed(shootAtSpeed);
@@ -162,7 +162,6 @@ public class RobotContainer {
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
      * @return the command to run in autonomous
      */
 
