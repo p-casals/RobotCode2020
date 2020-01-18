@@ -58,7 +58,7 @@ public class Climber extends SubsystemBase {
     hasClimbed = false;
   }
 
-  public BooleanSupplier hasClimbedSupplier = () -> hasClimbed;
+  public BooleanSupplier hasClimbedBooleanSupplier = () -> hasClimbed;
 
   
 

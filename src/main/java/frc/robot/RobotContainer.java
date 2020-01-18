@@ -62,7 +62,7 @@ public class RobotContainer {
     // SECOND LEVEL CLIMBER COMMANDS
     // TODO - check timeout times - I kind of made them up
     private final ConditionalCommand climbOrLower = new ConditionalCommand(
-        raiseHooks.withTimeout(6), climb.withTimeout(6).andThen(lowerClimbPistons.withTimeout(3)), CLIMBER.hasClimbedSupplier
+        raiseHooks.withTimeout(6), climb.withTimeout(6).andThen(lowerClimbPistons.withTimeout(3)), CLIMBER.hasClimbedBooleanSupplier
     );
 
     // SHOOTER COMMANDS
