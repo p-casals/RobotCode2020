@@ -77,10 +77,10 @@ public class RobotContainer {
      */
     private void configureButtonActions() {
         // CLIMB BUTTONS
-        climbButton.whenPressed(climb.withTimeout(8));
-        raiseHooksButton.whenPressed(raiseHooks.withTimeout(6));
-        raiseClimbPistonsButton.whenPressed(raiseClimbPistons.withTimeout(2));
-        lowerClimbPistonsButton.whenPressed(lowerClimbPistons.withTimeout(2));
+         // CLIMB BUTTONS
+         climbButton.whenPressed(climbOrLower);
+         pistonUpOrDownButton.whenPressed(pistonUpOrDown);
+ 
     }
 
     /**
