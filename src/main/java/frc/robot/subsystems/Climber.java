@@ -20,6 +20,7 @@ public class Climber extends SubsystemBase {
    
    private DoubleSolenoid pistonLiftPiston, robotLiftPiston;
   private boolean hasClimbed = false;
+  private boolean pistonUp = false;
    
   public Climber() {
     pistonLiftPiston = new DoubleSolenoid(CLIMBER_PISTON_LIFT_PISTON_1, CLIMBER_PISTON_LIFT_PISTON_2);
@@ -29,6 +30,7 @@ public class Climber extends SubsystemBase {
   public void raiseClimber() {
     //extends the secondary piston
     pistonLiftPiston.set(DoubleSolenoid.Value.kForward);
+    pistonUp = true;
   }
 
   public void stopRaisePiston() {
@@ -39,6 +41,7 @@ public class Climber extends SubsystemBase {
   public void reverseRaisePiston() {
     //retracts the secondary piston
     pistonLiftPiston.set(DoubleSolenoid.Value.kReverse);
+    pistonUp = false;
   }
   
   public void raiseHooks() {
@@ -59,6 +62,7 @@ public class Climber extends SubsystemBase {
   }
 
   public BooleanSupplier hasClimbedBooleanSupplier = () -> hasClimbed;
+  public BooleanSupplier pistonUpSupplier = () -> pistonUp;
 
   
 

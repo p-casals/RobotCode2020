@@ -65,6 +65,10 @@ public class RobotContainer {
         raiseHooks.withTimeout(6), climb.withTimeout(6).andThen(lowerClimbPistons.withTimeout(3)), CLIMBER.hasClimbedBooleanSupplier
     );
 
+    private final ConditionalCommand pistonUpOrDown = new ConditionalCommand(
+        lowerClimbPistons.withTimeout(2), raiseClimbPistons.withTimeout(2), CLIMBER.pistonUpSupplier
+    );
+
     // SHOOTER COMMANDS
     
     private final StartEndCommand shootAtSpeed = new StartEndCommand(
@@ -110,6 +114,7 @@ public class RobotContainer {
         intakeOn, pistonDeploy.andThen(intakeOn), INTAKE.isDeployedSupplier
     );
 
+
   
     // MAKE A NEW JOYSTICK
 
@@ -119,8 +124,8 @@ public class RobotContainer {
 
     // CLIMB BUTTONS
 
-    private final JoystickButton raiseBothPistonsButton = new JoystickButton(opController, RAISE_BOTH_PISTONS),
-                                 climbButton = new JoystickButton(opController, CLIMB);
+    private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_BOTH_PISTONS),
+                                 climbButton = new JoystickButton(opController, CLIMB_OR_LOWER);
                                  
     // SHOOT BUTTON (TOGGLEABLE)
 
@@ -144,8 +149,8 @@ public class RobotContainer {
     private void configureButtonActions() {
         // CLIMB BUTTONS
 
-        raiseBothPistonsButton.whenPressed(raiseClimbPistons.withTimeout(1).andThen(raiseHooks.withTimeout(1)));
         climbButton.whenPressed(climbOrLower);
+        pistonUpOrDownButton.whenPressed(pistonUpOrDown);
 
         // SHOOT BUTTONS
         shootButton.toggleWhenPressed(shootAtSpeed);
