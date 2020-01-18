@@ -24,6 +24,7 @@ public class RobotContainer {
     private final Drivetrain DRIVETRAIN = new Drivetrain();
 
 
+    
     // == JOYSTICK & BUTTON BINDINGS == //
 
 
@@ -32,37 +33,23 @@ public class RobotContainer {
     public final Joystick driverController = new Joystick(DRIVER_CONTROLLER), opController = new Joystick(OPERATOR_CONTROLLER);
   
     // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
-
-                            // CLIMB BUTTONS
+                                // CLIMB BUTTONS
     private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_CLIMB_PISTONS),
                                  climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
-                            // SHOOT BUTTON (TOGGLEABLE)
+                                // SHOOT BUTTON (TOGGLEABLE)
                                  flywheelToggleButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
-                            // PISTON-Y INTAKE BUTTONS
+                                // PISTON-Y INTAKE BUTTONS
                                  deployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
                                  retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
    
    
-   
-   
-   
-
-    /**
-     * The container for the robot.  Contains subsystems, OI devices, and commands.
-     */
-
+    // ROBOT CONTAINER
     public RobotContainer() {
         configureButtonActions();
     }
 
 
-
-
-    /**
-     * Config button actions: it changes what does each button do. Don't touch this to change bindings.
-     */
-
-
+    // CONFIG BUTTON ACTIONS
     private void configureButtonActions() {
         
         // CLIMB BUTTONS
@@ -79,20 +66,15 @@ public class RobotContainer {
 
 
 
-
-
     public Drivetrain getDrivetrain() {
         return this.DRIVETRAIN;
     }
-
-
 
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      * @return the command to run in autonomous
      */
-
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
         return new TestAutoCommandGroup(DRIVETRAIN);
