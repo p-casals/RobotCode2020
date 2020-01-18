@@ -19,96 +19,12 @@ import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
-
-    // CREATE SUBSYSTEMS
+    // IMPORTING STUFF AND STUFF
+    RobotCommands Command = new RobotCommands();
     private final Drivetrain DRIVETRAIN = new Drivetrain();
-    private final Climber CLIMBER = new Climber();
-    private final Shooter SHOOTER = new Shooter();
-    private final Intake INTAKE = new Intake();
-
-
-
-    // == COMMANDS == //
-
-
-
-    // BASE CLIMBER COMMANDS
-    private final StartEndCommand climbCommand = new StartEndCommand(
-        () -> CLIMBER.reversePrimary(), 
-        () -> CLIMBER.stopPrimary(), 
-        CLIMBER
-    );
-    private final StartEndCommand raisePrimaryCommand = new StartEndCommand(
-        () -> CLIMBER.raisePrimary(), 
-        () -> CLIMBER.stopPrimary(), 
-        CLIMBER
-    );
-    private final StartEndCommand raiseSecondaryCommand = new StartEndCommand(
-        () -> CLIMBER.raiseSecondary(), 
-        () -> CLIMBER.stopSecondary(), 
-        CLIMBER
-    );
-    private final StartEndCommand reverseSecondaryCommand = new StartEndCommand(
-        () -> CLIMBER.reverseSecondary(), 
-        () -> CLIMBER.stopSecondary(), 
-        CLIMBER
-    );
-
-
-    // SECOND LEVEL CLIMBER COMMANDS
-    // TODO - check timeout times - I kind of made them up
-    private final ConditionalCommand climbOrLower = new ConditionalCommand(
-        raisePrimaryCommand.withTimeout(6), climbCommand.withTimeout(6).andThen(reverseSecondaryCommand.withTimeout(3)), 
-        CLIMBER.hasClimbedBooleanSupplier
-    );
-    private final ConditionalCommand pistonUpOrDown = new ConditionalCommand(
-        reverseSecondaryCommand.withTimeout(2), 
-        raiseSecondaryCommand.withTimeout(2), 
-        CLIMBER.pistonUpSupplier
-    );
-        
-
-
-    // SHOOTER COMMANDS
-    // TODO: change set speed parameter to variable if vision processing works.
-     private final StartEndCommand shootAtSpeed = new StartEndCommand(
-        () -> SHOOTER.setSpeed(1), 
-        () -> SHOOTER.setSpeed(0), 
-        SHOOTER
-    );
-
-
-    // INTAKE COMMANDS
-    private final InstantCommand intakeOn = new InstantCommand(
-        () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED), 
-        INTAKE
-    );
-    private final InstantCommand intakeOff = new InstantCommand(
-        () -> INTAKE.wheelSpeed(0), 
-        INTAKE
-    );
-    private final StartEndCommand pistonDeploy = new StartEndCommand(
-        () -> INTAKE.deploy(), () -> INTAKE.stop(), 
-        INTAKE
-    );
-    private final StartEndCommand pistonRetract = new StartEndCommand(
-        () -> INTAKE.retract(), () -> INTAKE.stop(), 
-        INTAKE
-    );
-
-
-    // SECOND LEVEL INTAKE COMMANDS
-    private final ConditionalCommand finalDeployPiston = new ConditionalCommand(
-        intakeOn, pistonDeploy.andThen(intakeOn), INTAKE.isDeployedSupplier
-    );
-
-
-
 
 
     // == JOYSTICK & BUTTON BINDINGS == //
-
-
 
 
   
@@ -150,15 +66,15 @@ public class RobotContainer {
     private void configureButtonActions() {
         
         // CLIMB BUTTONS
-        climbButton.whenPressed(climbOrLower);
-        pistonUpOrDownButton.whenPressed(pistonUpOrDown);
+        climbButton.whenPressed(Command.climbOrLower);
+        pistonUpOrDownButton.whenPressed(Command.pistonUpOrDown);
 
         // SHOOT BUTTONS
-        flywheelToggleButton.toggleWhenPressed(shootAtSpeed);
+        flywheelToggleButton.toggleWhenPressed(Command.shootAtSpeed);
 
         // PISTON-Y INTAKE BUTTONS
-        deployIntakeButton.whileHeld(finalDeployPiston);
-        retractIntakeButton.whenPressed(intakeOff.andThen(pistonRetract.withTimeout(1)));
+        deployIntakeButton.whileHeld(Command.finalDeployPiston);
+        retractIntakeButton.whenPressed(Command.finalRetractIntake);
     }
 
 
