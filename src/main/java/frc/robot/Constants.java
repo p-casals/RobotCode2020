@@ -31,10 +31,10 @@ public final class Constants {
 
 
   // PISTONS
-  public static final int CLIMBER_PISTON_LIFT_PISTON_1 = 0;
-  public static final int CLIMBER_PISTON_LIFT_PISTON_2 = 1;
-  public static final int CLIMBER_ROBOT_LIFT_PISTON_1 = 2;
-  public static final int CLIMBER_ROBOT_LIFT_PISTON_2 = 3;
+  public static final int SECONDARY_PISTON_1 = 0;
+  public static final int SECONDARY_PISTON_2 = 1;
+  public static final int PRIMARY_PISTON_1 = 2;
+  public static final int PRIMARY_PISTON_2 = 3;
 
   public static final int INTAKE_PISTON_1 = 4;
   public static final int INTAKE_PISTON_2 = 5;
@@ -68,12 +68,10 @@ public final class Constants {
   public static final int CLIMB_OR_LOWER = 6;
 
   // SHOOTING
-  
   public static final int SHOOTER_WHEEL_TOGGLE = 7;
   public static final int SHOOT_BUTTON = 8;
 
   // INTAKE
-
   public static final int DEPLOY_INTAKE = 3;
   public static final int RETRACT_INTAKE = 1;
 

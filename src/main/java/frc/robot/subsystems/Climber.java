@@ -18,49 +18,55 @@ public class Climber extends SubsystemBase {
    * Creates a new climber.
    */
    
-   private DoubleSolenoid pistonLiftPiston, robotLiftPiston;
+   private DoubleSolenoid secondaryPiston, primaryPiston;
   private boolean hasClimbed = false;
   private boolean pistonUp = false;
    
   public Climber() {
-    pistonLiftPiston = new DoubleSolenoid(CLIMBER_PISTON_LIFT_PISTON_1, CLIMBER_PISTON_LIFT_PISTON_2);
-    robotLiftPiston = new DoubleSolenoid(CLIMBER_PISTON_LIFT_PISTON_1, CLIMBER_PISTON_LIFT_PISTON_2);
+    secondaryPiston = new DoubleSolenoid(SECONDARY_PISTON_1, SECONDARY_PISTON_2);
+    primaryPiston = new DoubleSolenoid(PRIMARY_PISTON_1, PRIMARY_PISTON_2);
   }
 
-  public void raiseClimber() {
+  // SECONDARY PISTON BASE COMMANDS
+
+  public void raisePiston() {
     //extends the secondary piston
-    pistonLiftPiston.set(DoubleSolenoid.Value.kForward);
+    secondaryPiston.set(DoubleSolenoid.Value.kForward);
     pistonUp = true;
   }
 
-  public void stopRaisePiston() {
+  public void stopPiston() {
     //stops the secondary piston
-    pistonLiftPiston.set(DoubleSolenoid.Value.kOff);
+    secondaryPiston.set(DoubleSolenoid.Value.kOff);
   }
 
-  public void reverseRaisePiston() {
+  public void reversePiston() {
     //retracts the secondary piston
-    pistonLiftPiston.set(DoubleSolenoid.Value.kReverse);
+    secondaryPiston.set(DoubleSolenoid.Value.kReverse);
     pistonUp = false;
   }
   
+  // PRIMARY PISTON BASE COMMANDS
+
   public void raiseHooks() {
     //extends the primary piston
-    robotLiftPiston.set(DoubleSolenoid.Value.kForward);
+    primaryPiston.set(DoubleSolenoid.Value.kForward);
     hasClimbed = true;
   }
 
-  public void stopHookPiston() {
+  public void stopHooks() {
     //stops the primary piston
-    robotLiftPiston.set(DoubleSolenoid.Value.kOff);
+    primaryPiston.set(DoubleSolenoid.Value.kOff);
   }
 
-  public void reverseHookPiston() {
+  public void reverseHooks() {
     //retracts the primary piston
-    robotLiftPiston.set(DoubleSolenoid.Value.kReverse);
+    primaryPiston.set(DoubleSolenoid.Value.kReverse);
     hasClimbed = false;
   }
 
+  // BOOLEANSUPPLIERS: For robotContainer climber secondary commands
+   
   public BooleanSupplier hasClimbedBooleanSupplier = () -> hasClimbed;
   public BooleanSupplier pistonUpSupplier = () -> pistonUp;
 

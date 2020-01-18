@@ -30,9 +30,9 @@ public class RobotContainer {
 
     private final StartEndCommand climb = new StartEndCommand(
             //runnable on init
-            () -> CLIMBER.reverseHookPiston(),
+            () -> CLIMBER.reverseHooks(),
             //runnable on end
-            () -> CLIMBER.stopHookPiston(),
+            () -> CLIMBER.stopHooks(),
             CLIMBER
     );
 
@@ -40,23 +40,23 @@ public class RobotContainer {
             //runnable on init
             () -> CLIMBER.raiseHooks(),
             //runnable on end
-            () -> CLIMBER.stopHookPiston(),
+            () -> CLIMBER.stopHooks(),
             CLIMBER
     );
 
     private final StartEndCommand raiseClimbPistons = new StartEndCommand(
             //runnable on init
-            () -> CLIMBER.raiseClimber(),
+            () -> CLIMBER.raisePiston(),
             //runnable on end
-            () -> CLIMBER.stopRaisePiston(),
+            () -> CLIMBER.stopPiston(),
             CLIMBER
     );
 
     private final StartEndCommand lowerClimbPistons = new StartEndCommand(
             //runnable on init
-            () -> CLIMBER.reverseRaisePiston(),
+            () -> CLIMBER.reversePiston(),
             //runnable on end
-            () -> CLIMBER.stopRaisePiston(),
+            () -> CLIMBER.stopPiston(),
             CLIMBER
     );
 
@@ -77,6 +77,7 @@ public class RobotContainer {
     private final StartEndCommand shootAtSpeed = new StartEndCommand(
         
     // TODO: change set speed parameter to variable if vision processing works.
+    // TODO: change this code so stopShooter becomes unnecessary
         
         //Runnable on initialise
         () -> SHOOTER.setSpeed(1),

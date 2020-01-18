@@ -23,12 +23,16 @@ public class Shooter extends SubsystemBase {
     motor3 = new VictorSP(SHOOTER_MOTOR_3);
 
   }
+
+  // TODO: shooterSpeed can become an outside variable when vision tracking works
   public void setSpeed(double shooterSpeed) {
     motor1.set(shooterSpeed);
     motor2.set(shooterSpeed);
     motor3.set(shooterSpeed);
   }
 
+  // Stops everything. not really necessary
+  // TODO: change robotcontainer code and delete this.
   public void stopShooter() {
     motor1.set(0);
     motor2.set(0);

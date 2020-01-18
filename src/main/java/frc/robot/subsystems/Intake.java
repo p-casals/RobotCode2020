@@ -19,7 +19,9 @@ public class Intake extends SubsystemBase {
   
 private VictorSP wheelMotor;
 private DoubleSolenoid intakePiston;
-public boolean isOn;
+
+// BOOLEANS: For RobotContainer's second-level intake commands
+public boolean isOn = false;
 private boolean isDeployed = false;
 
   public Intake() {
@@ -28,19 +30,17 @@ private boolean isDeployed = false;
 
   }
 
-  // MOTORS & PISTONS
-
+  // MOTORS
   public void wheelSpeed(double speed){
     wheelMotor.set(speed);
-
   }
 
   public void deployPiston() {
     intakePiston.set(DoubleSolenoid.Value.kForward);
     isDeployed = true;
-
   }
 
+  // PISTONS
   public void retractPiston() {
     intakePiston.set(DoubleSolenoid.Value.kReverse);
     isDeployed = false;
@@ -49,6 +49,8 @@ private boolean isDeployed = false;
   public void pistonOff() {
     intakePiston.set(DoubleSolenoid.Value.kOff);
   }
+
+  // BOOLEANSUPPLIER: For RobotContainer's second-level intake commands (for toggleability function)
   public BooleanSupplier isDeployedSupplier = () -> isDeployed;
   
 
