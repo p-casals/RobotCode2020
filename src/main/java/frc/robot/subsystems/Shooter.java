@@ -12,16 +12,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
 public class Shooter extends SubsystemBase {
+  
   private VictorSP motor1, motor2, motor3;
 
-  /**
-   * Creates a new ShooterSubsytem.
-   */
   public Shooter() {
     motor1 = new VictorSP(SHOOTER_MOTOR_1);
     motor2 = new VictorSP(SHOOTER_MOTOR_2);
     motor3 = new VictorSP(SHOOTER_MOTOR_3);
   }
+
+  // TODO: shooterSpeed can become an outside variable when vision tracking works
+
   public void setSpeed(double shooterSpeed) {
     motor1.set(shooterSpeed);
     motor2.set(shooterSpeed);

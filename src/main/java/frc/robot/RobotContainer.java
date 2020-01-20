@@ -11,6 +11,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.*;
 
@@ -18,7 +19,8 @@ import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
-    // SUBSYSTEMS
+    // IMPORTING STUFF AND STUFF
+    RobotCommands Command = new RobotCommands();
     private final Drivetrain DRIVETRAIN = new Drivetrain();
     private final Climber CLIMBER = new Climber();
     private final Shooter SHOOTER = new Shooter();
@@ -90,109 +92,57 @@ public class RobotContainer {
         () -> INTAKE.wheelSpeed(0),
         INTAKE
     );
-
-    private final StartEndCommand retractIntake = new StartEndCommand(
-    () -> INTAKE.deploySpeed(-DEPLOY_INTAKE_SPEED),
-    () -> INTAKE.deploySpeed(0),
-    INTAKE
-    );
-
-    // TODO: PISTON INTAKE
-
-    private final StartEndCommand pistonDeploy = new StartEndCommand(
-        () -> INTAKE.deployPiston(),
-        () -> INTAKE.pistonOff(),
-        INTAKE
-
-    );
-
-    private final StartEndCommand pistonRetract = new StartEndCommand(
-        () -> INTAKE.retractPiston(),
-        () -> INTAKE.pistonOff(),
-        INTAKE
-    );
+ 
+    // == JOYSTICK & BUTTON BINDINGS == //
 
 
   
-    // MAKE A NEW JOYSTICK
-
+    // NEW JOYSTICK
     public final Joystick driverController = new Joystick(DRIVER_CONTROLLER), opController = new Joystick(OPERATOR_CONTROLLER);
   
     // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
-
-    // CLIMB BUTTONS
-
-    private final JoystickButton climbButton = new JoystickButton(opController, CLIMB_BUTTON),
-                                 raiseHooksButton = new JoystickButton(opController, RAISE_HOOKS_BUTTON),
-                                 raiseClimbPistonsButton = new JoystickButton(opController, RAISE_CLIMB_PISTONS_BUTTON),
-                                 lowerClimbPistonsButton = new JoystickButton(opController, LOWER_CLIMB_PISTONS_BUTTON);
-
-    // SHOOT BUTTON (TOGGLEABLE)
-
-    private final JoystickButton shootButton = new JoystickButton(opController, SHOOT_BUTTON);
-
-    // INTAKE BUTTONS
-
-    private final JoystickButton deployIntakeButton = new JoystickButton(opController,DEPLOY_INTAKE),
-                                 retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
-                                 endIntakeButton = new JoystickButton(opController, END_INTAKE),
-                                 runIntakeButton = new JoystickButton(opController, RUN_INTAKE);
-    
-
-    // PISTON-Y INTAKE BUTTONS
-    // TODO: piston/motor change
-
-    private final JoystickButton pistonDeployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
-                                 pistonRetractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
-    /**
-     * The container for the robot.  Contains subsystems, OI devices, and commands.
-     */
-
+                                // CLIMB BUTTONS
+    private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_CLIMB_PISTONS),
+                                 climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
+                                // SHOOT BUTTON (TOGGLEABLE)
+                                 flywheelToggleButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
+                                // PISTON-Y INTAKE BUTTONS
+                                 deployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
+                                 retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
+   
+   
+    // ROBOT CONTAINER
     public RobotContainer() {
         configureButtonActions();
     }
 
-    /**
-     * Config button actions: it changes what does each button do. Don't touch this to change bindings
-     */
+
+    // CONFIG BUTTON ACTIONS
     private void configureButtonActions() {
+        
         // CLIMB BUTTONS
-        climbButton.whenPressed(climb.withTimeout(8));
-        raiseHooksButton.whenPressed(raiseHooks.withTimeout(6));
-        raiseClimbPistonsButton.whenPressed(raiseClimbPistons.withTimeout(2));
-        lowerClimbPistonsButton.whenPressed(lowerClimbPistons.withTimeout(2));
+        climbButton.whenPressed(Command.climbOrLower);
+        pistonUpOrDownButton.whenPressed(Command.pistonUpOrDown);
 
         // SHOOT BUTTONS
-        // TODO - this might not work. Check (I think it does... see Button.class)
-        shootButton.toggleWhenPressed(shootAtSpeed);
-
-        // TODO- add buttons for intake and change climb buttons
-
-        // INTAKE BUTTONS
-        deployIntakeButton.whenPressed(deployIntake);
-        retractIntakeButton.whenPressed(retractIntake);
-        endIntakeButton.whenPressed(intakeOff.andThen(retractIntake.withTimeout(1)));
-        runIntakeButton.whenPressed(deployIntake.withTimeout(1).andThen(intakeOn));
-
-        // TODO: either above or below is redundant. fix.
+        flywheelToggleButton.toggleWhenPressed(Command.shootAtSpeed);
 
         // PISTON-Y INTAKE BUTTONS
-        pistonDeployIntakeButton.whenPressed(pistonDeploy.withTimeout(1).andThen(intakeOn));
-        pistonRetractIntakeButton.whenPressed(intakeOff.andThen(pistonRetract.withTimeout(1)));
-
-
+        deployIntakeButton.whileHeld(Command.finalDeployPiston);
+        retractIntakeButton.whenPressed(Command.finalRetractIntake);
     }
+
+
 
     public Drivetrain getDrivetrain() {
         return this.DRIVETRAIN;
     }
 
+
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
      * @return the command to run in autonomous
      */
-
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
         return new TestAutoCommandGroup(DRIVETRAIN);

@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
@@ -15,45 +17,43 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Intake extends SubsystemBase {
   
-  // TODO: check intake deploy method (we need a piston??)
-  private VictorSP wheelMotor;
-  private VictorSP deployMotor;
- private DoubleSolenoid intakePiston;
+private VictorSP wheelMotor;
+private DoubleSolenoid intakePiston;
 
+// BOOLEANS: For RobotContainer's second-level intake commands
+public boolean isOn = false;
+private boolean isDeployed = false;
+
+  //CONSTRUCTOR
   public Intake() {
     wheelMotor = new VictorSP(WHEEL_INTAKE_MOTOR);
-    deployMotor = new VictorSP(DEPLOY_INTAKE_MOTOR);
    intakePiston = new DoubleSolenoid(INTAKE_PISTON_1, INTAKE_PISTON_2);
-
   }
 
-  // DEPLOY & WHEEL MOTORS
-  
-  public void deploySpeed(double speed){
-    deployMotor.set(speed);
-    
-  }
-
+  // MOTORS
   public void wheelSpeed(double speed){
     wheelMotor.set(speed);
   }
 
-
-  // TODO: IMPLEMENT PISTON?
-
-  public void deployPiston() {
+  public void deploy() {
     intakePiston.set(DoubleSolenoid.Value.kForward);
+    isDeployed = true;
   }
 
-  public void retractPiston() {
+  // PISTONS
+  public void retract() {
     intakePiston.set(DoubleSolenoid.Value.kReverse);
+    isDeployed = false;
   }
 
-  public void pistonOff() {
+  public void stop() {
     intakePiston.set(DoubleSolenoid.Value.kOff);
   }
 
+  // BOOLEANSUPPLIER: For RobotContainer's second-level intake commands (for toggleability function)
+  public BooleanSupplier isDeployedSupplier = () -> isDeployed;
   
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
