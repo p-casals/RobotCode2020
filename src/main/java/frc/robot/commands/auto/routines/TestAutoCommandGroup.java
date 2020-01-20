@@ -14,4 +14,3 @@ public class TestAutoCommandGroup extends SequentialCommandGroup {
     }
 }
 
-// TODO: this doesn't need to be its own thing: it can be inlined unless it's going to be much more complicated
