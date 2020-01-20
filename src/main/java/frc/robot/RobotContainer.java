@@ -67,7 +67,7 @@ public class RobotContainer {
         //Runnable on initialise
         () -> SHOOTER.setSpeed(1),
         //Runnable on end
-        () -> SHOOTER.stopShooter(),
+        () -> SHOOTER.setSpeed(0),
         SHOOTER
 
 

@@ -21,20 +21,12 @@ public class Shooter extends SubsystemBase {
     motor1 = new VictorSP(SHOOTER_MOTOR_1);
     motor2 = new VictorSP(SHOOTER_MOTOR_2);
     motor3 = new VictorSP(SHOOTER_MOTOR_3);
-
   }
   public void setSpeed(double shooterSpeed) {
     motor1.set(shooterSpeed);
     motor2.set(shooterSpeed);
     motor3.set(shooterSpeed);
   }
-
-  public void stopShooter() {
-    motor1.set(0);
-    motor2.set(0);
-    motor3.set(0);
-  }
-
 
   @Override
   public void periodic() {
