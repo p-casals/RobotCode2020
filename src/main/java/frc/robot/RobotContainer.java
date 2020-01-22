@@ -20,78 +20,13 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
 
     // IMPORTING STUFF AND STUFF
-    RobotCommands Command = new RobotCommands();
     private final Drivetrain DRIVETRAIN = new Drivetrain();
     private final Climber CLIMBER = new Climber();
     private final Shooter SHOOTER = new Shooter();
     private final Intake INTAKE = new Intake();
 
-    // CLIMBER COMMANDS
+    private final RobotCommands Command = new RobotCommands(CLIMBER, SHOOTER, INTAKE);
 
-    private final StartEndCommand climb = new StartEndCommand(
-            //runnable on init
-            () -> CLIMBER.reverseHookPiston(),
-            //runnable on end
-            () -> CLIMBER.stopHookPiston(),
-            CLIMBER
-    );
-
-    private final StartEndCommand raiseHooks = new StartEndCommand(
-            //runnable on init
-            () -> CLIMBER.raiseHooks(),
-            //runnable on end
-            () -> CLIMBER.stopHookPiston(),
-            CLIMBER
-    );
-
-    private final StartEndCommand raiseClimbPistons = new StartEndCommand(
-            //runnable on init
-            () -> CLIMBER.raiseClimber(),
-            //runnable on end
-            () -> CLIMBER.stopRaisePiston(),
-            CLIMBER
-    );
-
-    private final StartEndCommand lowerClimbPistons = new StartEndCommand(
-            //runnable on init
-            () -> CLIMBER.reverseRaisePiston(),
-            //runnable on end
-            () -> CLIMBER.stopRaisePiston(),
-            CLIMBER
-    );
-
-    // SHOOTER COMMANDS
-    
-    private final StartEndCommand shootAtSpeed = new StartEndCommand(
-        
-    // TODO: change set speed parameter to variable if vision processing works.
-        
-        //Runnable on initialise
-        () -> SHOOTER.setSpeed(1),
-        //Runnable on end
-        () -> SHOOTER.setSpeed(0),
-        SHOOTER
-
-
-    );
-
-    // INTAKE COMMANDS
-
-    private final StartEndCommand deployIntake = new StartEndCommand(
-        () -> INTAKE.deploySpeed(DEPLOY_INTAKE_SPEED),
-        () -> INTAKE.deploySpeed(0),
-        INTAKE
-    );
-
-    private final InstantCommand intakeOn = new InstantCommand(
-        () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED),
-        INTAKE
-    );
-
-    private final InstantCommand intakeOff = new InstantCommand(
-        () -> INTAKE.wheelSpeed(0),
-        INTAKE
-    );
  
     // == JOYSTICK & BUTTON BINDINGS == //
 
