@@ -1,3 +1,4 @@
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -7,74 +8,145 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.auto.EndIntake;
-import frc.robot.commands.auto.RunIntake;
+
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.*;
+
+import static frc.robot.Constants.*;
 
 public class RobotContainer {
-  // Subsystems
-  private final Drivetrain DRIVETRAIN = new Drivetrain();
-  private final Intake INTAKE = new Intake();
 
-  // Commands
+    // IMPORTING STUFF AND STUFF
+    RobotCommands Command = new RobotCommands();
+    private final Drivetrain DRIVETRAIN = new Drivetrain();
+    private final Climber CLIMBER = new Climber();
+    private final Shooter SHOOTER = new Shooter();
+    private final Intake INTAKE = new Intake();
 
-  // Controllers
-  private Joystick driverController, opController;
-  private JoystickButton buttonA, buttonB, buttonX, buttonY;
+    // CLIMBER COMMANDS
 
-  /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
-   */
-  public RobotContainer() {
-    configureButtonBindings();
-  }
+    private final StartEndCommand climb = new StartEndCommand(
+            //runnable on init
+            () -> CLIMBER.reverseHookPiston(),
+            //runnable on end
+            () -> CLIMBER.stopHookPiston(),
+            CLIMBER
+    );
 
-  public double getVerticalAxisLeft() {
-    return driverController.getRawAxis(Constants.FORWARD_AXIS_LEFT);
-  }
+    private final StartEndCommand raiseHooks = new StartEndCommand(
+            //runnable on init
+            () -> CLIMBER.raiseHooks(),
+            //runnable on end
+            () -> CLIMBER.stopHookPiston(),
+            CLIMBER
+    );
 
-  public double getHorizontalAxisRight() {
-    return driverController.getRawAxis(Constants.HORIZ_AXIS_RIGHT);
-  }
+    private final StartEndCommand raiseClimbPistons = new StartEndCommand(
+            //runnable on init
+            () -> CLIMBER.raiseClimber(),
+            //runnable on end
+            () -> CLIMBER.stopRaisePiston(),
+            CLIMBER
+    );
 
-  /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-    driverController = new Joystick(0);
-    opController = new Joystick(1);
+    private final StartEndCommand lowerClimbPistons = new StartEndCommand(
+            //runnable on init
+            () -> CLIMBER.reverseRaisePiston(),
+            //runnable on end
+            () -> CLIMBER.stopRaisePiston(),
+            CLIMBER
+    );
 
-    buttonA = new JoystickButton(opController, 0);
-    buttonB = new JoystickButton(opController, 1);
-    buttonX = new JoystickButton(opController, 2);
-    buttonY = new JoystickButton(opController, 3);
-
-    buttonA.whenPressed(new RunIntake(INTAKE));
-    buttonB.whenPressed(new EndIntake(INTAKE));
-  }
-
-  public Drivetrain getDrivetrain() {
-    return this.DRIVETRAIN;
-  }
+    // SHOOTER COMMANDS
+    
+    private final StartEndCommand shootAtSpeed = new StartEndCommand(
+        
+    // TODO: change set speed parameter to variable if vision processing works.
+        
+        //Runnable on initialise
+        () -> SHOOTER.setSpeed(1),
+        //Runnable on end
+        () -> SHOOTER.setSpeed(0),
+        SHOOTER
 
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return new TestAutoCommandGroup(DRIVETRAIN); //TODO- create auto command
-  }
+    );
+
+    // INTAKE COMMANDS
+
+    private final StartEndCommand deployIntake = new StartEndCommand(
+        () -> INTAKE.deploySpeed(DEPLOY_INTAKE_SPEED),
+        () -> INTAKE.deploySpeed(0),
+        INTAKE
+    );
+
+    private final InstantCommand intakeOn = new InstantCommand(
+        () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED),
+        INTAKE
+    );
+
+    private final InstantCommand intakeOff = new InstantCommand(
+        () -> INTAKE.wheelSpeed(0),
+        INTAKE
+    );
+ 
+    // == JOYSTICK & BUTTON BINDINGS == //
+
+
+  
+    // NEW JOYSTICK
+    public final Joystick driverController = new Joystick(DRIVER_CONTROLLER), opController = new Joystick(OPERATOR_CONTROLLER);
+  
+    // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
+                                // CLIMB BUTTONS
+    private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_CLIMB_PISTONS),
+                                 climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
+                                // SHOOT BUTTON (TOGGLEABLE)
+                                 flywheelToggleButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
+                                // PISTON-Y INTAKE BUTTONS
+                                 deployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
+                                 retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
+   
+   
+    // ROBOT CONTAINER
+    public RobotContainer() {
+        configureButtonActions();
+    }
+
+
+    // CONFIG BUTTON ACTIONS
+    private void configureButtonActions() {
+        
+        // CLIMB BUTTONS
+        climbButton.whenPressed(Command.climbOrLower);
+        pistonUpOrDownButton.whenPressed(Command.pistonUpOrDown);
+
+        // SHOOT BUTTONS
+        flywheelToggleButton.toggleWhenPressed(Command.shootAtSpeed);
+
+        // PISTON-Y INTAKE BUTTONS
+        deployIntakeButton.whileHeld(Command.finalDeployPiston);
+        retractIntakeButton.whenPressed(Command.finalRetractIntake);
+    }
+
+
+
+    public Drivetrain getDrivetrain() {
+        return this.DRIVETRAIN;
+    }
+
+
+    /**
+     * Use this to pass the autonomous command to the main {@link Robot} class.
+     * @return the command to run in autonomous
+     */
+    public Command getAutonomousCommand() {
+        // An ExampleCommand will run in autonomous
+        return new TestAutoCommandGroup(DRIVETRAIN);
+
+    }
+
 }
