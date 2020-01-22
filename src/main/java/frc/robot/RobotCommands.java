@@ -16,12 +16,18 @@ import static frc.robot.Constants.*;
 /**
  * For robot commands because RobotContainer is frighteningly messy
  */
-public class RobotCommands extends CommandBase{
+public class RobotCommands{
 
     // CREATE SUBSYSTEMS
-    private final Climber CLIMBER = new Climber();
-    private final Shooter SHOOTER = new Shooter();
-    private final Intake INTAKE = new Intake();
+    private Climber CLIMBER;
+    private Shooter SHOOTER;
+    private Intake INTAKE;
+
+    public RobotCommands(Climber climber, Shooter shooter, Intake intake){
+        CLIMBER = climber;
+        SHOOTER = shooter;
+        INTAKE = intake;
+    }
 
 
 
@@ -30,22 +36,22 @@ public class RobotCommands extends CommandBase{
 
 
     // BASE CLIMBER COMMANDS
-    private final StartEndCommand climbCommand = new StartEndCommand(
+    public final StartEndCommand climbCommand = new StartEndCommand(
         () -> CLIMBER.reversePrimary(), 
         () -> CLIMBER.stopPrimary(), 
         CLIMBER
     );
-    private final StartEndCommand raisePrimaryCommand = new StartEndCommand(
+    public final StartEndCommand raisePrimaryCommand = new StartEndCommand(
         () -> CLIMBER.raisePrimary(), 
         () -> CLIMBER.stopPrimary(), 
         CLIMBER
     );
-    private final StartEndCommand raiseSecondaryCommand = new StartEndCommand(
+    public final StartEndCommand raiseSecondaryCommand = new StartEndCommand(
         () -> CLIMBER.raiseSecondary(), 
         () -> CLIMBER.stopSecondary(), 
         CLIMBER
     );
-    private final StartEndCommand reverseSecondaryCommand = new StartEndCommand(
+    public final StartEndCommand reverseSecondaryCommand = new StartEndCommand(
         () -> CLIMBER.reverseSecondary(), 
         () -> CLIMBER.stopSecondary(), 
         CLIMBER
@@ -63,19 +69,19 @@ public class RobotCommands extends CommandBase{
 
 
     // INTAKE COMMANDS
-    private final InstantCommand intakeOn = new InstantCommand(
+    public final InstantCommand intakeOn = new InstantCommand(
         () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED), 
         INTAKE
     );
-    private final InstantCommand intakeOff = new InstantCommand(
+    public final InstantCommand intakeOff = new InstantCommand(
         () -> INTAKE.wheelSpeed(0), 
         INTAKE
     );
-    private final StartEndCommand pistonDeploy = new StartEndCommand(
+    public final StartEndCommand pistonDeploy = new StartEndCommand(
         () -> INTAKE.deploy(), () -> INTAKE.stop(), 
         INTAKE
     );
-    private final StartEndCommand pistonRetract = new StartEndCommand(
+    public final StartEndCommand pistonRetract = new StartEndCommand(
         () -> INTAKE.retract(), () -> INTAKE.stop(), 
         INTAKE
     );
