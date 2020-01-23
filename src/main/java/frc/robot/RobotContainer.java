@@ -23,9 +23,9 @@ public class RobotContainer {
     private final Climber CLIMBER = new Climber();
     private final Shooter SHOOTER = new Shooter();
     private final Intake INTAKE = new Intake();
-    private final ControlPannel CONTROLPANNEL = new ControlPannel();
+    private final ControlPanel CONTROLPANEL = new ControlPanel();
 
-    private final RobotCommands Command = new RobotCommands(CLIMBER, SHOOTER, INTAKE, CONTROLPANNEL);
+    private final RobotCommands Command = new RobotCommands(CLIMBER, SHOOTER, INTAKE, CONTROLPANEL);
 
  
     // == JOYSTICK & BUTTON BINDINGS == //
@@ -44,7 +44,7 @@ public class RobotContainer {
                                 // PISTON-Y INTAKE BUTTONS
                                  deployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
                                  retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
-                                 // CONTROL PANNEL BUTTONS
+                                 // CONTROL PANEL BUTTONS
                                  controlSpinButton = new JoystickButton(opController, SPIN_MOTOR),
                                  controlLiftButton = new JoystickButton(opController, LIFT_MOTOR);
 
@@ -70,7 +70,7 @@ public class RobotContainer {
         deployIntakeButton.whileHeld(Command.finalDeployPiston);
         retractIntakeButton.whenPressed(Command.finalRetractIntake);
 
-        // CONTROL PANNEL BUTTONS
+        // CONTROL PANEL BUTTONS
         controlSpinButton.whenHeld(Command.controlSpin);
         int x = 0;
         if (x == 0) {

@@ -31,7 +31,7 @@ public final class Constants {
   public static final int SHOOTER_MOTOR_1 = 7;
   public static final int SHOOTER_MOTOR_2 = 8;
   public static final int SHOOTER_MOTOR_3 = 9;
-  // CONTROL PANNEL MOTORS
+  // CONTROL PANEL MOTORS
   public static final int LIFT_MOTOR = 10;
   public static final int SPIN_MOTOR = 11;
 

@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
-public class ControlPannel extends SubsystemBase {
+public class ControlPanel extends SubsystemBase {
   /**
-   * Creates a new ControlPannel.
+   * Creates a new ControlPanel.
    */
   private VictorSP liftMotor;
   private VictorSP spinMotor;
 
-  public ControlPannel() {
+  public ControlPanel() {
     liftMotor = new VictorSP(LIFT_MOTOR);
     spinMotor = new VictorSP(SPIN_MOTOR);
   }

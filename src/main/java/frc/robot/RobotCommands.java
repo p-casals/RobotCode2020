@@ -22,9 +22,9 @@ public class RobotCommands{
     private Climber CLIMBER;
     private Shooter SHOOTER;
     private Intake INTAKE;
-    private ControlPannel CONTROL;
+    private ControlPanel CONTROL;
 
-    public RobotCommands(Climber climber, Shooter shooter, Intake intake, ControlPannel control){
+    public RobotCommands(Climber climber, Shooter shooter, Intake intake, ControlPanel control){
         CLIMBER = climber;
         SHOOTER = shooter;
         INTAKE = intake;
@@ -114,7 +114,7 @@ public class RobotCommands{
         CLIMBER.pistonUpSupplier
     );
 
-    // CONTROL PANNEL COMMANDS
+    // CONTROL PANEL COMMANDS
 
     public final StartEndCommand controlLift = new StartEndCommand(
         () -> CONTROL.lifterOnUp(),
