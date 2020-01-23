@@ -111,6 +111,13 @@ public class RobotCommands{
         raiseSecondaryCommand.withTimeout(2), 
         CLIMBER.pistonUpSupplier
     );
+
+    //Align Command for Autonomous
+    
+    public final InstantCommand align = new InstantCommand(
+        //new TurnCommand(train, video.getAngle(), 0.5).andThen(
+        //new MoveCommand(train, video.getDistance()+10, 0.5))
+    );
         
 
 
