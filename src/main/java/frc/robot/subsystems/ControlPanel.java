@@ -12,24 +12,36 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
 
-public class Shooter extends SubsystemBase {
+public class ControlPanel extends SubsystemBase {
+    /**
+     * Creates a new ControlPanel.
+     */
+    private final VictorSP liftMotor;
+    private final VictorSP spinMotor;
 
-    private final VictorSP motor1;
-  private final VictorSP motor2;
-  private final VictorSP motor3;
-
-    public Shooter() {
-        motor1 = new VictorSP(SHOOTER_MOTOR_1);
-        motor2 = new VictorSP(SHOOTER_MOTOR_2);
-        motor3 = new VictorSP(SHOOTER_MOTOR_3);
+    public ControlPanel() {
+        liftMotor = new VictorSP(LIFT_MOTOR);
+        spinMotor = new VictorSP(SPIN_MOTOR);
     }
 
-    // TODO: shooterSpeed can become an outside variable when vision tracking works
+    public void lifterOnUp() {
+        liftMotor.set(0.5);
+    }
 
-    public void setSpeed(double shooterSpeed) {
-        motor1.set(shooterSpeed);
-        motor2.set(shooterSpeed);
-        motor3.set(shooterSpeed);
+    public void spinnerOn() {
+        spinMotor.set(0.5);
+    }
+
+    public void lifterOff() {
+        liftMotor.set(0);
+    }
+
+    public void spinnerOff() {
+        liftMotor.set(0);
+    }
+
+    public void lifterOnDown() {
+        liftMotor.set(-0.5);
     }
 
     @Override

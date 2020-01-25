@@ -11,51 +11,51 @@ import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import static frc.robot.Constants.*;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 public class Intake extends SubsystemBase {
-  
-private VictorSP wheelMotor;
-private DoubleSolenoid intakePiston;
 
-// BOOLEANS: For RobotContainer's second-level intake commands
-public boolean isOn = false;
-private boolean isDeployed = false;
+    private final VictorSP wheelMotor;
+    private final DoubleSolenoid intakePiston;
 
-  //CONSTRUCTOR
-  public Intake() {
-    wheelMotor = new VictorSP(WHEEL_INTAKE_MOTOR);
-   intakePiston = new DoubleSolenoid(INTAKE_PISTON_1, INTAKE_PISTON_2);
-  }
+    private boolean isDeployed = false;
 
-  // MOTORS
-  public void wheelSpeed(double speed){
-    wheelMotor.set(speed);
-  }
+    //CONSTRUCTOR
+    public Intake() {
+        wheelMotor = new VictorSP(WHEEL_INTAKE_MOTOR);
+        intakePiston = new DoubleSolenoid(INTAKE_PISTON_1, INTAKE_PISTON_2);
+    }
 
-  public void deploy() {
-    intakePiston.set(DoubleSolenoid.Value.kForward);
-    isDeployed = true;
-  }
+    // MOTORS
+    public void wheelSpeed(double speed) {
+        wheelMotor.set(speed);
+    }
 
-  // PISTONS
-  public void retract() {
-    intakePiston.set(DoubleSolenoid.Value.kReverse);
-    isDeployed = false;
-  }
+    public void deploy() {
+        intakePiston.set(DoubleSolenoid.Value.kForward);
+        isDeployed = true;
+    }
 
-  public void stop() {
-    intakePiston.set(DoubleSolenoid.Value.kOff);
-  }
+    // PISTONS
+    public void retract() {
+        intakePiston.set(DoubleSolenoid.Value.kReverse);
+        isDeployed = false;
+    }
 
-  // BOOLEANSUPPLIER: For RobotContainer's second-level intake commands (for toggleability function)
-  public BooleanSupplier isDeployedSupplier = () -> isDeployed;
-  
+    public void stop() {
+        intakePiston.set(DoubleSolenoid.Value.kOff);
+    }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    // BOOLEANSUPPLIER: For RobotContainer's second-level intake commands (for toggleability function)
+    public final BooleanSupplier isDeployedSupplier = () -> isDeployed;
+
+
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    }
 }
