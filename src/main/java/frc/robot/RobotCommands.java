@@ -22,11 +22,13 @@ public class RobotCommands{
     private Climber CLIMBER;
     private Shooter SHOOTER;
     private Intake INTAKE;
+    private ControlPanel CONTROL;
 
-    public RobotCommands(Climber climber, Shooter shooter, Intake intake){
+    public RobotCommands(Climber climber, Shooter shooter, Intake intake, ControlPanel control){
         CLIMBER = climber;
         SHOOTER = shooter;
         INTAKE = intake;
+        CONTROL = control;
     }
 
 
@@ -112,13 +114,27 @@ public class RobotCommands{
         CLIMBER.pistonUpSupplier
     );
 
-    //Align Command for Autonomous
-    
-    public final InstantCommand align = new InstantCommand(
-        //new TurnCommand(train, video.getAngle(), 0.5).andThen(
-        //new MoveCommand(train, video.getDistance()+10, 0.5))
+    // CONTROL PANEL COMMANDS
+
+    public final StartEndCommand controlLift = new StartEndCommand(
+        () -> CONTROL.lifterOnUp(),
+        () -> CONTROL.lifterOff(),
+        CONTROL
+    );
+
+    public final StartEndCommand controlDrop = new StartEndCommand(
+        () -> CONTROL.lifterOnDown(),
+        () -> CONTROL.lifterOff(),
+        CONTROL
     );
         
-
+    public final StartEndCommand controlSpin = new StartEndCommand(
+        () -> CONTROL.spinnerOn(),
+        () -> CONTROL.spinnerOff(),
+        CONTROL
+    );
 
 }
+
+
+
