@@ -72,13 +72,11 @@ public class RobotContainer {
         
         int x = 0;
         if (x == 0) {
-            controlLiftButton.toggleWhenPressed(robotCommands.controlDrop);
-            //controlLiftButton.whenPressed(robotCommands.controlLift.withTimeout(3));
+            controlLiftButton.toggleWhenPressed(robotCommands.controlLift.withTimeout(3));
             x = 1;
         }
         else {
-            controlLiftButton.toggleWhenPressed(robotCommands.controlLift);
-            //controlLiftButton.whenPressed(robotCommands.controlDrop.withTimeout(3));
+            controlLiftButton.toggleWhenPressed(robotCommands.controlDrop.withTimeout(3));
             x = 0;
         }
     }
