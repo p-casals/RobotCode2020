@@ -5,7 +5,9 @@ import frc.robot.subsystems.Drivetrain;
 
 public class TurnCommand extends CommandBase {
     private final Drivetrain drivetrain;
-    private double degrees, speed, distanceToTurn;
+    private final double degrees;
+    private final double speed;
+    private final double distanceToTurn;
 
     public TurnCommand(Drivetrain drivetrain, double degrees, double speed) {
         this.drivetrain = drivetrain;
@@ -22,7 +24,7 @@ public class TurnCommand extends CommandBase {
         drivetrain.resetEncoders();
 
         // See isFinished() for explanation of motor direction.
-        if(degrees > 0) { // positive left, negative right
+        if (degrees > 0) { // positive left, negative right
             drivetrain.tankDrive(speed, -speed);
         } else { // negative left, positive right
             drivetrain.tankDrive(-speed, speed);
@@ -41,10 +43,10 @@ public class TurnCommand extends CommandBase {
 
         // If turning left (-degrees), left motors are -, and right motors are +.
         // If turning right (degrees), left motors are +, and right motors are -.
-        boolean isFinished = false;
+        boolean isFinished;
 
         // If distance is greater than distance to turn (w/ respect to direction), end.
-        if(degrees > 0) { // positive left, negative right
+        if (degrees > 0) { // positive left, negative right
             isFinished = drivetrain.getLeftDistance() > distanceToTurn && drivetrain.getRightDistance() < -distanceToTurn;
         } else { // negative left, positive right
             isFinished = drivetrain.getLeftDistance() < -distanceToTurn && drivetrain.getRightDistance() > distanceToTurn;

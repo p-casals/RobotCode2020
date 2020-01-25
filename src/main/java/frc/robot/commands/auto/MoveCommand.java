@@ -5,7 +5,8 @@ import frc.robot.subsystems.Drivetrain;
 
 public class MoveCommand extends CommandBase {
     private final Drivetrain drivetrain;
-    private double goal, speed;
+    private final double goal;
+    private final double speed;
 
     public MoveCommand(Drivetrain drivetrain, double goalInInches, double speed) {
         this.drivetrain = drivetrain;
