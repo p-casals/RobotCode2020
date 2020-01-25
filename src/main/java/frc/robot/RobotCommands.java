@@ -127,14 +127,14 @@ public class RobotCommands{
         () -> CONTROL.lifterOff(),
         CONTROL
     );
-        
+
     public final StartEndCommand controlSpin = new StartEndCommand(
         () -> CONTROL.spinnerOn(),
         () -> CONTROL.spinnerOff(),
         CONTROL
     );
-
+        
 }
-
+        
 
 
