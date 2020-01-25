@@ -16,37 +16,37 @@ import frc.robot.subsystems.*;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Auto2 extends SequentialCommandGroup {
-  /**
-   * Creates a new Auto2.
-   */
-  public Auto2(RobotCommands cmd, Drivetrain train, /** PatrickSensor paddy ,*/ Shooter shooter) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
-    super(
-      //Align and Shoot
-      //new Align(train, paddy), 
-      cmd.shootAtSpeed, 
+    /**
+     * Creates a new Auto2.
+     */
+    public Auto2(RobotCommands cmd, Drivetrain train) {
+        // Add your commands in the super() call, e.g.
+        // super(new FooCommand(), new BarCommand());
+        super(
+                //Align and Shoot
+                //new Align(train, paddy),
+                cmd.shootAtSpeed,
 
-      //Turn and move to bottom wall
-      new MoveCommand(train, -17, 0.5), 
-      new TurnCommand(train, 90, 0.5), 
-      new MoveCommand(train, 136, 0.5), 
+                //Turn and move to bottom wall
+                new MoveCommand(train, -17, 0.5),
+                new TurnCommand(train, 90, 0.5),
+                new MoveCommand(train, 136, 0.5),
 
-      //Move to position
-      new MoveCommand(train, -27.75, 0.5), 
-      new TurnCommand(train, 90, 0.5), 
+                //Move to position
+                new MoveCommand(train, -27.75, 0.5),
+                new TurnCommand(train, 90, 0.5),
 
-      //move all the way to the third ball and collect them allnew CollectionAuto1(train), 
-      cmd.finalDeployPiston, 
-      new MoveCommand(train, 300, 0.5),
-      cmd.finalRetractIntake 
+                //move all the way to the third ball and collect them allnew CollectionAuto1(train),
+                cmd.finalDeployPiston,
+                new MoveCommand(train, 300, 0.5),
+                cmd.finalRetractIntake
 
-      //Turn and move to target
-      //, new TurnCommand(train, 180, 0.5), 
-      //new Align(train, paddy), 
+                //Turn and move to target
+                //, new TurnCommand(train, 180, 0.5),
+                //new Align(train, paddy),
 
-      //Shoot
-      //cmd.shootAtSpeed
-    );
-  }
+                //Shoot
+                //cmd.shootAtSpeed
+        );
+    }
 }
