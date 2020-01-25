@@ -116,18 +116,6 @@ public class RobotCommands{
 
     // CONTROL PANEL COMMANDS
 
-    public final StartEndCommand controlLift = new StartEndCommand(
-        () -> CONTROL.lifterOnUp(),
-        () -> CONTROL.lifterOff(),
-        CONTROL
-    );
-
-    public final StartEndCommand controlDrop = new StartEndCommand(
-        () -> CONTROL.lifterOnDown(),
-        () -> CONTROL.lifterOff(),
-        CONTROL
-    );
-
     public final StartEndCommand controlSpin = new StartEndCommand(
         () -> CONTROL.spinnerOn(),
         () -> CONTROL.spinnerOff(),

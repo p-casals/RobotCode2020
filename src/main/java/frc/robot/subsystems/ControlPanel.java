@@ -24,7 +24,7 @@ public class ControlPanel extends SubsystemBase {
   }
 
   public void lifterOnUp() {
-    liftMotor.set(0.5);
+    liftMotor.set(1);
   }
 
   public void spinnerOn() {
