@@ -16,12 +16,20 @@ import static frc.robot.Constants.*;
 /**
  * For robot commands because RobotContainer is frighteningly messy
  */
-public class RobotCommands extends CommandBase{
+public class RobotCommands{
 
     // CREATE SUBSYSTEMS
-    private final Climber CLIMBER = new Climber();
-    private final Shooter SHOOTER = new Shooter();
-    private final Intake INTAKE = new Intake();
+    private Climber CLIMBER;
+    private Shooter SHOOTER;
+    private Intake INTAKE;
+    private ControlPanel CONTROL;
+
+    public RobotCommands(Climber climber, Shooter shooter, Intake intake, ControlPanel control){
+        CLIMBER = climber;
+        SHOOTER = shooter;
+        INTAKE = intake;
+        CONTROL = control;
+    }
 
 
 
@@ -30,22 +38,22 @@ public class RobotCommands extends CommandBase{
 
 
     // BASE CLIMBER COMMANDS
-    private final StartEndCommand climbCommand = new StartEndCommand(
+    public final StartEndCommand climbCommand = new StartEndCommand(
         () -> CLIMBER.reversePrimary(), 
         () -> CLIMBER.stopPrimary(), 
         CLIMBER
     );
-    private final StartEndCommand raisePrimaryCommand = new StartEndCommand(
+    public final StartEndCommand raisePrimaryCommand = new StartEndCommand(
         () -> CLIMBER.raisePrimary(), 
         () -> CLIMBER.stopPrimary(), 
         CLIMBER
     );
-    private final StartEndCommand raiseSecondaryCommand = new StartEndCommand(
+    public final StartEndCommand raiseSecondaryCommand = new StartEndCommand(
         () -> CLIMBER.raiseSecondary(), 
         () -> CLIMBER.stopSecondary(), 
         CLIMBER
     );
-    private final StartEndCommand reverseSecondaryCommand = new StartEndCommand(
+    public final StartEndCommand reverseSecondaryCommand = new StartEndCommand(
         () -> CLIMBER.reverseSecondary(), 
         () -> CLIMBER.stopSecondary(), 
         CLIMBER
@@ -63,19 +71,19 @@ public class RobotCommands extends CommandBase{
 
 
     // INTAKE COMMANDS
-    private final InstantCommand intakeOn = new InstantCommand(
+    public final InstantCommand intakeOn = new InstantCommand(
         () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED), 
         INTAKE
     );
-    private final InstantCommand intakeOff = new InstantCommand(
+    public final InstantCommand intakeOff = new InstantCommand(
         () -> INTAKE.wheelSpeed(0), 
         INTAKE
     );
-    private final StartEndCommand pistonDeploy = new StartEndCommand(
+    public final StartEndCommand pistonDeploy = new StartEndCommand(
         () -> INTAKE.deploy(), () -> INTAKE.stop(), 
         INTAKE
     );
-    private final StartEndCommand pistonRetract = new StartEndCommand(
+    public final StartEndCommand pistonRetract = new StartEndCommand(
         () -> INTAKE.retract(), () -> INTAKE.stop(), 
         INTAKE
     );
@@ -105,7 +113,29 @@ public class RobotCommands extends CommandBase{
         raiseSecondaryCommand.withTimeout(2), 
         CLIMBER.pistonUpSupplier
     );
+
+    // CONTROL PANEL COMMANDS
+
+    public final StartEndCommand controlLift = new StartEndCommand(
+        () -> CONTROL.lifterOnUp(),
+        () -> CONTROL.lifterOff(),
+        CONTROL
+    );
+
+    public final StartEndCommand controlDrop = new StartEndCommand(
+        () -> CONTROL.lifterOnDown(),
+        () -> CONTROL.lifterOff(),
+        CONTROL
+    );
+
+    public final StartEndCommand controlSpin = new StartEndCommand(
+        () -> CONTROL.spinnerOn(),
+        () -> CONTROL.spinnerOff(),
+        CONTROL
+    );
+        
+}
         
 
 
-}
+

@@ -8,23 +8,26 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.*;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import static frc.robot.Constants.*;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.*;
-
-import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
     // IMPORTING STUFF AND STUFF
-    RobotCommands Command = new RobotCommands();
     private final Drivetrain DRIVETRAIN = new Drivetrain();
+    private final Climber CLIMBER = new Climber();
+    private final Shooter SHOOTER = new Shooter();
+    private final Intake INTAKE = new Intake();
+    private final ControlPanel CONTROLPANEL = new ControlPanel();
 
+    private final RobotCommands Command = new RobotCommands(CLIMBER, SHOOTER, INTAKE, CONTROLPANEL);
 
-    
+ 
     // == JOYSTICK & BUTTON BINDINGS == //
 
 
@@ -40,7 +43,11 @@ public class RobotContainer {
                                  flywheelToggleButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
                                 // PISTON-Y INTAKE BUTTONS
                                  deployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
-                                 retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE);
+                                 retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
+                                 // CONTROL PANEL BUTTONS
+                                 controlSpinButton = new JoystickButton(opController, SPIN_MOTOR),
+                                 controlLiftButton = new JoystickButton(opController, LIFT_MOTOR);
+
    
    
     // ROBOT CONTAINER
@@ -62,6 +69,20 @@ public class RobotContainer {
         // PISTON-Y INTAKE BUTTONS
         deployIntakeButton.whileHeld(Command.finalDeployPiston);
         retractIntakeButton.whenPressed(Command.finalRetractIntake);
+
+        // CONTROL PANEL BUTTONS
+        controlSpinButton.whenHeld(Command.controlSpin);
+        int x = 0;
+        if (x == 0) {
+            controlLiftButton.cancelWhenPressed(Command.controlDrop);
+            controlLiftButton.whenPressed(Command.controlLift.withTimeout(3));
+            x = 1;
+        }
+        else {
+            controlLiftButton.cancelWhenPressed(Command.controlLift);
+            controlLiftButton.whenPressed(Command.controlDrop.withTimeout(3));
+            x = 0;
+        }
     }
 
 
