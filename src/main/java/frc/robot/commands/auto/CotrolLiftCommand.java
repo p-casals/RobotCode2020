@@ -15,7 +15,7 @@ public class CotrolLiftCommand extends CommandBase {
   /**
    * Creates a new CotrolLiftCommand.
    */
-  ControlPanel control = new ControlPanel();
+  private ControlPanel control;
   public CotrolLiftCommand(ControlPanel cp) {
     // Use addRequirements() here to declare subsystem dependencies.
 
