@@ -15,6 +15,11 @@ public class ControlPanel extends SubsystemBase {
   /**
    * Creates a new ControlPanel.
    */
+
+   /** TODO: change liftmotor and accompanying stuff to a piston. 
+    When the piston is fully extended, the control panel mechanism is deployed.
+    When the piston is fully retracted, the control panel mechanism is un-deployed.
+   */
   private VictorSP liftMotor;
   private VictorSP spinMotor;
 
