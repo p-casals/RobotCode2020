@@ -20,14 +20,10 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
 
     // IMPORTING STUFF AND STUFF
-    private final Drivetrain DRIVETRAIN = new Drivetrain();
-    private final Climber CLIMBER = new Climber();
-    private final Shooter SHOOTER = new Shooter();
-    private final Intake INTAKE = new Intake();
-    private final ControlPanel CONTROLPANEL = new ControlPanel();
 
-    private final RobotCommands Command = new RobotCommands(CLIMBER, SHOOTER, INTAKE, CONTROLPANEL);
+    
 
+    private final RobotCommands robotCommands = new RobotCommands();
 
     // == JOYSTICK & BUTTON BINDINGS == //
 
@@ -58,15 +54,15 @@ public class RobotContainer {
     private void configureButtonActions() {
 
         // CLIMB BUTTONS
-        climbButton.whenPressed(Command.climbOrLower);
-        pistonUpOrDownButton.whenPressed(Command.pistonUpOrDown);
+        climbButton.whenPressed(robotCommands.climbOrLower);
+        pistonUpOrDownButton.whenPressed(robotCommands.pistonUpOrDown);
 
         // SHOOT BUTTONS
-        flywheelToggleButton.toggleWhenPressed(Command.shootAtSpeed);
+        flywheelToggleButton.toggleWhenPressed(robotCommands.shootAtSpeed);
 
         // PISTON-Y INTAKE BUTTONS
-        deployIntakeButton.whileHeld(Command.finalDeployPiston);
-        retractIntakeButton.whenPressed(Command.finalRetractIntake);
+        deployIntakeButton.whileHeld(robotCommands.finalDeployPiston);
+        retractIntakeButton.whenPressed(robotCommands.finalRetractIntake);
 
         // CONTROL PANEL BUTTONS
         controlSpinButton.whenHeld(Command.controlSpin);
@@ -75,7 +71,7 @@ public class RobotContainer {
 
 
     public Drivetrain getDrivetrain() {
-        return this.DRIVETRAIN;
+        return robotCommands.getDrivetrain();
     }
 
 
@@ -86,7 +82,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new TestAutoCommandGroup(DRIVETRAIN);
+        return new TestAutoCommandGroup(getDrivetrain());
 
     }
 
