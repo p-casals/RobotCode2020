@@ -22,11 +22,6 @@ public class Storage extends SubsystemBase {
     motor = new VictorSP(STORAGE_GATE_MOTOR);
   }
 
-  // TODO: does motorspeed need to be a constant?
-
-  public void setGateSpeed(double motorSpeed) {
-    motor.set(motorSpeed);
-  }
 
   public void gateSpeed() {
     motor.set(GATE_SPEED);

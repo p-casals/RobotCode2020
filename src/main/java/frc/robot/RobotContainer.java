@@ -13,7 +13,7 @@ import static frc.robot.Constants.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.auto.routines.TestAutoCommandGroup;
+import frc.robot.commands.auto.routines.Auto2;
 import frc.robot.subsystems.*;
 
 public class RobotContainer {
@@ -99,8 +99,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return new TestAutoCommandGroup(getDrivetrain());
+        return new Auto2(robotCommands, getDrivetrain());
 
     }
 
