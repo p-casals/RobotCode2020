@@ -42,7 +42,9 @@ public class RobotContainer {
                                  retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
                                  // CONTROL PANEL BUTTONS
                                  controlSpinButton = new JoystickButton(opController, SPIN_MOTOR),
-                                 controlLiftButton = new JoystickButton(opController, LIFT_MOTOR);
+                                 controlLiftButton = new JoystickButton(opController, LIFT_MOTOR),
+                                 // STORAGE GATE BUTTON
+                                 storageGateButton = new JoystickButton(opController, STORAGE_MOTOR);
 
    
    
@@ -78,6 +80,10 @@ public class RobotContainer {
             controlLiftButton.toggleWhenPressed(robotCommands.controlDrop.withTimeout(3));
             x = 0;
         }
+
+        // STORAGE
+        storageGateButton.whenHeld(robotCommands.storageGate);
+
     }
 
 

@@ -28,6 +28,14 @@ public class Storage extends SubsystemBase {
     motor.set(motorSpeed);
   }
 
+  public void gateSpeed() {
+    motor.set(GATE_SPEED);
+  }
+
+  public void gateZero() {
+    motor.set(0);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
