@@ -13,6 +13,7 @@ import static frc.robot.Constants.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.auto.CotrolLiftCommand;
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.*;
 
@@ -64,10 +65,8 @@ public class RobotContainer {
         retractIntakeButton.whenPressed(robotCommands.finalRetractIntake);
 
         // CONTROL PANEL BUTTONS
-        controlSpinButton.whenHeld(robotCommands.controlSpin);
-        
-        controlLiftButton.cancelWhenPressed(Command.controlDrop);
-        controlLiftButton.whenPressed(Command.controlLift.withTimeout(3));
+        controlSpinButton.whenHeld(Command.controlSpin);
+        controlLiftButton.whenPressed(new CotrolLiftCommand(CONTROLPANEL).withTimeout(3));
     }
 
 
