@@ -105,5 +105,6 @@ public final class Constants {
   // STORAGE
   public static final double GATE_SPEED = 0.3;
   
+  
 }
 

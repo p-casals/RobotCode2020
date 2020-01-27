@@ -27,12 +27,11 @@ public class RobotContainer {
     // == JOYSTICK & BUTTON BINDINGS == //
 
 
-  
     // NEW JOYSTICK
     public final Joystick driverController = new Joystick(DRIVER_CONTROLLER), opController = new Joystick(OPERATOR_CONTROLLER);
-  
+
     // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
-                                // CLIMB BUTTONS
+    // CLIMB BUTTONS
     private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_CLIMB_PISTONS),
                                  climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
                                 // SHOOT BUTTON (TOGGLEABLE)
@@ -48,6 +47,7 @@ public class RobotContainer {
 
    
    
+
     // ROBOT CONTAINER
     public RobotContainer() {
         configureButtonActions();
@@ -56,7 +56,7 @@ public class RobotContainer {
 
     // CONFIG BUTTON ACTIONS
     private void configureButtonActions() {
-        
+
         // CLIMB BUTTONS
         climbButton.whenPressed(robotCommands.climbOrLower);
         pistonUpOrDownButton.whenPressed(robotCommands.pistonUpOrDown);
@@ -84,8 +84,8 @@ public class RobotContainer {
         // STORAGE
         storageGateButton.whenHeld(robotCommands.storageGate);
 
-    }
 
+    }
 
 
     public Drivetrain getDrivetrain() {
@@ -95,6 +95,7 @@ public class RobotContainer {
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
+     *
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
