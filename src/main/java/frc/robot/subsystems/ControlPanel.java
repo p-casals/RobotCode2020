@@ -20,6 +20,7 @@ public class ControlPanel extends SubsystemBase {
     When the piston is fully extended, the control panel mechanism is deployed.
     When the piston is fully retracted, the control panel mechanism is un-deployed.
    */
+  
   private VictorSP liftMotor;
   private VictorSP spinMotor;
 
