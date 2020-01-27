@@ -11,28 +11,30 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ControlPanel;
 import static frc.robot.Constants.*;
 
-public class CotrolLiftCommand extends CommandBase {
+public class ControlLiftCommand extends CommandBase {
   /**
    * Creates a new CotrolLiftCommand.
    */
   private ControlPanel control;
-  public CotrolLiftCommand(ControlPanel cp) {
+  public ControlLiftCommand(ControlPanel cp) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     addRequirements(cp);
     control = cp;
   }
 
+  // TODO- please make this a proper toggle- this will not work properly if being used twice
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(lifterVar == 0){
+    if(LIFTER_VAR == 0){
       control.lifterOnUp();
-      lifterVar = 1;
+      LIFTER_VAR = 1;
     }
     else{
       control.lifterOnDown();
-      lifterVar = 0;
+      LIFTER_VAR = 0;
     }
   }
 

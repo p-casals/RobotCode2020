@@ -19,7 +19,7 @@ package frc.robot;
 public final class Constants {
 
   // === Variables === //
-  public static final int LIFTER_VAR = 0;
+  public static int LIFTER_VAR = 0;
 
   // === ROBOT PORTS === //
 
