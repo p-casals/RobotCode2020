@@ -7,9 +7,8 @@
 
 package frc.robot.commands.auto.routines;
 
-
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
+import frc.robot.RobotCommands;
 import frc.robot.commands.auto.MoveCommand;
 import frc.robot.commands.auto.TurnCommand;
 import frc.robot.subsystems.Drivetrain;
@@ -22,7 +21,7 @@ public class Auto extends SequentialCommandGroup {
     /**
      * Creates a new TestAutoTwo.
      */
-    public Auto(Drivetrain DRIVETRAIN) {
+    public Auto(RobotCommands COMMAND, Drivetrain DRIVETRAIN) {
 
         //shoot
         //turn -37.69 degrees
@@ -31,6 +30,7 @@ public class Auto extends SequentialCommandGroup {
         // move forwards 108 in
 
         super(
+                COMMAND.shootAtSpeed,
                 new TurnCommand(DRIVETRAIN, -37.69, 0.5),
                 new MoveCommand(DRIVETRAIN, 109.461, 0.5),
                 new TurnCommand(DRIVETRAIN, 37.69, 0.5),
