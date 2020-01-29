@@ -13,8 +13,9 @@ import static frc.robot.Constants.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.auto.ControlLiftCommand;
-import frc.robot.commands.auto.routines.TestAutoCommandGroup;
+
+import frc.robot.commands.auto.routines.Auto2;
+
 import frc.robot.subsystems.*;
 
 public class RobotContainer {
@@ -32,15 +33,20 @@ public class RobotContainer {
     // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
     // CLIMB BUTTONS
     private final JoystickButton pistonUpOrDownButton = new JoystickButton(opController, RAISE_OR_LOWER_CLIMB_PISTONS),
-            climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
-    // SHOOT BUTTON (TOGGLEABLE)
-    flywheelToggleButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
-    // PISTON-Y INTAKE BUTTONS
-    deployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
-            retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
-    // CONTROL PANEL BUTTONS
-    controlSpinButton = new JoystickButton(opController, SPIN_MOTOR),
-            controlLiftButton = new JoystickButton(opController, LIFT_MOTOR);
+                                 climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
+                                // SHOOT BUTTON (TOGGLEABLE)
+                                 flywheelToggleButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
+                                // PISTON-Y INTAKE BUTTONS
+                                 deployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
+                                 retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
+                                 // CONTROL PANEL BUTTONS
+                                 controlSpinButton = new JoystickButton(opController, SPIN_CONTROL),
+                                 controlLiftButton = new JoystickButton(opController, LIFT_CONTROL),
+                                 // STORAGE GATE BUTTON
+                                 storageGateButton = new JoystickButton(opController, STORAGE_MOTOR);
+
+   
+   
 
     // ROBOT CONTAINER
     public RobotContainer() {
@@ -64,7 +70,10 @@ public class RobotContainer {
 
         // CONTROL PANEL BUTTONS
         controlSpinButton.whenHeld(robotCommands.controlSpin);
-        controlLiftButton.whenPressed(new ControlLiftCommand(robotCommands.CONTROL_PANEL).withTimeout(3));
+        controlLiftButton.whenPressed(robotCommands.liftControlMaybe);
+
+        // STORAGE
+        storageGateButton.whenHeld(robotCommands.storageGate);
     }
 
 
@@ -79,8 +88,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return new TestAutoCommandGroup(getDrivetrain());
+        return new Auto2(robotCommands, getDrivetrain());
 
     }
 

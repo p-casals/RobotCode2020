@@ -13,4 +13,3 @@ public class TestAutoCommandGroup extends SequentialCommandGroup {
                 new MoveCommand(drivetrain, 24, 0.5));
     }
 }
-
