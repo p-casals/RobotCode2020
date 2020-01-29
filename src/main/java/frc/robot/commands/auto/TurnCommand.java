@@ -3,22 +3,30 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
+// Turn command for the robot drivetrain
 public class TurnCommand extends CommandBase {
+
+
     private final Drivetrain drivetrain;
     private final double degrees;
     private final double speed;
     private final double distanceToTurn;
 
     public TurnCommand(Drivetrain drivetrain, double degrees, double speed) {
+       
+        // Initialise variables as per constructor
         this.drivetrain = drivetrain;
         this.degrees = degrees;
         this.speed = speed;
+        
         // Calculate the distance to turn based off angle (see isFinished).
         this.distanceToTurn = Drivetrain.WHEEL_TO_WHEEL_DIAMETER_INCHES * 2 * Math.PI * (degrees / 360);
 
+        // Requires a drivetrain to work
         addRequirements(drivetrain);
     }
 
+    // Called when code is first run
     @Override
     public void initialize() {
         drivetrain.resetEncoders();
@@ -31,10 +39,12 @@ public class TurnCommand extends CommandBase {
         }
     }
 
+    // Called after initialise()
     @Override
     public void execute() {
 
     }
+
 
     @Override
     public boolean isFinished() {
@@ -55,8 +65,10 @@ public class TurnCommand extends CommandBase {
         return isFinished;
     }
 
+    // Runs if the code is interrupted or when it's finished
     @Override
     public void end(boolean interrupted) {
-        drivetrain.tankDrive(0, 0); // Stop motors.
+        // Stop motors.
+        drivetrain.tankDrive(0, 0); 
     }
 }
