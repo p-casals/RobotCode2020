@@ -38,7 +38,6 @@ public final class Constants {
   public static final int SHOOTER_MOTOR_3 = 8;
 
   // CONTROL PANEL MOTORS
-  public static final int LIFT_MOTOR = 9;
   public static final int SPIN_MOTOR = 10;
 
   // STORAGE MOTOR
@@ -59,6 +58,9 @@ public final class Constants {
   public static final int INTAKE_PISTON_1 = 4;
   public static final int INTAKE_PISTON_2 = 5;
 
+  // CONTROL PANEL PISTONS
+  public static final int LIFT_PISTON_1 = 6;
+  public static final int LIFT_PISTON_2 = 7;
 
   
   // ENCODERS
@@ -93,6 +95,10 @@ public final class Constants {
   // INTAKE
   public static final int DEPLOY_INTAKE = 3;
   public static final int RETRACT_INTAKE = 1;
+
+  // CONTROL PANEL
+  public static final int LIFT_CONTROL = 4;
+  public static final int SPIN_CONTROL = 9;
 
 
   // STORAGE

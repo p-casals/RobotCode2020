@@ -16,9 +16,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.auto.routines.Auto2;
 
-import frc.robot.commands.auto.ControlLiftCommand;
-import frc.robot.commands.auto.routines.TestAutoCommandGroup;
-
 import frc.robot.subsystems.*;
 
 public class RobotContainer {
@@ -43,8 +40,8 @@ public class RobotContainer {
                                  deployIntakeButton = new JoystickButton(opController, DEPLOY_INTAKE),
                                  retractIntakeButton = new JoystickButton(opController, RETRACT_INTAKE),
                                  // CONTROL PANEL BUTTONS
-                                 controlSpinButton = new JoystickButton(opController, SPIN_MOTOR),
-                                 controlLiftButton = new JoystickButton(opController, LIFT_MOTOR),
+                                 controlSpinButton = new JoystickButton(opController, SPIN_CONTROL),
+                                 controlLiftButton = new JoystickButton(opController, LIFT_CONTROL),
                                  // STORAGE GATE BUTTON
                                  storageGateButton = new JoystickButton(opController, STORAGE_MOTOR);
 
@@ -73,7 +70,7 @@ public class RobotContainer {
 
         // CONTROL PANEL BUTTONS
         controlSpinButton.whenHeld(robotCommands.controlSpin);
-        controlLiftButton.whenPressed(new ControlLiftCommand(robotCommands.CONTROL_PANEL).withTimeout(3));
+        controlLiftButton.whenPressed(robotCommands.liftControlMaybe);
 
 
 

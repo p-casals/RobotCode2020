@@ -7,10 +7,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
+
+import java.util.function.BooleanSupplier;
 
 public class ControlPanel extends SubsystemBase {
   /**
@@ -23,17 +26,18 @@ public class ControlPanel extends SubsystemBase {
    */
   
 
-  private VictorSP liftMotor;
+  private final DoubleSolenoid liftPiston;
   private VictorSP spinMotor;
+  private boolean isUp = false;
 
   public ControlPanel() {
-    liftMotor = new VictorSP(LIFT_MOTOR);
+    liftPiston = new DoubleSolenoid(LIFT_PISTON_1, LIFT_PISTON_2);
     spinMotor = new VictorSP(SPIN_MOTOR);
   }
 
   public void lifterOnUp() {
-    liftMotor.set(0.5);
-
+    liftPiston.set(DoubleSolenoid.Value.kForward);
+    isUp = true;
   }
 
   public void spinnerOn() {
@@ -41,20 +45,25 @@ public class ControlPanel extends SubsystemBase {
   }
 
   public void lifterOff() {
-    liftMotor.set(0);
+    liftPiston.set(DoubleSolenoid.Value.kOff);
   }
 
   public void spinnerOff() {
-    liftMotor.set(0);
+    spinMotor.set(0);
   }
 
   public void lifterOnDown() {
-    liftMotor.set(-0.5);
+    liftPiston.set(DoubleSolenoid.Value.kReverse);
+    isUp = false;
   }
+  public BooleanSupplier controlUpSupplier = () -> isUp;
+      // TODO: the booleansuppliers are suspicious. perhaps fix them since they're not periodic?
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
   }
 
 }
