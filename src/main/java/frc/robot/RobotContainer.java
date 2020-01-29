@@ -72,12 +72,8 @@ public class RobotContainer {
         controlSpinButton.whenHeld(robotCommands.controlSpin);
         controlLiftButton.whenPressed(robotCommands.liftControlMaybe);
 
-
-
         // STORAGE
         storageGateButton.whenHeld(robotCommands.storageGate);
-
-
     }
 
 

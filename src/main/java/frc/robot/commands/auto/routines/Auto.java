@@ -21,7 +21,7 @@ public class Auto extends SequentialCommandGroup {
     /**
      * Creates a new TestAutoTwo.
      */
-    public Auto(RobotCommands COMMAND, Drivetrain DRIVETRAIN) {
+    public Auto(RobotCommands COMMANDS, Drivetrain DRIVETRAIN) {
 
         //shoot
         //turn -37.69 degrees
@@ -30,7 +30,7 @@ public class Auto extends SequentialCommandGroup {
         // move forwards 108 in
 
         super(
-                COMMAND.shootAtSpeed,
+                COMMANDS.shootAtSpeed,
                 new TurnCommand(DRIVETRAIN, -37.69, 0.5),
                 new MoveCommand(DRIVETRAIN, 109.461, 0.5),
                 new TurnCommand(DRIVETRAIN, 37.69, 0.5),

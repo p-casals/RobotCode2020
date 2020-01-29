@@ -22,7 +22,7 @@ public class RobotCommands{
     public final Climber CLIMBER = new Climber();
     public final Shooter SHOOTER = new Shooter();
     public final  Intake INTAKE = new Intake();
-    public final ControlPanel CONTROL = new ControlPanel();
+    public final ControlPanel CONTROL_PANEL = new ControlPanel();
     public final Drivetrain DRIVETRAIN = new Drivetrain();
     public final Storage STORAGE = new Storage();
 
@@ -82,21 +82,21 @@ public class RobotCommands{
     // CONTROL PANEL COMMANDS
 
     public final StartEndCommand controlLift = new StartEndCommand(
-        () -> CONTROL.lifterOnUp(),
-        () -> CONTROL.lifterOff(),
-        CONTROL
+        () -> CONTROL_PANEL.lifterOnUp(),
+        () -> CONTROL_PANEL.lifterOff(),
+        CONTROL_PANEL
     );
 
     public final StartEndCommand controlDrop = new StartEndCommand(
-        () -> CONTROL.lifterOnDown(),
-        () -> CONTROL.lifterOff(),
-        CONTROL
+        () -> CONTROL_PANEL.lifterOnDown(),
+        () -> CONTROL_PANEL.lifterOff(),
+        CONTROL_PANEL
     );
 
     public final StartEndCommand controlSpin = new StartEndCommand(
-        () -> CONTROL.spinnerOn(),
-        () -> CONTROL.spinnerOff(),
-        CONTROL
+        () -> CONTROL_PANEL.spinnerOn(),
+        () -> CONTROL_PANEL.spinnerOff(),
+        CONTROL_PANEL
     );
 
 
@@ -140,7 +140,7 @@ public class RobotCommands{
 
     public final ConditionalCommand liftControlMaybe = new ConditionalCommand(
         controlLift.withTimeout(3), controlDrop.withTimeout(3).andThen(), 
-        CONTROL.controlUpSupplier
+        CONTROL_PANEL.controlUpSupplier
     );
     
     // DRIVETRAIN

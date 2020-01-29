@@ -65,7 +65,6 @@ public class Climber extends SubsystemBase {
     public final BooleanSupplier hasClimbedBooleanSupplier = () -> hasClimbed;
     public final BooleanSupplier pistonUpSupplier = () -> pistonUp;
 
-    // TODO: the booleansuppliers are suspicious. perhaps fix them since they're not periodic?
 
     // BOOLEANSUPPLIERS: For robotContainer climber secondary commands
 

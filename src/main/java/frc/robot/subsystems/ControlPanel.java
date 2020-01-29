@@ -57,7 +57,6 @@ public class ControlPanel extends SubsystemBase {
     isUp = false;
   }
   public BooleanSupplier controlUpSupplier = () -> isUp;
-      // TODO: the booleansuppliers are suspicious. perhaps fix them since they're not periodic?
 
 
   @Override
