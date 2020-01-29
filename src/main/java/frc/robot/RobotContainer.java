@@ -13,20 +13,15 @@ import static frc.robot.Constants.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.auto.ControlLiftCommand;
 import frc.robot.commands.auto.routines.TestAutoCommandGroup;
 import frc.robot.subsystems.*;
 
 public class RobotContainer {
 
     // IMPORTING STUFF AND STUFF
-    private final Drivetrain DRIVETRAIN = new Drivetrain();
-    private final Climber CLIMBER = new Climber();
-    private final Shooter SHOOTER = new Shooter();
-    private final Intake INTAKE = new Intake();
-    private final ControlPanel CONTROLPANEL = new ControlPanel();
 
-    private final RobotCommands Command = new RobotCommands(CLIMBER, SHOOTER, INTAKE, CONTROLPANEL);
-
+    private final RobotCommands robotCommands = new RobotCommands();
 
     // == JOYSTICK & BUTTON BINDINGS == //
 
@@ -57,26 +52,24 @@ public class RobotContainer {
     private void configureButtonActions() {
 
         // CLIMB BUTTONS
-        climbButton.whenPressed(Command.climbOrLower);
-        pistonUpOrDownButton.whenPressed(Command.pistonUpOrDown);
+        climbButton.whenPressed(robotCommands.climbOrLower);
+        pistonUpOrDownButton.whenPressed(robotCommands.pistonUpOrDown);
 
         // SHOOT BUTTONS
-        flywheelToggleButton.toggleWhenPressed(Command.shootAtSpeed);
+        flywheelToggleButton.toggleWhenPressed(robotCommands.shootAtSpeed);
 
         // PISTON-Y INTAKE BUTTONS
-        deployIntakeButton.whileHeld(Command.finalDeployPiston);
-        retractIntakeButton.whenPressed(Command.finalRetractIntake);
+        deployIntakeButton.whileHeld(robotCommands.finalDeployPiston);
+        retractIntakeButton.whenPressed(robotCommands.finalRetractIntake);
 
         // CONTROL PANEL BUTTONS
-        controlSpinButton.whenHeld(Command.controlSpin);
-        int x = 0;
-        controlLiftButton.cancelWhenPressed(Command.controlDrop);
-        controlLiftButton.whenPressed(Command.controlLift.withTimeout(3));
+        controlSpinButton.whenHeld(robotCommands.controlSpin);
+        controlLiftButton.whenPressed(new ControlLiftCommand(robotCommands.CONTROL_PANEL).withTimeout(3));
     }
 
 
     public Drivetrain getDrivetrain() {
-        return this.DRIVETRAIN;
+        return robotCommands.DRIVETRAIN;
     }
 
 
@@ -87,7 +80,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new TestAutoCommandGroup(DRIVETRAIN);
+        return new TestAutoCommandGroup(getDrivetrain());
 
     }
 

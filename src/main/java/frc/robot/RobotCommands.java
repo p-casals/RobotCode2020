@@ -19,23 +19,13 @@ import static frc.robot.Constants.*;
 public class RobotCommands{
 
     // CREATE SUBSYSTEMS
-    private Climber CLIMBER;
-    private Shooter SHOOTER;
-    private Intake INTAKE;
-    private ControlPanel CONTROL;
-
-    public RobotCommands(Climber climber, Shooter shooter, Intake intake, ControlPanel control){
-        CLIMBER = climber;
-        SHOOTER = shooter;
-        INTAKE = intake;
-        CONTROL = control;
-    }
-
-
+    public final Climber CLIMBER = new Climber();
+    public final Shooter SHOOTER = new Shooter();
+    public final  Intake INTAKE = new Intake();
+    public final ControlPanel CONTROL_PANEL = new ControlPanel();
+    public final Drivetrain DRIVETRAIN = new Drivetrain();
 
     // == COMMANDS == //
-
-
 
     // BASE CLIMBER COMMANDS
     public final StartEndCommand climbCommand = new StartEndCommand(
@@ -116,22 +106,10 @@ public class RobotCommands{
 
     // CONTROL PANEL COMMANDS
 
-    public final StartEndCommand controlLift = new StartEndCommand(
-        () -> CONTROL.lifterOnUp(),
-        () -> CONTROL.lifterOff(),
-        CONTROL
-    );
-
-    public final StartEndCommand controlDrop = new StartEndCommand(
-        () -> CONTROL.lifterOnDown(),
-        () -> CONTROL.lifterOff(),
-        CONTROL
-    );
-
     public final StartEndCommand controlSpin = new StartEndCommand(
-        () -> CONTROL.spinnerOn(),
-        () -> CONTROL.spinnerOff(),
-        CONTROL
+        () -> CONTROL_PANEL.spinnerOn(),
+        () -> CONTROL_PANEL.spinnerOff(),
+            CONTROL_PANEL
     );
-        
+
 }
