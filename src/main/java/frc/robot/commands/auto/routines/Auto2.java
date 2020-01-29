@@ -19,6 +19,8 @@ public class Auto2 extends SequentialCommandGroup {
     /**
      * Creates a new Auto2.
      */
+
+
     public Auto2(RobotCommands cmd, Drivetrain train) {
         // Add your commands in the super() call, e.g.
         // super(new FooCommand(), new BarCommand());

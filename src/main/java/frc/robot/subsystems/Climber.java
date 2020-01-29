@@ -24,6 +24,7 @@ public class Climber extends SubsystemBase {
     private boolean pistonUp = false;
 
 
+
     // CONSTRUCTOR
     public Climber() {
         secondaryPiston = new DoubleSolenoid(SECONDARY_PISTON_1, SECONDARY_PISTON_2);
@@ -61,14 +62,16 @@ public class Climber extends SubsystemBase {
         primaryPiston.set(DoubleSolenoid.Value.kReverse);
         hasClimbed = false;
     }
+    public final BooleanSupplier hasClimbedBooleanSupplier = () -> hasClimbed;
+    public final BooleanSupplier pistonUpSupplier = () -> pistonUp;
 
 
     // BOOLEANSUPPLIERS: For robotContainer climber secondary commands
-    public final BooleanSupplier hasClimbedBooleanSupplier = () -> hasClimbed;
-    public final BooleanSupplier pistonUpSupplier = () -> pistonUp;
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        
+    
     }
 }

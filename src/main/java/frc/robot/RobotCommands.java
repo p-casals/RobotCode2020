@@ -24,6 +24,7 @@ public class RobotCommands{
     public final  Intake INTAKE = new Intake();
     public final ControlPanel CONTROL_PANEL = new ControlPanel();
     public final Drivetrain DRIVETRAIN = new Drivetrain();
+    public final Storage STORAGE = new Storage();
 
     // == COMMANDS == //
 
@@ -78,6 +79,37 @@ public class RobotCommands{
         INTAKE
     );
 
+    // CONTROL PANEL COMMANDS
+
+    public final StartEndCommand controlLift = new StartEndCommand(
+        () -> CONTROL_PANEL.lifterOnUp(),
+        () -> CONTROL_PANEL.lifterOff(),
+        CONTROL_PANEL
+    );
+
+    public final StartEndCommand controlDrop = new StartEndCommand(
+        () -> CONTROL_PANEL.lifterOnDown(),
+        () -> CONTROL_PANEL.lifterOff(),
+        CONTROL_PANEL
+    );
+
+    public final StartEndCommand controlSpin = new StartEndCommand(
+        () -> CONTROL_PANEL.spinnerOn(),
+        () -> CONTROL_PANEL.spinnerOff(),
+        CONTROL_PANEL
+    );
+
+
+
+    // STORAGE COMMANDS
+
+    public final StartEndCommand storageGate = new StartEndCommand(
+        () -> STORAGE.gateSpeed(),
+        () -> STORAGE.gateZero(),
+        STORAGE
+    );
+
+
 
     // SECOND LEVEL INTAKE COMMANDS
     public final ConditionalCommand finalDeployPiston = new ConditionalCommand(
@@ -104,12 +136,18 @@ public class RobotCommands{
         CLIMBER.pistonUpSupplier
     );
 
-    // CONTROL PANEL COMMANDS
+    // SECOND LEVEL CONTROL COMMANDS
 
-    public final StartEndCommand controlSpin = new StartEndCommand(
-        () -> CONTROL_PANEL.spinnerOn(),
-        () -> CONTROL_PANEL.spinnerOff(),
-            CONTROL_PANEL
+    public final ConditionalCommand liftControlMaybe = new ConditionalCommand(
+        controlLift.withTimeout(3), controlDrop.withTimeout(3).andThen(), 
+        CONTROL_PANEL.controlUpSupplier
     );
+    
+    // DRIVETRAIN
+
+    public Drivetrain getDrivetrain() {
+        return this.DRIVETRAIN;
+    }
+
 
 }
