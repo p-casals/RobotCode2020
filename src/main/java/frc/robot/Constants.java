@@ -17,9 +17,10 @@ package frc.robot;
  */
 public final class Constants {
 
-  // === ROBOT PORTS === //
+  // === Variables === //
+  public static int LIFTER_VAR = 0;
 
-  // MOTORS
+  // === ROBOT PORTS === //
 
   // DRIVE MOTORS
   public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
@@ -45,18 +46,21 @@ public final class Constants {
 
   // PISTONS
 
+
   // CLIMBING PISTONS
   public static final int SECONDARY_PISTON_1 = 0;
   public static final int SECONDARY_PISTON_2 = 1;
   public static final int PRIMARY_PISTON_1 = 2;
   public static final int PRIMARY_PISTON_2 = 3;
 
+  
+  
   // INTAKE PISTONS
   public static final int INTAKE_PISTON_1 = 4;
   public static final int INTAKE_PISTON_2 = 5;
 
 
-
+  
   // ENCODERS
   public static final int LEFT_ENCODER_PORT = 0; // port 1 is reserved
   public static final int RIGHT_ENCODER_PORT = 2; // port 3 is reserved
@@ -90,9 +94,11 @@ public final class Constants {
   public static final int DEPLOY_INTAKE = 3;
   public static final int RETRACT_INTAKE = 1;
 
+
   // STORAGE
   public static final int STORAGE_MOTOR = 2;
   // TODO: make gate button part of shooter?
+
 
 
   // === SPEED CONSTANTS === //
@@ -105,6 +111,7 @@ public final class Constants {
   // STORAGE
   public static final double GATE_SPEED = 0.3;
   
+
   
 }
 

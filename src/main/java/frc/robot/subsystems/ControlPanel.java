@@ -22,6 +22,7 @@ public class ControlPanel extends SubsystemBase {
     When the piston is fully retracted, the control panel mechanism is un-deployed.
    */
   
+
   private VictorSP liftMotor;
   private VictorSP spinMotor;
 
@@ -32,6 +33,7 @@ public class ControlPanel extends SubsystemBase {
 
   public void lifterOnUp() {
     liftMotor.set(0.5);
+
   }
 
   public void spinnerOn() {
