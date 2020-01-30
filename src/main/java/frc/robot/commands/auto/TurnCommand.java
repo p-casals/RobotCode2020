@@ -3,7 +3,6 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-// Turn command for the robot drivetrain
 public class TurnCommand extends CommandBase {
 
 
@@ -14,7 +13,6 @@ public class TurnCommand extends CommandBase {
 
     public TurnCommand(Drivetrain drivetrain, double degrees, double speed) {
        
-        // Initialise variables as per constructor
         this.drivetrain = drivetrain;
         this.degrees = degrees;
         this.speed = speed;
@@ -26,7 +24,6 @@ public class TurnCommand extends CommandBase {
         addRequirements(drivetrain);
     }
 
-    // Called when code is first run
     @Override
     public void initialize() {
         drivetrain.resetEncoders();
@@ -39,7 +36,6 @@ public class TurnCommand extends CommandBase {
         }
     }
 
-    // Called after initialise()
     @Override
     public void execute() {
 
@@ -65,7 +61,6 @@ public class TurnCommand extends CommandBase {
         return isFinished;
     }
 
-    // Runs if the code is interrupted or when it's finished
     @Override
     public void end(boolean interrupted) {
         // Stop motors.

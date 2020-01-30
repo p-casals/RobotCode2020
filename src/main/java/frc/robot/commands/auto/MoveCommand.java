@@ -22,7 +22,6 @@ public class MoveCommand extends CommandBase {
         addRequirements(drivetrain);
     }
 
-    // Called when the code is first called (or initialised)
     @Override
     public void initialize() {
         drivetrain.resetEncoders();
@@ -30,7 +29,6 @@ public class MoveCommand extends CommandBase {
     }
 
 
-    // Called after initialise() each time the code is run
     @Override
     public void execute() {
         correctHeading();
@@ -44,14 +42,12 @@ public class MoveCommand extends CommandBase {
         drivetrain.tankDrive(speed + 1 * error, speed - 1 * error);
     }
 
-    // Decide whether or not it's finished
     @Override
     public boolean isFinished() {
         // If the average of the encoders is greater than the goal, stop.
         return (drivetrain.getLeftDistance() + drivetrain.getRightDistance()) / 2 >= goal;
     }
 
-    // Called after execute() is completed OR if the command is interrupted for any reason
     @Override
     public void end(boolean interrupted) {
         drivetrain.tankDrive(0, 0);

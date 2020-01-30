@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 import java.util.function.BooleanSupplier;
 
-// Climber class: for endgame climbing 
 public class Climber extends SubsystemBase {
 
 
@@ -32,7 +31,6 @@ public class Climber extends SubsystemBase {
 
 
 
-    // Constructor: initialise the climber
     public Climber() {
         secondaryPiston = new DoubleSolenoid(SECONDARY_PISTON_1, SECONDARY_PISTON_2);
         primaryPiston = new DoubleSolenoid(PRIMARY_PISTON_1, PRIMARY_PISTON_2);
@@ -83,8 +81,6 @@ public class Climber extends SubsystemBase {
     public final BooleanSupplier hasClimbedBooleanSupplier = () -> hasClimbed;
     public final BooleanSupplier pistonUpSupplier = () -> pistonUp;
 
-
-    // BOOLEANSUPPLIERS: For robotContainer climber secondary commands
 
     @Override
     public void periodic() {

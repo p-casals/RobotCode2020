@@ -23,6 +23,7 @@ public class Auto2 extends SequentialCommandGroup {
      */
     public Auto2(RobotCommands cmd, Drivetrain train) {
         
+        // Put commands in the super() call
         
         super(
                 //Align and Shoot
