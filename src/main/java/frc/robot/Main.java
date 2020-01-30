@@ -15,9 +15,7 @@ import edu.wpi.first.wpilibj.RobotBase;
  * call.
  */
 
- // DO NOT MODIFY THIS CLASS UNLESS YOU KNOW WHAT YOU'RE DOING
- // WHICH UNLESS YOU'RE PATRICK OR SARAH YOU DON'T
- // SO NO TOUCHY TOUCHY
+
 public final class Main {
     private Main() {
     }
