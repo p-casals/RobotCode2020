@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.VictorSP;
 import static frc.robot.Constants.*;
 
+// Ball storage: this class controls the gate opening onto the shooter. 
+// It could also be an extra motor: that much is unclear. 
 public class Storage extends SubsystemBase {
   
   private VictorSP motor;

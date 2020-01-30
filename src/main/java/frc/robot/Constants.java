@@ -22,6 +22,9 @@ public final class Constants {
 
   // === ROBOT PORTS === //
 
+  // MOTORS
+
+
   // DRIVE MOTORS
   public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
   public static final int BACK_LEFT_DRIVE_MOTOR = 1;
@@ -52,8 +55,6 @@ public final class Constants {
   public static final int PRIMARY_PISTON_1 = 2;
   public static final int PRIMARY_PISTON_2 = 3;
 
-  
-  
   // INTAKE PISTONS
   public static final int INTAKE_PISTON_1 = 4;
   public static final int INTAKE_PISTON_2 = 5;
@@ -62,14 +63,18 @@ public final class Constants {
   public static final int LIFT_PISTON_1 = 6;
   public static final int LIFT_PISTON_2 = 7;
 
-  
+  // ENCODERS
+
+
   // ENCODERS
   public static final int LEFT_ENCODER_PORT = 0; // port 1 is reserved
   public static final int RIGHT_ENCODER_PORT = 2; // port 3 is reserved
   
 
   // === CONTROLLERS === //
-  
+
+  // GENERAL
+
 
   // STICKS
   public static final int HORIZ_AXIS_LEFT = 0;
@@ -83,6 +88,9 @@ public final class Constants {
   // CONTROLLERS
   public static final int DRIVER_CONTROLLER = 0;
   public static final int OPERATOR_CONTROLLER = 1;
+
+  // FOR SPECIFIC ACTIONS
+
 
   // CLIMBING
   public static final int RAISE_OR_LOWER_CLIMB_PISTONS = 5;
@@ -100,11 +108,9 @@ public final class Constants {
   public static final int LIFT_CONTROL = 4;
   public static final int SPIN_CONTROL = 9;
 
-
   // STORAGE
   public static final int STORAGE_MOTOR = 2;
   // TODO: make gate button part of shooter?
-
 
 
   // === SPEED CONSTANTS === //

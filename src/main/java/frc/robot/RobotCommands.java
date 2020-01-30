@@ -26,7 +26,11 @@ public class RobotCommands{
     public final Drivetrain DRIVETRAIN = new Drivetrain();
     public final Storage STORAGE = new Storage();
 
+
     // == COMMANDS == //
+
+
+    // BASE COMMANDS
 
     // BASE CLIMBER COMMANDS
     public final StartEndCommand climbCommand = new StartEndCommand(
@@ -49,8 +53,6 @@ public class RobotCommands{
         () -> CLIMBER.stopSecondary(), 
         CLIMBER
     );
-
-
  
     // SHOOTER COMMANDS
     // TODO: change set speed parameter to variable if vision processing works.
@@ -59,7 +61,6 @@ public class RobotCommands{
         () -> SHOOTER.setSpeed(0), 
         SHOOTER
     );
-
 
     // INTAKE COMMANDS
     public final InstantCommand intakeOn = new InstantCommand(
@@ -80,29 +81,23 @@ public class RobotCommands{
     );
 
     // CONTROL PANEL COMMANDS
-
     public final StartEndCommand controlLift = new StartEndCommand(
         () -> CONTROL_PANEL.lifterOnUp(),
         () -> CONTROL_PANEL.lifterOff(),
         CONTROL_PANEL
     );
-
     public final StartEndCommand controlDrop = new StartEndCommand(
         () -> CONTROL_PANEL.lifterOnDown(),
         () -> CONTROL_PANEL.lifterOff(),
         CONTROL_PANEL
     );
-
     public final StartEndCommand controlSpin = new StartEndCommand(
         () -> CONTROL_PANEL.spinnerOn(),
         () -> CONTROL_PANEL.spinnerOff(),
         CONTROL_PANEL
     );
 
-
-
     // STORAGE COMMANDS
-
     public final StartEndCommand storageGate = new StartEndCommand(
         () -> STORAGE.gateSpeed(),
         () -> STORAGE.gateZero(),
@@ -110,21 +105,20 @@ public class RobotCommands{
     );
 
 
+    // SECOND LEVEL COMMANDS
+
 
     // SECOND LEVEL INTAKE COMMANDS
     public final ConditionalCommand finalDeployPiston = new ConditionalCommand(
         intakeOn, pistonDeploy.andThen(intakeOn), INTAKE.isDeployedSupplier
     );
-
     public final SequentialCommandGroup finalRetractIntake = new SequentialCommandGroup(
         intakeOff,
         pistonRetract.withTimeout(1)
         //TODO - timeout times again
     );
 
-
     // SECOND LEVEL CLIMBER COMMANDS
-
     // TODO - check timeout times - I kind of made them up
     public final ConditionalCommand climbOrLower = new ConditionalCommand(
         raisePrimaryCommand.withTimeout(6), climbCommand.withTimeout(6).andThen(reverseSecondaryCommand.withTimeout(3)), 
@@ -137,21 +131,18 @@ public class RobotCommands{
     );
 
     // SECOND LEVEL CONTROL COMMANDS
-
     public final ConditionalCommand liftControlMaybe = new ConditionalCommand(
         controlLift.withTimeout(3), controlDrop.withTimeout(3).andThen(), 
         CONTROL_PANEL.controlUpSupplier
     );
     
-    // DRIVETRAIN
+    
+    
+    // MAKE A DRIVETRAIN
 
     public Drivetrain getDrivetrain() {
         return this.DRIVETRAIN;
     }
-
-
-
-
 }
 
 

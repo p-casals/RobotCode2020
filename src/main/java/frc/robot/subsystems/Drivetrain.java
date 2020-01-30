@@ -17,6 +17,7 @@ import static frc.robot.Constants.*;
 
 public class Drivetrain extends SubsystemBase {
 
+    // Basic constants: this is for the drivetrain. Don't touch this.
     public static final double MM_TO_IN = 0.0393701;
     public static final double WHEEL_TO_WHEEL_DIAMETER_INCHES = 320 * MM_TO_IN;
     public static final double WHEEL_DIAMETER_INCHES = 4;
@@ -30,6 +31,7 @@ public class Drivetrain extends SubsystemBase {
     private final SpeedControllerGroup right;
 
     public Drivetrain() {
+        // Creating / Defining drivetrain
         WPI_TalonFX frontLeft = new WPI_TalonFX(FRONT_LEFT_DRIVE_MOTOR);
         WPI_TalonFX backLeft = new WPI_TalonFX(BACK_LEFT_DRIVE_MOTOR);
         WPI_TalonFX frontRight = new WPI_TalonFX(FRONT_RIGHT_DRIVE_MOTOR);
@@ -46,6 +48,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
+
         setLeftSpeed(-leftSpeed);
         setRightSpeed(rightSpeed);
     }

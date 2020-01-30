@@ -21,7 +21,6 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
 
     // IMPORTING STUFF AND STUFF
-
     private final RobotCommands robotCommands = new RobotCommands();
 
     // == JOYSTICK & BUTTON BINDINGS == //
@@ -53,7 +52,6 @@ public class RobotContainer {
         configureButtonActions();
     }
 
-
     // CONFIG BUTTON ACTIONS
     private void configureButtonActions() {
 
@@ -76,11 +74,11 @@ public class RobotContainer {
         storageGateButton.whenHeld(robotCommands.storageGate);
     }
 
-
+    
+    // GET DRIVETRAIN
     public Drivetrain getDrivetrain() {
         return robotCommands.DRIVETRAIN;
     }
-
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -89,7 +87,5 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         return new Auto2(robotCommands, getDrivetrain());
-
     }
-
 }
