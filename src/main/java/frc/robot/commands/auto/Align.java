@@ -9,8 +9,10 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.Timer;
+import frc.robot.M_I2C;
+
+
+
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -20,20 +22,24 @@ public class Align extends SequentialCommandGroup {
   /**
    * Creates a new Align.
    */
-
   
   // == PATRICK  LOOK HERE ==
   // height IS THE DISTANCE FROM THE FLOOR TO THE HIGH SHOOTING GOAL IN INCHES
   // knownD IS THE DISTANCE FROM THE SHOOTING GOAL TO WHERE WE WANT THE ROBOT TO SHOOT FROM IN INCHES
   // WE CAN ALSO HAVE height AND knownD BE PARAMETERS IN THE CONSTRUCTER IF YOU WANT!!!!!!!!!!!!!
 
-  public Align(Drivetrain train, I2C i2c, double height, double knownD) {
+  public Align(Drivetrain train, M_I2C i2c, double height, double knownD) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
+
+    
     super(
-          new TurnCommand(train, (i2c.getPixy().x)*60-30),
-          new MoveCommand(train, (height / tan(i2c.getPixy().y*40-20)-knownD))
+
+          new TurnCommand(train, (i2c.getPixy().x)*60-30, 0.5),
+          new MoveCommand(train, (height / Math.tan(i2c.getPixy().y*40-20)-knownD), 0.5)
     );
   }
+
+
 }
 
