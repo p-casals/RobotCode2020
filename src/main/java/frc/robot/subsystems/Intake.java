@@ -27,6 +27,11 @@ public class Intake extends SubsystemBase {
     private final DoubleSolenoid intakePiston;
 
     private boolean isDeployed = false;
+    private boolean isOn = false;
+
+    public final BooleanSupplier isDeployedSupplier = () -> isDeployed;
+    public final BooleanSupplier isOnSupplier = () -> isOn;
+
 
     //CONSTRUCTOR: defining and creating the intake
     public Intake() {
@@ -39,6 +44,13 @@ public class Intake extends SubsystemBase {
     // Set the spinner to a certain speed. 
     public void wheelSpeed(double speed) {
         wheelMotor.set(speed);
+        if(speed != 0) {
+            isOn = true;
+            BooleanSupplier isOnSupplier = () -> isOn;
+        } else{
+            isOn = false;
+            BooleanSupplier isOnSupplier = () -> isOn;
+        }
     }
 
     // PISTONS:
@@ -47,12 +59,15 @@ public class Intake extends SubsystemBase {
     public void deploy() {
         intakePiston.set(DoubleSolenoid.Value.kForward);
         isDeployed = true;
+        BooleanSupplier isDeployedSupplier = () -> isDeployed;
+
     }
 
     // Retract the intake: retract the pistons.
     public void retract() {
         intakePiston.set(DoubleSolenoid.Value.kReverse);
         isDeployed = false;
+        BooleanSupplier isDeployedSupplier = () -> isDeployed;
     }
 
     // Stop the pistons from either extending further
@@ -62,13 +77,19 @@ public class Intake extends SubsystemBase {
         intakePiston.set(DoubleSolenoid.Value.kOff);
     }
 
-    // BOOLEANSUPPLIER: For RobotContainer's second-level intake commands (for toggleability function)
-    // Again, a boolsup is basically a boolean and this line of code converts it.
-    public final BooleanSupplier isDeployedSupplier = () -> isDeployed;
+
 
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        // BOOLEANSUPPLIER: For RobotContainer's second-level intake commands (for toggleability function)
+        // Again, a boolsup is basically a boolean and this line of code converts it.
+        
+        // TODO: check if the below are viable and can be used. Else, revert to using those declared within each action
+        
+        BooleanSupplier isDeployedSupplier = () -> isDeployed;
+        BooleanSupplier isOnSupplier = () -> isOn;
+
     }
 }

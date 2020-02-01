@@ -35,8 +35,9 @@ public class RobotContainer {
                                  climbButton = new JoystickButton(opController, CLIMB_OR_LOWER),
                                 // SHOOT BUTTON (TOGGLEABLE)
                                  flywheelToggleButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
-                                // PISTON-Y INTAKE BUTTONS
+                                // INTAKE BUTTONS
                                  deployOrRetractIntakeButton = new JoystickButton(opController, DEPLOY_RETRACT_INTAKE),
+                                 onOrOffIntakeButton = new JoystickButton(opController, ON_OR_OFF_INTAKE),
                                  // CONTROL PANEL BUTTONS
                                  controlSpinButton = new JoystickButton(opController, SPIN_CONTROL),
                                  controlLiftButton = new JoystickButton(opController, LIFT_CONTROL),
@@ -63,8 +64,9 @@ public class RobotContainer {
         // SHOOT BUTTONS
         flywheelToggleButton.toggleWhenPressed(robotCommands.shootAtSpeed);
 
-        // PISTON-Y INTAKE BUTTONS
+        // INTAKE BUTTONS
         deployOrRetractIntakeButton.whenPressed(robotCommands.deployOrRetractIntake);
+        onOrOffIntakeButton.whenPressed(robotCommands.onOrOffIntake);
 
         // CONTROL PANEL BUTTONS
 

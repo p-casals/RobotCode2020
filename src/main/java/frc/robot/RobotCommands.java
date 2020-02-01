@@ -129,6 +129,10 @@ public class RobotCommands{
         finalRetractIntake, finalDeployPiston, INTAKE.isDeployedSupplier
     );
 
+    public final ConditionalCommand onOrOffIntake = new ConditionalCommand(
+        intakeOff, intakeOn, INTAKE.isOnSupplier
+    );
+
     // SECOND LEVEL CLIMBER COMMANDS
     // TODO - check timeout times - I kind of made them up
     public final ConditionalCommand climbOrLower = new ConditionalCommand(

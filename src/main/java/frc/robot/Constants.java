@@ -85,6 +85,7 @@ public final class Constants {
   public static final int SHOOT_BUTTON = 8;
   // INTAKE
   public static final int DEPLOY_RETRACT_INTAKE = 3;
+  public static final int ON_OR_OFF_INTAKE = 1;
   // CONTROL PANEL
   public static final int LIFT_CONTROL = 4;
   public static final int SPIN_CONTROL = 9;
