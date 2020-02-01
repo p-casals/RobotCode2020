@@ -84,8 +84,7 @@ public final class Constants {
   public static final int SHOOTER_WHEEL_TOGGLE = 7;
   public static final int SHOOT_BUTTON = 8;
   // INTAKE
-  public static final int DEPLOY_INTAKE = 3;
-  public static final int RETRACT_INTAKE = 1;
+  public static final int DEPLOY_RETRACT_INTAKE = 3;
   // CONTROL PANEL
   public static final int LIFT_CONTROL = 4;
   public static final int SPIN_CONTROL = 9;

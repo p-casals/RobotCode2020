@@ -125,6 +125,9 @@ public class RobotCommands{
         pistonRetract.withTimeout(1)
         //TODO - timeout times again
     );
+    public final ConditionalCommand deployOrRetractIntake = new ConditionalCommand(
+        finalRetractIntake, finalDeployPiston, INTAKE.isDeployedSupplier
+    );
 
     // SECOND LEVEL CLIMBER COMMANDS
     // TODO - check timeout times - I kind of made them up
