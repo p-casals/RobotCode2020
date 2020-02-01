@@ -3,10 +3,10 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.I2C;
 
-public class colorsensor{
+public class ColorSensor{
     I2C sport;
     byte[] retval = new byte[2];
-    colorsensor(int addr){
+    ColorSensor(int addr){
       sport = new I2C(Port.kOnboard, addr);
       sport.write(0x00, 0b00000110);
       sport.write(0x04, 0b01000000);
