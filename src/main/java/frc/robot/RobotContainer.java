@@ -71,8 +71,7 @@ public class RobotContainer {
         // CONTROL PANEL BUTTONS
 
         // TODO: make controlSpin button and controlMatch button the same thing based on game data
-        controlSpinButton.whenHeld(robotCommands.controlSpin);
-
+        controlSpinButton.whenHeld(robotCommands.spinSetTimes);
         controlMatchButton.whenHeld(robotCommands.controlSpinIfNoMatch);
         controlLiftButton.whenPressed(robotCommands.liftControlMaybe);
 

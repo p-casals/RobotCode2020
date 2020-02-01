@@ -18,15 +18,24 @@ import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
+
 
 public class ColorSensor extends SubsystemBase{
   
-  String color;
-  // TODO: get color from smartdashboard gameupdates and change color to that.
+  String colorToGet;
   ColorSensorV3 sensor;
   public int numberOfTimesToSpin;
   public Color detectedColor;
   boolean colorMatches;
+  String colorToStopOn;
+  Boolean keepSpinning;
+
+  
+
+
+
 
   private final ColorMatch m_colorMatcher = new ColorMatch();
   
@@ -37,6 +46,7 @@ public class ColorSensor extends SubsystemBase{
 
 
   public BooleanSupplier colorMatchSupplier = () -> colorMatches;
+  public BooleanSupplier keepSpinningSupplier = () -> keepSpinning;
 
   public ColorSensor() {
     sensor  = new ColorSensorV3(Port.kOnboard);
@@ -45,6 +55,31 @@ public class ColorSensor extends SubsystemBase{
 
   @Override
   public void periodic() {
+    
+    /**
+     * The below code is for the color matching stage. 
+     */
+    String gameData;
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
+    if (gameData.length() > 0) {
+      switch (gameData.charAt(0)) {
+        case 'B':
+          colorToGet = "B";
+        case 'G':
+          colorToGet = "G";
+        case 'R':
+          colorToGet = "R";
+        case 'Y':
+          colorToGet = "Y";
+        default:
+          break;
+      }
+    } else {
+      // No data recieved yet
+    }
+    
+    
+    
     detectedColor = sensor.getColor();
 
     /**
@@ -97,15 +132,43 @@ public class ColorSensor extends SubsystemBase{
 
     SmartDashboard.putNumber("Proximity", proximity);
   
-    if (colorString != color) {
-      colorMatches = false;
-    } else {
+    if (colorString == colorToGet) {
       colorMatches = true;
+    } else {
+      colorMatches = false;
     }
 
     colorMatchSupplier = () -> colorMatches;
+
+
+    /** 
+     * The below code is for spinning the control panel 4 times
+     */
+
+    String colorToStopOn = colorString;
+
+    for(int i = 0; i < 4; i++) {
+      while(colorToStopOn == colorString) {
+        keepSpinning = true;
+        keepSpinningSupplier = () -> keepSpinning;
+      }
+      while(colorToStopOn != colorString) {
+        keepSpinning = true;
+        keepSpinningSupplier = () -> keepSpinning;
+      }
+      keepSpinning = false;
+      keepSpinningSupplier = () -> keepSpinning;
+    }
+    keepSpinningSupplier = () -> keepSpinning;
+
+
+    
+
   }
-  
-  
+
+
+
+
+
 
 }

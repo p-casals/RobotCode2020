@@ -104,11 +104,7 @@ public class RobotCommands{
     );
 
     // 
-    public final ConditionalCommand controlSpinIfNoMatch = new ConditionalCommand(
-        controlSpin,
-        controlStop,
-        COLOR_SENSOR.colorMatchSupplier
-    );
+    
 
     // STORAGE COMMANDS
     public final StartEndCommand storageGate = new StartEndCommand(
@@ -116,8 +112,6 @@ public class RobotCommands{
         () -> STORAGE.gateZero(),
         STORAGE
     );
-
-
 
     // SECOND LEVEL COMMANDS
 
@@ -154,8 +148,18 @@ public class RobotCommands{
 
 
 
-    // COLOR SENSOR COMMANDS
+    // COLOR SENSOR (CONTROL PANEL) SECOND LEVEL COMMANDS
+    public final ConditionalCommand controlSpinIfNoMatch = new ConditionalCommand(
+        controlStop,
+        controlSpin,
+        COLOR_SENSOR.colorMatchSupplier
+    );
 
+    public final ConditionalCommand spinSetTimes = new ConditionalCommand(
+        controlSpin,
+        controlStop,
+        COLOR_SENSOR.keepSpinningSupplier
+    );
 
     
     
