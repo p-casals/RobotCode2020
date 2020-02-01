@@ -25,6 +25,7 @@ public class RobotCommands{
     public final ControlPanel CONTROL_PANEL = new ControlPanel();
     public final Drivetrain DRIVETRAIN = new Drivetrain();
     public final Storage STORAGE = new Storage();
+    public final ColorSensor COLOR_SENSOR = new ColorSensor();
 
 
     // == COMMANDS == //
@@ -97,12 +98,25 @@ public class RobotCommands{
         CONTROL_PANEL
     );
 
+    public final InstantCommand controlStop = new InstantCommand(
+        () -> CONTROL_PANEL.spinnerOff(),
+        CONTROL_PANEL
+    );
+
+    // 
+    public final ConditionalCommand controlSpinIfNoMatch = new ConditionalCommand(
+        controlSpin,
+        controlStop,
+        COLOR_SENSOR.colorMatchSupplier
+    );
+
     // STORAGE COMMANDS
     public final StartEndCommand storageGate = new StartEndCommand(
         () -> STORAGE.gateSpeed(),
         () -> STORAGE.gateZero(),
         STORAGE
     );
+
 
 
     // SECOND LEVEL COMMANDS
@@ -121,7 +135,8 @@ public class RobotCommands{
     // SECOND LEVEL CLIMBER COMMANDS
     // TODO - check timeout times - I kind of made them up
     public final ConditionalCommand climbOrLower = new ConditionalCommand(
-        raisePrimaryCommand.withTimeout(6), climbCommand.withTimeout(6).andThen(reverseSecondaryCommand.withTimeout(3)), 
+        raisePrimaryCommand.withTimeout(6), 
+        climbCommand.withTimeout(6).andThen(reverseSecondaryCommand.withTimeout(3)), 
         CLIMBER.hasClimbedBooleanSupplier
     );
     public final ConditionalCommand pistonUpOrDown = new ConditionalCommand(
@@ -136,6 +151,12 @@ public class RobotCommands{
         CONTROL_PANEL.controlUpSupplier
     );
     
+
+
+
+    // COLOR SENSOR COMMANDS
+
+
     
     
     // MAKE A DRIVETRAIN

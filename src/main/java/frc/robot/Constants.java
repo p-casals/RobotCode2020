@@ -63,12 +63,18 @@ public final class Constants {
   public static final int LIFT_PISTON_1 = 6;
   public static final int LIFT_PISTON_2 = 7;
 
+  // PORT FOR COLOR SENSOR
+
+  public static final int COLOR_SENSOR_PORT = 4;
+
   // ENCODERS
 
 
   // ENCODERS
   public static final int LEFT_ENCODER_PORT = 0; // port 1 is reserved
   public static final int RIGHT_ENCODER_PORT = 2; // port 3 is reserved
+
+
   
 
   // === CONTROLLERS === //
@@ -107,6 +113,7 @@ public final class Constants {
   // CONTROL PANEL
   public static final int LIFT_CONTROL = 4;
   public static final int SPIN_CONTROL = 9;
+  public static final int MATCH_CONTROL = 10;
 
   // STORAGE
   public static final int STORAGE_MOTOR = 2;

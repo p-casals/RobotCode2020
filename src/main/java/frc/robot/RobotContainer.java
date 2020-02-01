@@ -41,8 +41,10 @@ public class RobotContainer {
                                  // CONTROL PANEL BUTTONS
                                  controlSpinButton = new JoystickButton(opController, SPIN_CONTROL),
                                  controlLiftButton = new JoystickButton(opController, LIFT_CONTROL),
+                                 controlMatchButton = new JoystickButton(opController, MATCH_CONTROL),
                                  // STORAGE GATE BUTTON
                                  storageGateButton = new JoystickButton(opController, STORAGE_MOTOR);
+                                 
 
    
    
@@ -67,7 +69,11 @@ public class RobotContainer {
         retractIntakeButton.whenPressed(robotCommands.finalRetractIntake);
 
         // CONTROL PANEL BUTTONS
+
+        // TODO: make controlSpin button and controlMatch button the same thing based on game data
         controlSpinButton.whenHeld(robotCommands.controlSpin);
+
+        controlMatchButton.whenHeld(robotCommands.controlSpinIfNoMatch);
         controlLiftButton.whenPressed(robotCommands.liftControlMaybe);
 
         // STORAGE
