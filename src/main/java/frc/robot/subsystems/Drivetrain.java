@@ -46,7 +46,6 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
-
         setLeftSpeed(-leftSpeed);
         setRightSpeed(rightSpeed);
     }

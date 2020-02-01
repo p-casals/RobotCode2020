@@ -145,21 +145,21 @@ public class ColorSensor extends SubsystemBase{
      * The below code is for spinning the control panel 4 times
      */
 
-    String colorToStopOn = colorString;
+    // String colorToStopOn = colorString;
 
-    for(int i = 0; i < 4; i++) {
-      while(colorToStopOn == colorString) {
-        keepSpinning = true;
-        keepSpinningSupplier = () -> keepSpinning;
-      }
-      while(colorToStopOn != colorString) {
-        keepSpinning = true;
-        keepSpinningSupplier = () -> keepSpinning;
-      }
-      keepSpinning = false;
-      keepSpinningSupplier = () -> keepSpinning;
-    }
-    keepSpinningSupplier = () -> keepSpinning;
+    // for(int i = 0; i < 4; i++) {
+    //   while(colorToStopOn == colorString) {
+    //     keepSpinning = true;
+    //     keepSpinningSupplier = () -> keepSpinning;
+    //   }
+    //   while(colorToStopOn != colorString) {
+    //     keepSpinning = true;
+    //     keepSpinningSupplier = () -> keepSpinning;
+    //   }
+    //   keepSpinning = false;
+    //   keepSpinningSupplier = () -> keepSpinning;
+    // }
+    // keepSpinningSupplier = () -> keepSpinning;
 
 
     

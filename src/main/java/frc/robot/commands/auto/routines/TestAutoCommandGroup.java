@@ -10,13 +10,9 @@ import frc.robot.subsystems.Drivetrain;
 public class TestAutoCommandGroup extends SequentialCommandGroup {
   
     public TestAutoCommandGroup(Drivetrain drivetrain) {
-      
         super(
-        
-        new MoveCommand(drivetrain, 24, 0.5),
-             
-        new TurnCommand(drivetrain, 180, 0.5),
-                
-        new MoveCommand(drivetrain, 24, 0.5));
+            new MoveCommand(drivetrain, 24, 0.5),
+            new TurnCommand(drivetrain, 180, 0.5),
+            new MoveCommand(drivetrain, 24, 0.5));
     }
 }
