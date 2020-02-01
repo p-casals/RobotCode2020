@@ -86,7 +86,7 @@ public class Intake extends SubsystemBase {
         // BOOLEANSUPPLIER: For RobotContainer's second-level intake commands (for toggleability function)
         // Again, a boolsup is basically a boolean and this line of code converts it.
         
-        // TODO: check if the below are viable and can be used. Else, revert to using those declared within each action
+        // TODO: check if the below are viable and can be used. Else, revert to using
         
         BooleanSupplier isDeployedSupplier = () -> isDeployed;
         BooleanSupplier isOnSupplier = () -> isOn;

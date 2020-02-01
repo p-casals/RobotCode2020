@@ -64,8 +64,9 @@ public class RobotCommands{
     );
 
     // INTAKE COMMANDS
-    public final InstantCommand intakeOn = new InstantCommand(
+    public final StartEndCommand intakeOn = new StartEndCommand(
         () -> INTAKE.wheelSpeed(WHEEL_INTAKE_SPEED), 
+        () -> INTAKE.wheelSpeed(0),
         INTAKE
     );
     public final InstantCommand intakeOff = new InstantCommand(

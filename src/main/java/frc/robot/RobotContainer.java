@@ -66,7 +66,7 @@ public class RobotContainer {
 
         // INTAKE BUTTONS
         deployOrRetractIntakeButton.whenPressed(robotCommands.deployOrRetractIntake);
-        onOrOffIntakeButton.whenPressed(robotCommands.onOrOffIntake);
+        onOrOffIntakeButton.toggleWhenPressed(robotCommands.intakeOn);
 
         // CONTROL PANEL BUTTONS
 
