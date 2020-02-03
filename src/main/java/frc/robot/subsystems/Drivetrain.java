@@ -17,12 +17,14 @@ import static frc.robot.Constants.*;
 
 public class Drivetrain extends SubsystemBase {
 
+    // Static fields
     public static final double MM_TO_IN = 0.0393701;
     public static final double WHEEL_TO_WHEEL_DIAMETER_INCHES = 320 * MM_TO_IN;
     public static final double WHEEL_DIAMETER_INCHES = 4;
 
     public static final double PULSES_PER_ROTATION = 256;
-
+    
+    // Fields
     private final Encoder leftEncoder;
     private final Encoder rightEncoder;
 
@@ -44,12 +46,24 @@ public class Drivetrain extends SubsystemBase {
         rightEncoder = new Encoder(RIGHT_ENCODER_PORT, RIGHT_ENCODER_PORT + 1);
         rightEncoder.setDistancePerPulse((2 * Math.PI * WHEEL_DIAMETER_INCHES) / PULSES_PER_ROTATION);
     }
-
+    /**
+     * Envokes methods to change speeds of left and right motors on the robot to desired amount
+     * 
+     * @param leftSpeed desired speed of the left side of the robot
+     * @param rightSpeed desired speed of the right side of the robot
+     */
     public void tankDrive(double leftSpeed, double rightSpeed) {
         setLeftSpeed(-leftSpeed);
         setRightSpeed(rightSpeed);
     }
 
+    /**
+     * Takes raw value from the joysticks and manipulates it before giving it to tankdrive
+     * in order to now jolt forward/accelerate really fast and topple
+     * 
+     * @param x x value of the joystick [0, 1] for forward/backward
+     * @param z z value of the joystick [0, 1] for left/right (turning)
+     */
     public void arcadeDrive(double x, double z) {
         x *= Math.abs(x);
         z *= Math.abs(z);
@@ -57,23 +71,46 @@ public class Drivetrain extends SubsystemBase {
         tankDrive(x - z, x + z);
     }
 
+    /**
+     * Getter method for the left encoder distance
+     * 
+     * @return Returns the distance that the left encoder has recorded (traveled) in units
+     */
     public double getLeftDistance() {
         return leftEncoder.getDistance();
     }
 
+    /**
+     * Getter method for the right encoder distance
+     * 
+     * @return Returns the distance that the right encoder has recorded (traveled) in units
+     */
     public double getRightDistance() {
         return rightEncoder.getDistance();
     }
 
+    /**
+     * Resets the values of both encoders (left and right)
+     */
     public void resetEncoders() {
         leftEncoder.reset();
         rightEncoder.reset();
     }
 
+    /**
+     * Sets the left side of the robot to the desired speed
+     * 
+     * @param speed Desired speed of the left side of the robot
+     */
     private void setLeftSpeed(double speed) {
         left.set(speed);
     }
 
+    /**
+     * Sets the right side of the robot to the desired speed
+     * 
+     * @param speed Desired speed of the right side of the robot
+     */
     private void setRightSpeed(double speed) {
         right.set(speed);
     }
