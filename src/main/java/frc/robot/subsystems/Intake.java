@@ -81,7 +81,7 @@ public class Intake extends SubsystemBase {
     * or from retracting further:
     * use once extended and retracted to heart's content
     */
-    public void stop() {
+    public void stopPistons() {
         intakePiston.set(DoubleSolenoid.Value.kOff);
     }
 
