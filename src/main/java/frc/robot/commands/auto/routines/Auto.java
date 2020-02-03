@@ -15,11 +15,11 @@ import frc.robot.subsystems.Drivetrain;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 
-
+// Auto routine #1
 public class Auto extends SequentialCommandGroup {
 
     /**
-     * Creates a new TestAutoTwo.
+     * Creates a new Auto.
      */
     public Auto(RobotCommands COMMANDS, Drivetrain DRIVETRAIN) {
 

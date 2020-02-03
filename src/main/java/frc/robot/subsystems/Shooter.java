@@ -12,13 +12,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
 
+// Creates a new shooter
 public class Shooter extends SubsystemBase {
 
+    // Create three motors: they should work in tandem to rotate
+    // the flywheel at the same time: gives it extra power
     private final VictorSP motor1;
-  private final VictorSP motor2;
-  private final VictorSP motor3;
+    private final VictorSP motor2;
+    private final VictorSP motor3;
 
     public Shooter() {
+
+        // refer to constants.java for motor ports
         motor1 = new VictorSP(SHOOTER_MOTOR_1);
         motor2 = new VictorSP(SHOOTER_MOTOR_2);
         motor3 = new VictorSP(SHOOTER_MOTOR_3);
