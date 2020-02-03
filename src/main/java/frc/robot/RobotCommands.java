@@ -74,11 +74,11 @@ public class RobotCommands{
         INTAKE
     );
     public final StartEndCommand pistonDeploy = new StartEndCommand(
-        () -> INTAKE.deploy(), () -> INTAKE.stop(), 
+        () -> INTAKE.deploy(), () -> INTAKE.stopPistons(), 
         INTAKE
     );
     public final StartEndCommand pistonRetract = new StartEndCommand(
-        () -> INTAKE.retract(), () -> INTAKE.stop(), 
+        () -> INTAKE.retract(), () -> INTAKE.stopPistons(), 
         INTAKE
     );
 

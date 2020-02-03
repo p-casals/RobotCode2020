@@ -44,12 +44,12 @@ public class Intake extends SubsystemBase {
     // Set the spinner to a certain speed. 
     public void wheelSpeed(double speed) {
         wheelMotor.set(speed);
-        if(speed != 0) {
+        if(Math.abs(speed) >=.001) {
             isOn = true;
-            BooleanSupplier isOnSupplier = () -> isOn;
+            // BooleanSupplier isOnSupplier = () -> isOn;
         } else{
             isOn = false;
-            BooleanSupplier isOnSupplier = () -> isOn;
+            // BooleanSupplier isOnSupplier = () -> isOn;
         }
     }
 
@@ -59,7 +59,7 @@ public class Intake extends SubsystemBase {
     public void deploy() {
         intakePiston.set(DoubleSolenoid.Value.kForward);
         isDeployed = true;
-        BooleanSupplier isDeployedSupplier = () -> isDeployed;
+        // BooleanSupplier isDeployedSupplier = () -> isDeployed;
 
     }
 
@@ -67,13 +67,13 @@ public class Intake extends SubsystemBase {
     public void retract() {
         intakePiston.set(DoubleSolenoid.Value.kReverse);
         isDeployed = false;
-        BooleanSupplier isDeployedSupplier = () -> isDeployed;
+        // BooleanSupplier isDeployedSupplier = () -> isDeployed;
     }
 
     // Stop the pistons from either extending further
     // or from retracting further:
     // use once extended and retracted to heart's content
-    public void stop() {
+    public void stopPistons() {
         intakePiston.set(DoubleSolenoid.Value.kOff);
     }
 
@@ -88,8 +88,8 @@ public class Intake extends SubsystemBase {
         
         // TODO: check if the below are viable and can be used. Else, revert to using
         
-        BooleanSupplier isDeployedSupplier = () -> isDeployed;
-        BooleanSupplier isOnSupplier = () -> isOn;
+        // BooleanSupplier isDeployedSupplier = () -> isDeployed;
+        // BooleanSupplier isOnSupplier = () -> isOn;
 
     }
 }
