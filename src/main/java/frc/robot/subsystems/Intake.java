@@ -40,8 +40,11 @@ public class Intake extends SubsystemBase {
     }
 
     // MOTORS:
-
-    // Set the spinner to a certain speed. 
+    /**
+     * Set the spinner to a certain speed
+     * 
+     * @param speed Desired speed of the spinner
+     */ 
     public void wheelSpeed(double speed) {
         wheelMotor.set(speed);
         if(Math.abs(speed) >=.001) {
@@ -54,8 +57,9 @@ public class Intake extends SubsystemBase {
     }
 
     // PISTONS:
-
-    // Deploy the intake: extend the pistons.
+    /**
+     * Deploy the intake: extend the pistons
+     */
     public void deploy() {
         intakePiston.set(DoubleSolenoid.Value.kForward);
         isDeployed = true;
@@ -63,16 +67,20 @@ public class Intake extends SubsystemBase {
 
     }
 
-    // Retract the intake: retract the pistons.
+    /**
+     * Retract the intake: retract the pistons
+     */
     public void retract() {
         intakePiston.set(DoubleSolenoid.Value.kReverse);
         isDeployed = false;
         // BooleanSupplier isDeployedSupplier = () -> isDeployed;
     }
 
-    // Stop the pistons from either extending further
-    // or from retracting further:
-    // use once extended and retracted to heart's content
+    /** 
+    * Stop the pistons from either extending further
+    * or from retracting further:
+    * use once extended and retracted to heart's content
+    */
     public void stopPistons() {
         intakePiston.set(DoubleSolenoid.Value.kOff);
     }
