@@ -31,24 +31,24 @@ public class RobotContainer {
 
     // CONFIG BUTTON BINDINGS (See constants.java to change specific ports etc.)
     // CLIMBER BUTTONS
-    private final JoystickButton raiseUpButton = new JoystickButton(opController, RAISE_LIFTER),
-                                 lowerDownButton = new JoystickButton(opController, LOWER_LIFTER),
-                                 gearClimbButton = new JoystickButton(opController, GEAR_BUTTON),
+    private final JoystickButton raiseUpButton = new JoystickButton(opController, LB),
+                                 lowerDownButton = new JoystickButton(opController, RB),
+                                 gearClimbButton = new JoystickButton(opController, BACK),
 
                                 // SHOOT BUTTON (TOGGLEABLE)
-                                 flywheelToggleButton = new JoystickButton(opController, SHOOTER_WHEEL_TOGGLE),
+                                 flywheelToggleButton = new JoystickButton(opController, START),
 
                                 // INTAKE BUTTONS
-                                 deployOrRetractIntakeButton = new JoystickButton(opController, DEPLOY_RETRACT_INTAKE),
-                                 onOrOffIntakeButton = new JoystickButton(opController, ON_OR_OFF_INTAKE),
+                                 deployOrRetractIntakeButton = new JoystickButton(opController, X),
+                                 onOrOffIntakeButton = new JoystickButton(opController, A),
 
                                  // CONTROL PANEL BUTTONS
-                                 controlSpinButton = new JoystickButton(opController, SPIN_CONTROL),
-                                 controlLiftButton = new JoystickButton(opController, LIFT_CONTROL),
+                                 controlSpinButton = new JoystickButton(opController, RIGHT_STICK_BUTTON),
+                                 controlLiftButton = new JoystickButton(opController, Y),
                                  controlMatchButton = new JoystickButton(opController, MATCH_CONTROL),
 
                                  // STORAGE GATE BUTTON
-                                 storageGateButton = new JoystickButton(opController, STORAGE_MOTOR);
+                                 storageGateButton = new JoystickButton(opController, B);
                                  
 
    
