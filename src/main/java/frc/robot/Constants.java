@@ -20,6 +20,7 @@ public final class Constants {
   // === ROBOT PORTS === //
 
   // MOTORS
+
   // DRIVE MOTORS
   public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
   public static final int BACK_LEFT_DRIVE_MOTOR = 1;
@@ -46,7 +47,9 @@ public final class Constants {
   // STORAGE MOTOR
   public static final int STORAGE_GATE_MOTOR = 13;
 
+
   // PISTONS
+
   // INTAKE PISTONS
   public static final int INTAKE_PISTON_1 = 4;
   public static final int INTAKE_PISTON_2 = 5;
@@ -65,40 +68,33 @@ public final class Constants {
 
   // === CONTROLLERS === //
 
-  // STICKS
-  public static final int HORIZ_AXIS_LEFT = 0;
-  public static final int FORWARD_AXIS_LEFT = 1;
-  public static final int FORWARD_AXIS_RIGHT = 2;
-  public static final int HORIZ_AXIS_RIGHT = 3;
-
-  // TRIGGERS
-  public static final int LEFT_TRIGGER_AXIS = 7;
-
   // CONTROLLERS
   public static final int DRIVER_CONTROLLER = 0;
   public static final int OPERATOR_CONTROLLER = 1;
 
-  // OP CONTROLLER BUTTONS
-  // CLIMBING
-  public static final int RAISE_LIFTER = 5;
-  public static final int LOWER_LIFTER = 6;
-  public static final int GEAR_BUTTON = 7;
+  // STICKS (for xbox controler)
+  public static final int HORIZ_AXIS_LEFT = 0;
+  public static final int FORWARD_AXIS_LEFT = 1;
+  public static final int HORIZ_AXIS_RIGHT = 4;
+  public static final int FORWARD_AXIS_RIGHT = 5;
 
-  // SHOOTING
-  public static final int SHOOTER_WHEEL_TOGGLE = 8;
-  public static final int SHOOT_BUTTON = 9;
+  public static final int LEFT_TRIGGER_AXIS = 2;
+  public static final int RIGHT_TRIGGER_AXIS = 3;
 
-  // INTAKE
-  public static final int DEPLOY_RETRACT_INTAKE = 3;
-  public static final int ON_OR_OFF_INTAKE = 1;
+  // CONTROLLER BUTTONS (for xbox controller)
+  public static final int A = 1;
+  public static final int B = 2;
+  public static final int X = 3;
+  public static final int Y = 4;
+  public static final int LB = 5;
+  public static final int RB = 6;
+  public static final int BACK = 7;
+  public static final int START = 8;
+  public static final int LEFT_STICK_BUTTON = 9;
+  public static final int RIGHT_STICK_BUTTON = 10;
 
-  // CONTROL PANEL
-  public static final int LIFT_CONTROL = 4;
-  public static final int SPIN_CONTROL = 10;
-  public static final int MATCH_CONTROL = 11;
+  public static final int MATCH_CONTROL = 11; // TODO: change this because button 11 doesn't exist
 
-  // STORAGE
-  public static final int STORAGE_MOTOR = 2;
 
 
   // === SPEED CONSTANTS === //
@@ -109,7 +105,6 @@ public final class Constants {
   // STORAGE
   public static final double GATE_SPEED = 0.3;
   
-
   
 }
 
