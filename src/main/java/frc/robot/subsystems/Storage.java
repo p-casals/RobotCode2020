@@ -17,21 +17,23 @@ import static frc.robot.Constants.*;
   // TODO: make gate button part of shooter?
 
 public class Storage extends SubsystemBase {
-  
+  // FIELDS
   private VictorSP motor;
-  
-  /**
-   * Creates a new Storage.
-   */
+
   public Storage() {
     motor = new VictorSP(STORAGE_GATE_MOTOR);
   }
 
-
+  /**
+   * Sets the storage motor (gate) to 0.3 (GATE_SPEED in constants)
+   */
   public void gateSpeed() {
     motor.set(GATE_SPEED);
   }
 
+  /**
+   * Sets the speed of the storage motor (gate) to 0 for stopping
+   */
   public void gateZero() {
     motor.set(0);
   }
