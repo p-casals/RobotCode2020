@@ -22,6 +22,8 @@ public class RobotContainer {
 
     // IMPORTING STUFF AND STUFF
     private final RobotCommands robotCommands = new RobotCommands();
+    int timesSpun;
+
 
     // == JOYSTICK & BUTTON BINDINGS == //
 
@@ -76,13 +78,17 @@ public class RobotContainer {
 
         // CONTROL PANEL BUTTONS
 
-        // TODO: make controlSpin button and controlMatch button the same thing based on game data
-        controlSpinButton.whenHeld(robotCommands.spinSetTimes);
+        // TODO: make a control spin times counter?
+
+        controlSpinButton.whenHeld(robotCommands.spinHalfEitherEight);
         controlMatchButton.whenHeld(robotCommands.controlSpinIfNoMatch);
         controlLiftButton.whenPressed(robotCommands.liftControlMaybe);
 
         // STORAGE
         storageGateButton.whenHeld(robotCommands.storageGate);
+
+        // Control Panel Spin Half
+        
     }
 
     

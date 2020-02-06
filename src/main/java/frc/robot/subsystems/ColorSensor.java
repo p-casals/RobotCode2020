@@ -28,9 +28,12 @@ public class ColorSensor extends SubsystemBase{
   ColorSensorV3 sensor;
   public int numberOfTimesToSpin;
   public Color detectedColor;
-  boolean colorMatches;
+  public boolean colorMatches;
   String colorToStopOn;
   Boolean keepSpinning;
+  public int timesSpun;
+  Boolean colorNotMatch;
+  
 
   private final ColorMatch m_colorMatcher = new ColorMatch();
   
@@ -41,16 +44,80 @@ public class ColorSensor extends SubsystemBase{
 
 
   public BooleanSupplier colorMatchSupplier = () -> colorMatches;
+  public BooleanSupplier colorMatchSupplierReverse = () -> colorNotMatch;
   public BooleanSupplier keepSpinningSupplier = () -> keepSpinning;
 
   public ColorSensor() {
     sensor  = new ColorSensorV3(Port.kOnboard);
 
+    // TODO: put gameData in either constructor or in periodic(). Perhaps somewhere else?
+    String gameData;
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
+    if (gameData.length() > 0) {
+      switch (gameData.charAt(0)) {
+        case 'B':
+          colorToGet = "B";
+        case 'G':
+          colorToGet = "G";
+        case 'R':
+          colorToGet = "R";
+        case 'Y':
+          colorToGet = "Y";
+        default:
+          break;
+      }
+    } else {
+      // No data recieved yet
+    }
   }
 
-  @Override
-  public void periodic() {
-    
+  // TODO: make this always run? can it run in the background?
+  public void spunTimesCounter() {
+    while(detectedColor.toString() == colorToGet) {
+      if(detectedColor.toString() != colorToGet) {
+        timesSpun ++;
+      }
+    }
+    while(detectedColor.toString() != colorToGet) {
+      while(detectedColor.toString() == colorToGet) {
+        if(detectedColor.toString() != colorToGet) {
+          timesSpun ++;
+        }
+      }
+    }
+
+    if(timesSpun < 10) {
+      keepSpinning = true;
+    } else{
+      keepSpinning = false;
+    }
+    keepSpinningSupplier = () -> keepSpinning;
+  }
+
+  public void spinHalf() {
+    if(detectedColor.toString() == colorToGet) {
+      while(detectedColor.toString() == colorToGet) {
+      
+      }
+    }else if(detectedColor.toString() != colorToGet) {
+
+    }
+  }
+
+  public void timesSpunIncrease() {
+    timesSpun++;
+  }
+  // This returns the color that it's currently on.
+  public Color currentColor() {
+    return detectedColor;
+  }
+
+  public void updateColor() {
+    if(detectedColor.toString() == colorToGet) {
+      
+    }else if(detectedColor.toString() != colorToGet) {
+
+    }    
     /**
      * The below code is for the color matching stage. 
      */
@@ -100,15 +167,21 @@ public class ColorSensor extends SubsystemBase{
       colorString = "Unknown";
     }
 
+    // From the spunTimesCounter method above.
+    if(timesSpun < 10) {
+      keepSpinning = true;
+    } else{
+      keepSpinning = false;
+    }
+
     /**
      * Open Smart Dashboard or Shuffleboard to see the color detected by the 
      * sensor.
      */
-    SmartDashboard.putNumber("R", detectedColor.red);
-    SmartDashboard.putNumber("G", detectedColor.green);
-    SmartDashboard.putNumber("B", detectedColor.blue);
+
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
+    SmartDashboard.putNumber("Times Spun", timesSpun);
 
     /**
      * In addition to RGB IR values, the color sensor can also return an 
@@ -127,33 +200,19 @@ public class ColorSensor extends SubsystemBase{
   
     if (colorString == colorToGet) {
       colorMatches = true;
+      colorNotMatch = false;
     } else {
       colorMatches = false;
+      colorNotMatch = true;
     }
 
     colorMatchSupplier = () -> colorMatches;
+    colorMatchSupplierReverse = () -> colorNotMatch;
 
+  }
 
-    /** 
-     * The below code is for spinning the control panel 4 times
-     */
-
-    // String colorToStopOn = colorString;
-
-    // for(int i = 0; i < 4; i++) {
-    //   while(colorToStopOn == colorString) {
-    //     keepSpinning = true;
-    //     keepSpinningSupplier = () -> keepSpinning;
-    //   }
-    //   while(colorToStopOn != colorString) {
-    //     keepSpinning = true;
-    //     keepSpinningSupplier = () -> keepSpinning;
-    //   }
-    //   keepSpinning = false;
-    //   keepSpinningSupplier = () -> keepSpinning;
-    // }
-    // keepSpinningSupplier = () -> keepSpinning;
-    
+  @Override
+  public void periodic() {
   }
 
 }

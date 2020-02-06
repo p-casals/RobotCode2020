@@ -140,10 +140,28 @@ public class RobotCommands{
         COLOR_SENSOR.colorMatchSupplier
     );
 
-    public final ConditionalCommand spinSetTimes = new ConditionalCommand(
-        controlSpin,
-        controlStop,
-        COLOR_SENSOR.keepSpinningSupplier
+    public final InstantCommand spinHalfWhenEquals = new InstantCommand(
+        () -> controlSpin.withInterrupt(COLOR_SENSOR.colorMatchSupplierReverse),
+        COLOR_SENSOR
+    );
+
+    public final InstantCommand spinHalfWhenDoesNot = new InstantCommand(
+        () -> controlSpin.withInterrupt(COLOR_SENSOR.colorMatchSupplier).andThen(spinHalfWhenEquals),
+        COLOR_SENSOR
+    );
+
+    public final ConditionalCommand spinHalfEither = new ConditionalCommand(
+        spinHalfWhenEquals,
+        spinHalfWhenDoesNot,
+        COLOR_SENSOR.colorMatchSupplier
+    );
+    
+    public final SequentialCommandGroup spinHalfEitherEight = new SequentialCommandGroup(
+        spinHalfEither.andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither)    );
+    
+    public final InstantCommand plusTimesSpun = new InstantCommand(
+        () -> COLOR_SENSOR.timesSpunIncrease(),
+        COLOR_SENSOR
     );
 
     
