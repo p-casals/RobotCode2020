@@ -30,14 +30,18 @@ public class Climber extends SubsystemBase {
      * 
      * @param speed Desired speed of the motor lifting the hook
      */
-    public void setLifterSpeed(double speed){ lifterMotor.set(speed); }
+    public void setLifterSpeed(double speed){
+        lifterMotor.set(speed); 
+    }
 
     /**
      * Sets the speed of the gear motors to the desired speed
      * 
      * @param speed Desired speed of the two gear motors
      */
-    public void setGearSpeed(double speed){ gearBoxMotor1.set(speed); gearBoxMotor2.set(speed); }
+    public void setGearSpeed(double speed){ 
+        gearBoxMotor1.set(speed); gearBoxMotor2.set(speed); 
+    }
 
 
     @Override

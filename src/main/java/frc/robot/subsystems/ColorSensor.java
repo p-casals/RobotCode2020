@@ -29,8 +29,6 @@ public class ColorSensor extends SubsystemBase{
   public int numberOfTimesToSpin;
   public Color detectedColor;
   public boolean colorMatches;
-  String colorToStopOn;
-  Boolean keepSpinning;
   public int timesSpun;
   Boolean colorNotMatch;
   
@@ -45,7 +43,6 @@ public class ColorSensor extends SubsystemBase{
 
   public BooleanSupplier colorMatchSupplier = () -> colorMatches;
   public BooleanSupplier colorMatchSupplierReverse = () -> colorNotMatch;
-  public BooleanSupplier keepSpinningSupplier = () -> keepSpinning;
 
   public ColorSensor() {
     sensor  = new ColorSensorV3(Port.kOnboard);
@@ -71,38 +68,6 @@ public class ColorSensor extends SubsystemBase{
     }
   }
 
-  // TODO: make this always run? can it run in the background?
-  public void spunTimesCounter() {
-    while(detectedColor.toString() == colorToGet) {
-      if(detectedColor.toString() != colorToGet) {
-        timesSpun ++;
-      }
-    }
-    while(detectedColor.toString() != colorToGet) {
-      while(detectedColor.toString() == colorToGet) {
-        if(detectedColor.toString() != colorToGet) {
-          timesSpun ++;
-        }
-      }
-    }
-
-    if(timesSpun < 10) {
-      keepSpinning = true;
-    } else{
-      keepSpinning = false;
-    }
-    keepSpinningSupplier = () -> keepSpinning;
-  }
-
-  public void spinHalf() {
-    if(detectedColor.toString() == colorToGet) {
-      while(detectedColor.toString() == colorToGet) {
-      
-      }
-    }else if(detectedColor.toString() != colorToGet) {
-
-    }
-  }
 
   public void timesSpunIncrease() {
     timesSpun++;
@@ -112,12 +77,7 @@ public class ColorSensor extends SubsystemBase{
     return detectedColor;
   }
 
-  public void updateColor() {
-    if(detectedColor.toString() == colorToGet) {
-      
-    }else if(detectedColor.toString() != colorToGet) {
-
-    }    
+  public void updateColor() {  
     /**
      * The below code is for the color matching stage. 
      */
@@ -165,13 +125,6 @@ public class ColorSensor extends SubsystemBase{
       colorString = "Y";
     } else {
       colorString = "Unknown";
-    }
-
-    // From the spunTimesCounter method above.
-    if(timesSpun < 10) {
-      keepSpinning = true;
-    } else{
-      keepSpinning = false;
     }
 
     /**
