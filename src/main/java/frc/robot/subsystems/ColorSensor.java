@@ -112,11 +112,7 @@ public class ColorSensor extends SubsystemBase{
     return detectedColor;
   }
 
-
-  // TODO: spin x times using keepSpinning
-
-  @Override
-  public void periodic() {
+  public void alwaysRunning() {
     if(detectedColor.toString() == colorToGet) {
       
     }else if(detectedColor.toString() != colorToGet) {
@@ -213,13 +209,10 @@ public class ColorSensor extends SubsystemBase{
     colorMatchSupplier = () -> colorMatches;
     colorMatchSupplierReverse = () -> colorNotMatch;
 
+  }
 
-    /** 
-     * The below code is for spinning the control panel 4 times
-     */
-
-
-    
+  @Override
+  public void periodic() {
   }
 
 }

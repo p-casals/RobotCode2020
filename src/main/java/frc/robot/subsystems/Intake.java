@@ -49,10 +49,10 @@ public class Intake extends SubsystemBase {
         wheelMotor.set(speed);
         if(Math.abs(speed) >=.001) {
             isOn = true;
-            // BooleanSupplier isOnSupplier = () -> isOn;
+            BooleanSupplier isOnSupplier = () -> isOn;
         } else{
             isOn = false;
-            // BooleanSupplier isOnSupplier = () -> isOn;
+            BooleanSupplier isOnSupplier = () -> isOn;
         }
     }
 
@@ -63,7 +63,7 @@ public class Intake extends SubsystemBase {
     public void deploy() {
         intakePiston.set(DoubleSolenoid.Value.kForward);
         isDeployed = true;
-        // BooleanSupplier isDeployedSupplier = () -> isDeployed;
+        BooleanSupplier isDeployedSupplier = () -> isDeployed;
 
     }
 
@@ -73,7 +73,7 @@ public class Intake extends SubsystemBase {
     public void retract() {
         intakePiston.set(DoubleSolenoid.Value.kReverse);
         isDeployed = false;
-        // BooleanSupplier isDeployedSupplier = () -> isDeployed;
+        BooleanSupplier isDeployedSupplier = () -> isDeployed;
     }
 
     /** 
@@ -93,11 +93,7 @@ public class Intake extends SubsystemBase {
         // This method will be called once per scheduler run
         // BOOLEANSUPPLIER: For RobotContainer's second-level intake commands (for toggleability function)
         // Again, a boolsup is basically a boolean and this line of code converts it.
-        
-        // TODO: check if the below are viable and can be used. Else, revert to using
-        
-        // BooleanSupplier isDeployedSupplier = () -> isDeployed;
-        // BooleanSupplier isOnSupplier = () -> isOn;
+                
 
     }
 }
