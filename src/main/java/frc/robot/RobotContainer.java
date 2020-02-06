@@ -11,6 +11,7 @@ package frc.robot;
 import static frc.robot.Constants.*;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -22,6 +23,8 @@ public class RobotContainer {
 
     // IMPORTING STUFF AND STUFF
     private final RobotCommands robotCommands = new RobotCommands();
+    int timesSpun;
+
 
     // == JOYSTICK & BUTTON BINDINGS == //
 
@@ -76,13 +79,17 @@ public class RobotContainer {
 
         // CONTROL PANEL BUTTONS
 
-        // TODO: make controlSpin button and controlMatch button the same thing based on game data
-        controlSpinButton.whenHeld(robotCommands.spinSetTimes);
+        // TODO: make a control spin times counter
+
+        controlSpinButton.whenHeld(robotCommands.spinHalfEither);
         controlMatchButton.whenHeld(robotCommands.controlSpinIfNoMatch);
         controlLiftButton.whenPressed(robotCommands.liftControlMaybe);
 
         // STORAGE
         storageGateButton.whenHeld(robotCommands.storageGate);
+
+        // Control Panel Spin Half
+        
     }
 
     
