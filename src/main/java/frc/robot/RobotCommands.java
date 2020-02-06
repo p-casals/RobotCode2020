@@ -30,30 +30,7 @@ public class RobotCommands{
 
     // == COMMANDS == //
 
-
     // BASE COMMANDS
-
-    // BASE CLIMBER COMMANDS
-    public final StartEndCommand climbCommand = new StartEndCommand(
-        () -> CLIMBER.reversePrimary(), 
-        () -> CLIMBER.stopPrimary(), 
-        CLIMBER
-    );
-    public final StartEndCommand raisePrimaryCommand = new StartEndCommand(
-        () -> CLIMBER.raisePrimary(), 
-        () -> CLIMBER.stopPrimary(), 
-        CLIMBER
-    );
-    public final StartEndCommand raiseSecondaryCommand = new StartEndCommand(
-        () -> CLIMBER.raiseSecondary(), 
-        () -> CLIMBER.stopSecondary(), 
-        CLIMBER
-    );
-    public final StartEndCommand reverseSecondaryCommand = new StartEndCommand(
-        () -> CLIMBER.reverseSecondary(), 
-        () -> CLIMBER.stopSecondary(), 
-        CLIMBER
-    );
  
     // SHOOTER COMMANDS
     // TODO: change set speed parameter to variable if vision processing works.
@@ -74,11 +51,11 @@ public class RobotCommands{
         INTAKE
     );
     public final StartEndCommand pistonDeploy = new StartEndCommand(
-        () -> INTAKE.deploy(), () -> INTAKE.stop(), 
+        () -> INTAKE.deploy(), () -> INTAKE.stopPistons(), 
         INTAKE
     );
     public final StartEndCommand pistonRetract = new StartEndCommand(
-        () -> INTAKE.retract(), () -> INTAKE.stop(), 
+        () -> INTAKE.retract(), () -> INTAKE.stopPistons(), 
         INTAKE
     );
 
@@ -104,9 +81,26 @@ public class RobotCommands{
         CONTROL_PANEL
     );
 
-    // 
+    // CLIMBER COMMANDS
+    public final StartEndCommand raiseLifter = new StartEndCommand(
+        () -> CLIMBER.setLifterSpeed(0.75),
+        () -> CLIMBER.setLifterSpeed(0),
+        CLIMBER
+    );
     
+    public final StartEndCommand lowerLifter = new StartEndCommand(
+        () -> CLIMBER.setLifterSpeed(-0.75),
+        () -> CLIMBER.setLifterSpeed(0),
+        CLIMBER
+    );
 
+    public final StartEndCommand gearClimb = new StartEndCommand(
+        () -> CLIMBER.setGearSpeed(0.75),
+        () -> CLIMBER.setGearSpeed(0),
+        CLIMBER
+    );
+    
+    
     // STORAGE COMMANDS
     public final StartEndCommand storageGate = new StartEndCommand(
         () -> STORAGE.gateSpeed(),
@@ -115,7 +109,6 @@ public class RobotCommands{
     );
 
     // SECOND LEVEL COMMANDS
-
 
     // SECOND LEVEL INTAKE COMMANDS
     public final ConditionalCommand finalDeployPiston = new ConditionalCommand(
@@ -134,27 +127,11 @@ public class RobotCommands{
         intakeOff, intakeOn, INTAKE.isOnSupplier
     );
 
-    // SECOND LEVEL CLIMBER COMMANDS
-    // TODO - check timeout times - I kind of made them up
-    public final ConditionalCommand climbOrLower = new ConditionalCommand(
-        raisePrimaryCommand.withTimeout(6), 
-        climbCommand.withTimeout(6).andThen(reverseSecondaryCommand.withTimeout(3)), 
-        CLIMBER.hasClimbedBooleanSupplier
-    );
-    public final ConditionalCommand pistonUpOrDown = new ConditionalCommand(
-        reverseSecondaryCommand.withTimeout(2), 
-        raiseSecondaryCommand.withTimeout(2), 
-        CLIMBER.pistonUpSupplier
-    );
-
     // SECOND LEVEL CONTROL COMMANDS
     public final ConditionalCommand liftControlMaybe = new ConditionalCommand(
         controlLift.withTimeout(3), controlDrop.withTimeout(3).andThen(), 
         CONTROL_PANEL.controlUpSupplier
     );
-    
-
-
 
     // COLOR SENSOR (CONTROL PANEL) SECOND LEVEL COMMANDS
     public final ConditionalCommand controlSpinIfNoMatch = new ConditionalCommand(

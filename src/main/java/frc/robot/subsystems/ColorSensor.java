@@ -32,11 +32,6 @@ public class ColorSensor extends SubsystemBase{
   String colorToStopOn;
   Boolean keepSpinning;
 
-  
-
-
-
-
   private final ColorMatch m_colorMatcher = new ColorMatch();
   
   private final Color kBlueTarget = ColorMatch.makeColor(0.163, 0.481, 0.355);
@@ -77,8 +72,6 @@ public class ColorSensor extends SubsystemBase{
     } else {
       // No data recieved yet
     }
-    
-    
     
     detectedColor = sensor.getColor();
 
@@ -160,15 +153,7 @@ public class ColorSensor extends SubsystemBase{
     //   keepSpinningSupplier = () -> keepSpinning;
     // }
     // keepSpinningSupplier = () -> keepSpinning;
-
-
     
-
   }
-
-
-
-
-
 
 }

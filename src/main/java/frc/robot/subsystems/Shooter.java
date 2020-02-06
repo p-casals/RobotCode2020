@@ -15,6 +15,7 @@ import static frc.robot.Constants.*;
 // Creates a new shooter
 public class Shooter extends SubsystemBase {
 
+    // FIELDS
     // Create three motors: they should work in tandem to rotate
     // the flywheel at the same time: gives it extra power
     private final VictorSP motor1;
@@ -31,6 +32,11 @@ public class Shooter extends SubsystemBase {
 
     // TODO: shooterSpeed can become an outside variable when vision tracking works
 
+    /**
+     * Sets the speed of the three shooter motors to the desired speed
+     * 
+     * @param shooterSpeed Desired speed of the three shooter motors
+     */
     public void setSpeed(double shooterSpeed) {
         motor1.set(shooterSpeed);
         motor2.set(shooterSpeed);
