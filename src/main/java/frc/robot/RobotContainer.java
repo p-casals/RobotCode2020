@@ -79,9 +79,9 @@ public class RobotContainer {
 
         // CONTROL PANEL BUTTONS
 
-        // TODO: make a control spin times counter
+        // TODO: make a control spin times counter?
 
-        controlSpinButton.whenHeld(robotCommands.spinHalfEither);
+        controlSpinButton.whenHeld(robotCommands.spinHalfEitherEight);
         controlMatchButton.whenHeld(robotCommands.controlSpinIfNoMatch);
         controlLiftButton.whenPressed(robotCommands.liftControlMaybe);
 

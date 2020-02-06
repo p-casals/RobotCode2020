@@ -143,7 +143,6 @@ public class RobotCommands{
     public final InstantCommand spinHalfWhenEquals = new InstantCommand(
         () -> controlSpin.withInterrupt(COLOR_SENSOR.colorMatchSupplierReverse),
         COLOR_SENSOR
-
     );
 
     public final InstantCommand spinHalfWhenDoesNot = new InstantCommand(
@@ -156,6 +155,9 @@ public class RobotCommands{
         spinHalfWhenDoesNot,
         COLOR_SENSOR.colorMatchSupplier
     );
+    
+    public final SequentialCommandGroup spinHalfEitherEight = new SequentialCommandGroup(
+        spinHalfEither.andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither).andThen(spinHalfEither)    );
     
     public final InstantCommand plusTimesSpun = new InstantCommand(
         () -> COLOR_SENSOR.timesSpunIncrease(),
