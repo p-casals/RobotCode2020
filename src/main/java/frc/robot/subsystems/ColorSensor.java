@@ -112,7 +112,7 @@ public class ColorSensor extends SubsystemBase{
     return detectedColor;
   }
 
-  public void alwaysRunning() {
+  public void updateColor() {
     if(detectedColor.toString() == colorToGet) {
       
     }else if(detectedColor.toString() != colorToGet) {

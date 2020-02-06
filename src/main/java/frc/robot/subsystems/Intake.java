@@ -49,10 +49,8 @@ public class Intake extends SubsystemBase {
         wheelMotor.set(speed);
         if(Math.abs(speed) >=.001) {
             isOn = true;
-            BooleanSupplier isOnSupplier = () -> isOn;
         } else{
             isOn = false;
-            BooleanSupplier isOnSupplier = () -> isOn;
         }
     }
 
@@ -63,7 +61,6 @@ public class Intake extends SubsystemBase {
     public void deploy() {
         intakePiston.set(DoubleSolenoid.Value.kForward);
         isDeployed = true;
-        BooleanSupplier isDeployedSupplier = () -> isDeployed;
 
     }
 
@@ -73,7 +70,6 @@ public class Intake extends SubsystemBase {
     public void retract() {
         intakePiston.set(DoubleSolenoid.Value.kReverse);
         isDeployed = false;
-        BooleanSupplier isDeployedSupplier = () -> isDeployed;
     }
 
     /** 
@@ -85,6 +81,9 @@ public class Intake extends SubsystemBase {
         intakePiston.set(DoubleSolenoid.Value.kOff);
     }
 
+    public void updateBooleans() {
+        BooleanSupplier isDeployedSupplier = () -> isDeployed;
+    }
 
 
 
